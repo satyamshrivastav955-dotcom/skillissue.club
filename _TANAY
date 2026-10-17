@@ -1,0 +1,295 @@
+# RAGEQUIT.EXE: How Long Can You Stay Calm?
+
+A single-file rage-bait game for Round 2. It looks like a cute, tiny game, promises "Only 5 easy levels!", and then runs the player through 12 traps that each attack a different frustration. The UI, narrator and sounds get angrier as the player does.
+
+Everything is in one file: `ragequit.html` (HTML, CSS and vanilla JS, no frameworks, no build step).
+
+## Run it
+
+1. Download `ragequit.html`.
+2. Double-click it to open it in any modern browser (works offline).
+3. Only the Google Fonts request needs internet. Without it, fallback fonts are used.
+
+Hosted version: https://claude.ai/artifact/DBso4Adzs6ihRrEwXqSU4W
+
+## Structure: exactly 2 pages
+
+The game lives on one HTML file, split into two scrolling views. Moving between them swaps content in place, with no reload and no new URL.
+
+| View | Contents |
+|------|----------|
+| Page 1 | Intro card (warning, start button, leaderboard) and levels 1-6 |
+| Page 2 | Levels 7-12, then the results card at the bottom |
+
+- Levels are stacked in a scrolling column. Locked levels are blurred, and each unlocks only when the previous one is cleared.
+- After level 6, a "Next page" button appears.
+- Results appear as a card at the bottom of the page you are on. They are not a separate screen.
+- Cards slide in on scroll. The page scrolls to the next level automatically.
+
+## The 12 levels
+
+| # | Level | The trap | How to beat it |
+|---|-------|----------|----------------|
+| 1 | Click to Win | Button dodges the cursor 3 times, then splits into 5 fakes | Click the smallest button |
+| 2 | Loading 99% | Bar hits 99% and drops back to 12% | Click the tiny "cancel" link after the 3rd reset |
+| 3 | Perfect 50 | Slider jitters under the mouse near 50 | Hold within 0.6 of 50 for 1s. Keyboard arrows don't jitter |
+| 4 | Password Hell | Contradicting rules appear every 3s, lying strength meter | Type `correcthorsebatterystaple`, or press Submit 3 times |
+| 5 | Cookie Maze | 4 stacked banners, "Accept All" is a decoy | Click the tiny moving "x" on each banner |
+| 6 | Ad Apocalypse | "Skip in 5" resets on hover, fake popups with fake X buttons | Keep the mouse off Skip, wait for "Skip ▶", click it |
+| 7 | Captcha | Checkbox slides away 3 times, grid reshuffles after every click | Click 3 buses in total |
+| 8 | Whack-a-Mole+ | Moles pop up fast, some say "DON'T" | Hit 6 real moles |
+| 9 | Opposite Day | 4 shuffled buttons | Click "DO NOT CLICK" |
+| 10 | Memory Betrayal | 3 pairs, cards reshuffle after every miss | Match all pairs |
+| 11 | Fake Victory | Confetti and "YOU WIN!", then "just kidding" | Click OK |
+| 12 | Fake Crash | Fake blue screen | Do nothing for 10s. Any key press or click resets the timer |
+
+## Game systems
+
+**Rage meter (0-100%).**
+- Rises with failed clicks (+3 to +8 each), with time (about +0.15 per second), and with some level events.
+- Above 20% the background shifts toward red.
+- Above 40% scanlines fade in.
+- Above 60% the level area shakes.
+- The level area also tilts slightly as rage rises.
+
+**Narrator.**
+- A speech bubble with 5 tiers of lines (calm, annoyed, frustrated, raging, chaos).
+- The tier follows the rage meter.
+- It also reacts to hints, level clears and mercy.
+
+**Fail feedback.** Every fail flashes a red outline, plays an error buzz and adds rage.
+
+**Hints and mercy (so nobody gets stuck).**
+- After 2 fails on a level, the narrator gives a hint.
+- After 3 fails, or after 18 seconds on a level, a "Mercy: next level" button appears and skips the level.
+
+**Audio.** WebAudio only (click, error buzz, trombone, fanfare). No audio files. A mute toggle is always in the top bar.
+
+**Ticker.** A scrolling bar of fake stats at the bottom ("Player_Dave quit at level 2").
+
+**Top bar.** Timer, page and level indicator, rage meter, mute, and an "I give up" button that always works.
+
+## End screen
+
+The results card shows:
+- title
+- time
+- level reached
+- failed clicks
+- rage %
+- score
+
+Titles:
+- **Zen Monk:** you beat level 12 by waiting it out
+- **Mildly Annoyed:** rage below 25%
+- **Keyboard Warrior:** rage below 50%
+- **Table Flipper:** rage below 80%
+- **Monitor Defenestrator:** rage 80% or above
+
+Score is `(level reached x 100) + seconds survived - rage %`.
+
+**Shame leaderboard.**
+- Top 5 scores, saved in the browser's localStorage under the key `rq_lb`.
+- All storage calls are wrapped in try/catch, so the game still works with storage disabled.
+
+**Secret reward.** The card includes a "Claim your Calm Certificate" button. It opens the classic rickroll video on YouTube in a new tab. The tab only opens when the user clicks, because browsers block automatic new tabs.
+
+## Safety and fair play
+
+- A flashing-lights and shaking warning is on the intro card.
+- `prefers-reduced-motion` is respected (shake, ticker and scroll reveals are turned off).
+- "I give up" works at all times.
+- No back-button hijacking, no `beforeunload` trap, no tracking, no network requests apart from Google Fonts. The rickroll opens only on click.
+- Every level is beatable, and the Mercy button guarantees progress.
+
+## Code layout (inside `ragequit.html`)
+
+| Section | Responsibility |
+|---------|----------------|
+| `S` | Global state: rage, level, fails, start time, mute, live flag |
+| `beep` / `snd` | WebAudio sound effects |
+| `L` / `say()` | Narrator lines and speech bubble |
+| `rage()` | Meter fill, background color, tilt, scanlines, shake |
+| `fail()` / `mercy()` | Fail penalties, hints, the skip button |
+| `LV` | Level registry: array of `{name, hint, init(area, win)}` |
+| `build(p)` | Renders page p (0 or 1) with locked level cards |
+| `activate(i)` | Unlocks level i, scrolls to it, runs `init`, handles win |
+| `end2()` | Builds the results card, saves the leaderboard |
+| `board()` | Renders the leaderboard |
+
+## Add a new level
+
+1. Add an object to the `LV` array: `{name:"My Level", hint:"...", init(a, win){ ... return ()=>{ /* cleanup */ } }}`.
+2. In `init`, build your HTML inside the container `a`.
+3. Call `win()` when the player beats it and `fail(n)` for a tracked fail (n is the rage added).
+4. Return a cleanup function that clears your intervals and listeners.
+5. Update the level counts: the page split in `build()` (6 per page) and the `S.l>=12` / `S.l==6` checks in `activate()`.
+
+## Known limitations
+
+- Not built yet: inverted-mouse Opposite Day, canvas share card, looping background music, mid-hit label swaps in Whack-a-Mole.
+- Leftover code from earlier versions remains (an unused start screen, an unused results screen and the old `load0` function). It doesn't affect gameplay and can be deleted.
+- Not tested on real phones. Hover-based levels (1, 6, 7) behave differently on touch.
+- The game has not been run in a browser by its author, so expect some rough edges.
+
+## Conversation and change log (every request and what changed)
+
+This section records each request from the conversation, what was asked, and exactly what was done in response. Turns are numbered in order.
+
+### Turn 1: The original idea and master prompt
+**Request:** Plan for Round 2: a rage-baiting page that makes the user angry and frustrated by its creativity. Make it like a game, level-wise ("let's see how long you can go"), with a crazy UI. Don't stop at 5 levels, go craziest. Give the most detailed prompt.
+
+**Delivered:**
+- Concept **RAGEQUIT.EXE: How Long Can You Stay Calm?**
+- A 12-level table (Click to Win, Loading 99%, Captcha, Perfect 50, Opposite Day, Password Hell, Cookie Banner Maze, Whack-a-Mole+, Ad Apocalypse, Memory Betrayal, Fake Victory, Fake Crash)
+- Meta features: rage meter, snarky narrator, a fake "Mercy" button that makes levels harder, fake stats, share card, shame leaderboard, WebAudio sounds
+- Fair-play rules: flashing-light warning, reduced-motion support, honest "I give up"
+- A copy-paste master prompt, demo tips (let judges play 60 seconds, show the live rage meter, reveal the "do nothing for 20s" ending as a twist), and an offer to build it
+
+### Turn 2: Implementation plan uploaded, first build
+**Request:** The user uploaded an implementation plan (architecture, JS module table, level registry, level breakdown with secret win conditions, color tokens, rage-driven UI degradation, WebAudio design, 40+ tiered narrator lines, end screen with share card and leaderboard, verification plan). No explicit instruction was given, so it was treated as "build this".
+
+**Delivered:** A single-file game, published as a playable page. Built from the plan but kept lean to finish fast.
+- **Engine:** state object, WebAudio sounds, tiered narrator, rage meter (background color shift, tilt, scanlines, shake), level registry, end screen, shame leaderboard (localStorage with try/catch), fake-stats ticker
+- **8 levels:** Click to Win, Loading 99%, Perfect 50, Password Hell, Cookie Maze, Ad Apocalypse, Fake Victory, Fake Crash
+- **Left out for the first build:** Captcha, Opposite Day (inverted mouse), Whack-a-Mole+, Memory Betrayal, canvas share card, background music loop
+
+### Turn 3: "How to go to next levels?"
+**Request:** Instructions for how to beat each level.
+
+**Delivered:** A per-level walkthrough of the winning trick for each of the 8 levels, plus a note about staying still on phones for the last level. No code changes.
+
+### Turn 4: "Make it frustrating but let users progress, add more levels"
+**Request:** Run the site, keep it frustrating, don't waste time, let users reach the next level easily, optionally add levels.
+
+**Delivered (11 edits):**
+- Said clearly that the page could not be run by the assistant, and edited the published page instead
+- **Mercy button:** appears after 3 fails and skips the level
+- **Earlier hints:** narrator gives the hint after 2 fails (was every 5)
+- **Easier tuning:** Click to Win dodges 3 times (was 5), Loading bar runs faster, Cookie Maze has 4 banners (was 6), Fake Crash wait cut to 10 seconds (was 20)
+- **Red screen flash** on every fail
+- **3 new levels:** Captcha (3 buses, reshuffling grid, sliding checkbox), Whack-a-Mole+ (6 real moles, "DON'T" decoys), Opposite Day (click the button that says DO NOT CLICK)
+- Total: 11 levels
+
+### Turn 5: "Levels aren't advancing, make it 12 levels, 2 pages only, in 3 minutes"
+**Request:** Levels weren't progressing after the user got frustrated. Keep the user frustrated through all 12 levels, and constrain it to 2 pages. Update fast.
+
+**Diagnosis and fixes (14 edits):**
+- Found that Perfect 50 was nearly impossible (needed an exact value) and Password Hell relied on a password nobody would guess
+- **Mercy timer:** the Mercy button now also appears after 18 seconds on any level, even if the user never fails
+- **Perfect 50:** now wins within 0.6 of 50 held for 1 second
+- **Password Hell:** the 3rd Submit press wins, in addition to the secret password
+- **Ad Apocalypse:** Skip button raised above the popups so they can't cover it
+- **Fake Crash:** only key presses and clicks reset the timer (mouse movement no longer does)
+- **12th level:** Memory Betrayal added (3 pairs, reshuffle on a miss)
+- **First reading of "2 pages":** a start page plus a game page, with the results as an overlay on the game page
+
+### Turn 6: "Add scroll animations, strictly 2 pages"
+**Request:** Add in-scroll animations while staying strictly within 2 pages.
+
+**Delivered (4 edits):**
+- The start page became scrollable
+- Cards slide up and untilt as they enter the screen
+- A pink progress bar at the top fills while scrolling, then shrinks after 80% (rage-bait)
+- A 😤 emoji grows, spins and slides sideways as you scroll
+- Added bait copy ("Keep scrolling… you are almost there!", "Wow, still scrolling?")
+- Reduced-motion turns the scroll effects off
+
+### Turn 7: "I literally want all levels within 2 pages"
+**Request:** Clarified that all the levels must live within 2 pages.
+
+**Delivered (8 edits), full restructure:**
+- **Page 1:** intro card (warning, start button, leaderboard) followed by levels 1-6
+- **Page 2:** levels 7-12
+- Levels are stacked in one scrolling column, blurred and locked until the previous one is cleared
+- Clearing a level marks it "cleared" and auto-scrolls to the next
+- After level 6, a "Next page" button swaps in page 2 without reloading
+- Mercy button now attaches to the active level card
+- New functions: `build(p)` renders a page, `activate(i)` unlocks and runs a level
+- The old start screen and old loader were left in the file as unused code
+
+### Turn 8: "How many webpages are we creating?"
+**Request:** A clarifying question.
+
+**Answer:** Technically one web page, one HTML file at one link. The "2 pages" are two views inside it, swapped in place with no new URL. Offered to split into two real files (`page1.html`, `page2.html`) that link to each other, which would need the rage meter and timer to be carried across.
+
+### Turn 9: "We still get a results page at the end"
+**Request:** Objected that the results still appeared as a separate page.
+
+**Delivered (1 edit):** Admitted the previous "overlay" was still a full-screen takeover. Results now render as a card at the bottom of the scrolling page the user is on (page 2 after level 12, or either page after "I give up"). "Try Again" rebuilds page 1.
+
+### Turn 10: Rickroll surprise
+**Request:** When the user opens the results at the end, surprise them with the most famous meme, the rickroll video.
+
+**Delivered (2 edits):**
+- A cyan button on the results card: **Claim your Calm Certificate**
+- Clicking opens the Rick Astley "Never Gonna Give You Up" video on YouTube in a new tab, and the narrator says "Rickrolled. Certificate revoked."
+- Reasons for the design: browsers block tabs that open without a click, and the published page can't embed the video, so it links out
+- The page itself never navigates away
+
+### Turn 11: "Send level-wise detailings"
+**Request:** A full description of each level.
+
+**Delivered:** A per-level write-up covering the trap, the fail rules, the win rule, and the shared systems (hints, mercy, fail penalties, "I give up", the rickroll). No code changes.
+
+### Turn 12: "Give me the file and code"
+**Request:** The deliverable file.
+
+**Delivered:** `ragequit.html` presented for download. Noted that it opens offline, that only Google Fonts and the rickroll link need internet, and that some unused leftover code remains.
+
+### Turn 13: "Give me the README"
+**Request:** A README for the whole conversation.
+
+**Delivered:** This README: overview, how to run, 2-page structure, level table, systems, scoring and titles, safety, code layout, how to add a level, known limitations.
+
+### Turn 14: "Include conversational and prompt-wise changes, every detail"
+**Request:** Add every change from the conversation to the README.
+
+**Delivered:** This change log, plus the comparison tables below.
+
+## Original spec vs what was actually built
+
+The master prompt and the uploaded plan asked for more than was built. This table lists every difference.
+
+| Spec said | What is in the file |
+|-----------|---------------------|
+| 12 levels (told 5) | 12 levels, "Only 5 easy levels!" button text kept |
+| Level 5 Opposite Day: inverted mouse and input lag | Replaced by a label gag: click the button that says DO NOT CLICK |
+| Level 3 Captcha: images change after each click, fake retry counter | Grid reshuffles after each click, sliding checkbox. No fake retry counter |
+| Level 4 slider handle shrinks and jitters | Handle jitters under the mouse. It does not shrink |
+| Level 6 password: rules contradict, lying meter | Done. Also accepts the 3rd Submit press |
+| Level 7: 6 banners | 4 banners, moving tiny X |
+| Level 8: labels swap mid-hit, speed ramps up | "DON'T" decoys only. No label swap, no speed ramp |
+| Level 9: countdown resets on hover | Done. Popups have fake X buttons |
+| Level 10: cards swap when cursor leaves the grid | Cards reshuffle after a mismatch |
+| Level 11: confetti falls upward, "just kidding" | Done (confetti rises, OK button continues) |
+| Level 12: BSOD, restarts at Level 1 ULTRA, do nothing for 20s | BSOD, do nothing for 10s. No restart to a harder Level 1 |
+| Mercy button that makes levels harder | Mercy button that skips the level (changed on request) |
+| Hints that are misleading but eventually helpful | Hints are honest |
+| 40+ tiered narrator lines | 15 tiered lines (3 per tier) plus a few event lines |
+| Hint after 5 fails | Hint after 2 fails |
+| Fake stats | Done as a scrolling ticker |
+| Canvas share card with QR placeholder | Not built |
+| Background music loop with rising tempo | Not built (sound effects only) |
+| Leaderboard score = levels x time bonus / rage | Score = (level x 100) + seconds - rage % |
+| Leaderboard top 5 in localStorage | Done |
+| Separate warning screen, start screen, end screen | Merged into the 2 pages |
+| Press Start 2P, Comic Neue, Impact fonts | Press Start 2P and Comic Neue, with Impact/Comic Sans fallbacks |
+| ~900-1200 lines | Much shorter (compact code, lean build budget) |
+| Verification plan (manual playthrough, mobile, DevTools network check) | Not performed by the author |
+
+## Tuning values changed during the conversation
+
+| Setting | Original | Now |
+|---------|----------|-----|
+| Click to Win dodges | 5 | 3 |
+| Loading bar tick | 90 ms | 45 ms |
+| Cookie banners | 6 | 4 |
+| Fake Crash wait | 20 s | 10 s |
+| Perfect 50 win range | exactly 50.000 for 1.5 s | within 0.6 for 1 s |
+| Password Hell | secret password only | secret password or 3rd Submit |
+| Hint appears after | every 5 fails | 2 fails |
+| Mercy button | none | after 3 fails or 18 s |
+| Crash reset triggers | mouse move, key, click | key and click only |
+| Number of levels | 8 | 12 |
+| Screens | start, game, results | 2 scrolling pages, results inline |

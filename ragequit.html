@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAGEQUIT.EXE</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--k:#0d0d0d;--pink:#ff006e;--cyan:#00f5d4;--yel:#ffe100;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Comic Neue','Comic Sans MS',cursive;font-weight:700;color:var(--k);background:#fef3c7;overflow:hidden;transition:background .5s}
+h1,h2,.px{font-family:'Press Start 2P',Impact,monospace;line-height:1.4}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;text-align:center}
+.scr.on{display:flex}
+#e{background:rgba(254,243,199,.97);z-index:30}
+#s0{justify-content:flex-start;overflow-y:auto;overflow-x:hidden;gap:30vh;padding:0 16px 40vh}
+#sp{position:sticky;top:0;flex:none;height:10px;background:var(--pink);width:0;z-index:3;border-bottom:3px solid #000;align-self:flex-start}
+.rv{opacity:0;transform:translateY(70px) rotate(-4deg);transition:opacity .6s,transform .6s}
+.rv.in{opacity:1;transform:none}
+#parx{will-change:transform}
+.lock{filter:blur(3px) grayscale(1);pointer-events:none}
+button{font:inherit;font-size:18px;background:var(--yel);border:4px solid var(--k);box-shadow:6px 6px 0 var(--k);padding:10px 18px;cursor:pointer}
+button:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--k)}
+.card{background:#fff;border:4px solid var(--k);box-shadow:6px 6px 0 var(--k);padding:14px;max-width:min(560px,94vw)}
+#bar{position:absolute;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;gap:8px;align-items:center;padding:8px;background:var(--cyan);border-bottom:4px solid var(--k);font-size:14px;z-index:5;flex-wrap:wrap}
+#bar button{font-size:13px;padding:4px 8px;box-shadow:3px 3px 0 var(--k)}
+#meter{flex:1;min-width:80px;height:18px;border:3px solid var(--k);background:#fff}
+#fill{height:100%;width:0;background:var(--pink)}
+#lv{position:absolute;inset:60px 0 90px;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:40px;padding:10px 10px 40vh;overflow-y:auto;overflow-x:hidden;transition:transform .3s}
+#lv .area{position:relative;width:min(560px,94vw);height:min(340px,50vh);border:4px solid var(--k);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+#nar{position:absolute;left:10px;bottom:34px;right:10px;background:#fff;border:4px solid var(--k);box-shadow:5px 5px 0 var(--pink);padding:8px 12px;font-size:16px;z-index:5}
+#tick{position:absolute;bottom:0;left:0;right:0;height:26px;background:var(--k);color:var(--yel);overflow:hidden;white-space:nowrap;font-size:13px;line-height:26px;z-index:5}
+#tick span{display:inline-block;padding-left:100%;animation:tk 40s linear infinite}
+@keyframes tk{to{transform:translateX(-100%)}}
+#crt{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:9;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px)}
+.shake{animation:sh .25s infinite}
+@keyframes sh{25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,3px)}}
+.bn{position:absolute;border:3px solid var(--k);background:var(--yel);font-size:14px;padding:4px 8px;box-shadow:3px 3px 0 var(--k)}
+.ab{position:absolute}
+@media (prefers-reduced-motion:reduce){.shake,#tick span{animation:none}.rv{opacity:1;transform:none;transition:none}}
+</style></head><body>
+<div id="crt"></div>
+<div class="scr" id="s0">
+ <div id="sp"></div><h1 style="margin-top:10vh">RAGEQUIT.EXE</h1><div class="card">Scroll down to begin. It is only 2 pages. ↓</div><div id="parx" class="px" style="font-size:40px">😤</div><div class="card">Keep scrolling… you are almost there! (98.7% of players made it this far)</div><div class="card">Wow, still scrolling? A toddler would have clicked by now.</div>
+ <div class="card">⚠️ Contains shaking, flashing colors and loud buzzers. Reduced-motion is respected. The “I give up” button always works.</div>
+ <button id="go" class="px" style="font-size:14px">Only 5 easy levels!</button>
+ <div id="lb" class="card" style="font-size:14px"></div>
+</div>
+<div class="scr on" id="g">
+ <div id="bar"><span id="tm">0:00</span><span id="lvn">L1</span><div id="meter"><div id="fill"></div></div><button id="mu">🔊</button><button id="gu">I give up</button></div>
+ <div id="lv"></div><div id="nar"></div>
+ <div id="tick"><span>Player_Dave quit at level 2 😭 &nbsp;•&nbsp; Only 0.3% finish level 9 &nbsp;•&nbsp; 98.7% of players beat this in 3 seconds &nbsp;•&nbsp; Karen_77 threw a mouse &nbsp;•&nbsp; Sponsored: Calm™ Tea</span></div>
+</div>
+<div class="scr" id="e">
+ <h2 id="et"></h2>
+ <div class="card" id="es"></div>
+ <button id="ra">Try Again (you won't)</button>
+ <div id="lb2" class="card" style="font-size:14px"></div>
+</div>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),rnd=(a,b)=>a+Math.random()*(b-a);
+const S={r:0,l:0,f:0,t0:0,live:false,mute:false,fails:0};
+// ---------- Audio (WebAudio only) ----------
+let ac;function beep(f=440,d=.12,ty='sine',to=f){if(S.mute)return;try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.setValueAtTime(f,ac.currentTime);o.frequency.linearRampToValueAtTime(to,ac.currentTime+d);g.gain.setValueAtTime(.12,ac.currentTime);g.gain.linearRampToValueAtTime(0,ac.currentTime+d);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const snd={click:()=>beep(440,.05),err:()=>beep(160,.3,'square',60),trom:()=>beep(220,.8,'sawtooth',110),fan:()=>[262,330,392,523].forEach((f,i)=>setTimeout(()=>beep(f,.15),i*120))};
+// ---------- Narrator (tiered by rage) ----------
+const L=[["Oh, brave soul. You can do this!","Only 5 easy levels! :)","Take your time."],
+["Interesting technique.","Was that on purpose?","Hmm. Bold."],
+["lol.","Even my grandma got past this.","Have you tried not failing?"],
+["SKILL ISSUE.","The button didn't move that fast. Your hands did.","Breathe. Or don't."],
+["I CAN HEAR YOUR FOREHEAD ON THE DESK.","╰(°□°╰)","Ctrl+W is right there. Do it."]];
+function say(t){$('#nar').textContent=t||L[Math.min(4,S.r/20|0)][rnd(0,3)|0]}
+// ---------- Rage meter / UI degradation ----------
+function rage(n){S.r=Math.min(100,S.r+n);const r=S.r;$('#fill').style.width=r+'%';
+ document.body.style.background=`hsl(${48-r*.48},90%,${88-r*.45}%)`;
+ $('#lv').style.transform=`rotate(${(r/100)*(Math.random()<.5?-2:2)}deg)`;
+ $('#crt').style.opacity=r>40?Math.min(.8,(r-40)/60):0;
+ $('#lv').classList.toggle('shake',r>60)}
+function mercy(){if(!S.live||$('#mercy'))return;const m=document.createElement('button');m.id='mercy';m.textContent='😇 Mercy: next level';m.style.cssText+=';font-size:14px;position:relative;z-index:60';m.onclick=()=>S.win();(S.cards[S.l]||$('#lv')).append(m);say('Fine. I pity you. Press Mercy.')}
+function fail(n=6){S.fails++;S.f++;rage(n);snd.err();say();document.body.style.outline='8px solid red';setTimeout(()=>document.body.style.outline='',120);if(S.f==2)say("Hint: "+LV[S.l].hint);if(S.f>=3)mercy()}
+// ---------- Levels: {name, hint, init(area,win)->cleanup} ----------
+const LV=[
+{name:"Click to Win",hint:"The smallest one is honest.",init(a,win){let d=0,off;const b=document.createElement('button');b.className='bn';b.style.cssText+=';font-size:20px';b.textContent='CLICK ME';a.append(b);
+ const mv=()=>{b.style.left=rnd(5,60)+'%';b.style.top=rnd(5,80)+'%'};b.style.position='absolute';mv();
+ b.onpointerenter=()=>{if(d<3){d++;mv()}};
+ b.onclick=()=>{if(d<3){fail(3);return}b.remove();const n=5,r=rnd(0,n)|0;for(let i=0;i<n;i++){const x=document.createElement('button');x.className='bn';x.textContent='CLICK';const s=i==r?10:rnd(12,22);x.style.fontSize=s+'px';x.style.padding=(s/3)+'px';x.style.left=rnd(5,75)+'%';x.style.top=rnd(5,80)+'%';x.onclick=()=>i==r?win():fail();a.append(x)}};
+ return()=>{}}},
+{name:"Loading… 99%",hint:"Cancel is the only real button.",init(a,win){let p=0,rs=0;a.innerHTML='<div class="px" style="font-size:12px">Installing happiness</div><div style="width:80%;height:30px;border:4px solid #000"><div id="pb" style="height:100%;background:var(--cyan);width:0"></div></div><div id="pt">0%</div><a id="cn" style="font-size:10px;cursor:pointer;text-decoration:underline">cancel</a>';
+ const iv=setInterval(()=>{p+=rnd(1,3);if(p>=99){p=12;rs++;say("Almost there!")}$('#pb').style.width=p+'%';$('#pt').textContent=(p|0)+'%'},45);
+ $('#cn').onclick=()=>rs>=3?win():fail(3);return()=>clearInterval(iv)}},
+{name:"Perfect 50",hint:"Anything within 0.6 of 50 counts. Keyboard arrows don't jitter.",init(a,win){a.innerHTML='<div class="px" id="v" style="font-size:20px">0.000</div><input id="sl" type="range" min="0" max="100" step="0.001" value="10" style="width:80%"><div>Land within 0.6 of 50 and hold 1s</div>';
+ const s=$('#sl');let hold=0,ptr=false;const sh=()=>$('#v').textContent=(+s.value).toFixed(3);
+ s.onpointerdown=()=>ptr=true;s.onpointerup=()=>{ptr=false;if(Math.abs(s.value-50)>.6)fail(4)};
+ s.oninput=sh;s.onpointermove=()=>{if(ptr&&Math.abs(s.value-50)<4){s.value=+s.value+rnd(-.4,.4);sh()}};
+ const iv=setInterval(()=>{hold=Math.abs(s.value-50)<.6?hold+.1:0;if(hold>=1)win()},100);return()=>clearInterval(iv)}},
+{name:"Password Hell",hint:"An XKCD comic knows the answer.",init(a,win){const R=["Min 12 characters","No vowels allowed","Must contain a vowel","Must contain an emoji","Must not contain an emoji","Must be shorter than 4 characters"];
+ a.innerHTML='<input id="pw" placeholder="password" style="font-size:18px;padding:6px;border:4px solid #000;width:80%"><div id="st" style="width:80%;height:14px;border:3px solid #000"><div id="sf" style="height:100%;background:var(--pink)"></div></div><div id="rl" style="font-size:14px"></div><button id="sb">Submit</button>';
+ let n=1;const rl=()=>$('#rl').innerHTML=R.slice(0,n).map(x=>'• '+x).join('<br>');rl();
+ const iv=setInterval(()=>{if(n<R.length){n++;rl();rage(2)}},3000);
+ $('#pw').oninput=()=>$('#sf').style.width=rnd(5,100)+'%';
+ let tr=0;$('#sb').onclick=()=>{tr++;if($('#pw').value==='correcthorsebatterystaple'||tr>=3){say('Fine. Whatever.');win()}else fail()};return()=>clearInterval(iv)}},
+{name:"Cookie Maze",hint:"The X is tiny. Follow it.",init(a,win){let n=4;const bs=[];const mvx=()=>bs.forEach(b=>{b.x.style.left=rnd(2,92)+'%';b.x.style.top=rnd(2,70)+'%'});
+ for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bn';b.style.cssText+=`;left:${6+i*3}%;top:${8+i*4}%;width:80%;height:60%;background:hsl(${i*60},80%,80%);text-align:center`;b.innerHTML='🍪 We use cookies!<br><br><span class="dc" style="border:3px solid #000;padding:4px 10px;background:var(--cyan)">Accept All</span>';
+ const x=document.createElement('span');x.textContent='x';x.className='ab';x.style.cssText+=';font-size:9px;cursor:pointer;padding:2px 3px;background:#eee;border:1px solid #000';b.append(x);b.x=x;bs.push(b);a.append(b);
+ b.querySelector('.dc').onclick=e=>{e.stopPropagation();fail()};
+ x.onclick=e=>{e.stopPropagation();const t=bs.pop();t.remove();n--;snd.click();mvx();bs.length?0:win()}}mvx();return()=>{}}},
+{name:"Ad Apocalypse",hint:"Patience beats the mouse.",init(a,win){let c=5;a.innerHTML='<div class="px" style="font-size:14px">AD: BUY SOCKS™</div><button id="sk" style="font-size:14px;position:relative;z-index:50">Skip in 5</button>';
+ const sk=$('#sk');sk.onpointerenter=()=>{if(c>0){c=5;rage(2);sk.textContent='Skip in 5'}};
+ sk.onclick=()=>c<=0?win():fail(3);
+ const iv=setInterval(()=>{if(c>0&&!sk.matches(':hover')){c--;sk.textContent=c?'Skip in '+c:'Skip ▶'}},1000);
+ const pop=setInterval(()=>{const p=document.createElement('div');p.className='bn';p.style.left=rnd(0,70)+'%';p.style.top=rnd(0,75)+'%';p.innerHTML='🎰 YOU WON! <b class="fx" style="cursor:pointer;background:#fff;padding:0 4px;border:2px solid #000">X</b>';p.querySelector('.fx').onclick=e=>{e.stopPropagation();fail(3);p.remove()};a.append(p);if(a.children.length>9)a.children[2].remove()},2200);
+ return()=>{clearInterval(iv);clearInterval(pop)}}},
+{name:"Captcha",hint:"Buses only. Catch the checkbox.",init(a,win){let d=0,got=0;a.innerHTML='<label class="px" id="cl" style="font-size:12px;transition:transform .2s"><input type="checkbox" id="cb"> I am not a robot</label><div id="gr" style="display:none;grid-template-columns:repeat(3,64px);gap:4px"></div>';const cb=$('#cb'),gr=$('#gr'),cl=$('#cl');
+ const deal=()=>{gr.innerHTML='';const bus=[0,1,2,3,4,5,6,7,8].sort(()=>Math.random()-.5).slice(0,3);for(let i=0;i<9;i++){const t=document.createElement('button');t.style.cssText='font-size:26px;padding:4px;box-shadow:none';t.textContent=bus.includes(i)?'🚌':['🚗','🚲','🚦','🌳'][i%4];t.onclick=()=>{if(i!==-1&&bus.includes(i)){got++;snd.click();got>=3?win():deal()}else{fail(3);deal()}};gr.append(t)}};
+ cl.onpointerenter=()=>{if(d<3){d++;cl.style.transform=`translate(${rnd(-80,80)}px,${rnd(-30,30)}px)`}};cb.onchange=()=>{cl.style.display='none';gr.style.display='grid';deal()};return()=>{}}},
+{name:"Whack-a-Mole+",hint:"Skip the DON'T ones. Hit 6.",init(a,win){let h=0;a.innerHTML='<div id="wh" class="px" style="font-size:12px">Hit 6 moles: 0</div>';const iv=setInterval(()=>{const m=document.createElement('button'),bad=Math.random()<.3;m.className='bn';m.textContent=bad?"DON'T":'🐹';m.style.cssText+=`;left:${rnd(2,80)}%;top:${rnd(18,78)}%;font-size:18px`;m.onclick=()=>{m.remove();if(bad)fail(5);else{h++;snd.click();$('#wh').textContent='Hit 6 moles: '+h;if(h>=6)win()}};a.append(m);setTimeout(()=>m.remove(),1600)},650);return()=>clearInterval(iv)}},
+{name:"Opposite Day",hint:"Do the opposite.",init(a,win){a.innerHTML='<div class="px" style="font-size:12px">Today is Opposite Day.<br>Click the button that says NOT to click.</div>';['Click me!','Pick me!','DO NOT CLICK','Free money'].sort(()=>Math.random()-.5).forEach(t=>{const b=document.createElement('button');b.textContent=t;b.style.fontSize='15px';b.onclick=()=>t=='DO NOT CLICK'?win():fail();a.append(b)});return()=>{}}},
+{name:"Memory Betrayal",hint:"Match the pairs. Cards shuffle on a miss.",init(a,win){let busy=0;const E=['🍕','🐸','🚀'];const cs=[...E,...E].map(e=>({e,o:0,m:0})).sort(()=>Math.random()-.5);const g=document.createElement('div');g.style.cssText='display:grid;grid-template-columns:repeat(3,70px);gap:6px';a.append(g);
+ const r=()=>{g.innerHTML='';cs.forEach(c=>{const b=document.createElement('button');b.style.cssText='font-size:26px;height:64px;box-shadow:none';b.textContent=c.m||c.o?c.e:'❓';b.onclick=()=>{if(c.m||c.o||busy)return;c.o=1;snd.click();const op=cs.filter(x=>x.o&&!x.m);if(op.length==2){if(op[0].e==op[1].e){op.forEach(x=>x.m=1);if(cs.every(x=>x.m))return win()}else{busy=1;fail(3);r();setTimeout(()=>{op.forEach(x=>x.o=0);cs.sort(()=>Math.random()-.5);busy=0;r()},700);return}}r()};g.append(b)})};r();return()=>{}}},
+{name:"Fake Victory",hint:"Read the dialog. Then click OK.",init(a,win){a.innerHTML='<div class="px" style="font-size:22px">YOU WIN!</div>';snd.fan();let cs=[];for(let i=0;i<30;i++){const e=document.createElement('span');e.textContent='🎉';e.className='ab';e.style.left=rnd(0,95)+'%';e.style.top='100%';e.style.transition=`top ${rnd(2,4)}s linear`;a.append(e);cs.push(e);setTimeout(()=>e.style.top='-10%',50)}
+ const t=setTimeout(()=>{rage(8);snd.trom();a.insertAdjacentHTML('beforeend','<div class="card" style="position:absolute;z-index:3">…just kidding.<br><button id="ok">OK</button></div>');$('#ok').onclick=win},2500);return()=>clearTimeout(t)}},
+{name:"Fake Crash",hint:"Do nothing. Truly nothing. 10 seconds.",init(a,win){let t=10;const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#0000aa;color:#fff;z-index:20;padding:30px;font-family:monospace;font-size:16px';
+ o.innerHTML=':(<br><br>Your PC ran into a problem.<br>Restarting from Level 1…<br><br><span id="cd"></span>';document.body.append(o);
+ const reset=()=>{if(t<10){fail(5);t=10}};
+ ['keydown','pointerdown'].forEach(ev=>addEventListener(ev,reset));
+ const iv=setInterval(()=>{t--;$('#cd').textContent=t>=9?'':'Still rebooting… '+t;if(t<=0){win()}},1000);
+ return()=>{clearInterval(iv);o.remove();['pointermove','keydown','pointerdown'].forEach(ev=>removeEventListener(ev,reset))}}}
+];
+// ---------- Runner ----------
+let clean=()=>{},end;
+let pg=0;
+function build(p){pg=p;clearTimeout(S.mt);clean();clean=()=>{};const lv=$('#lv');lv.replaceChildren();lv.scrollTop=0;S.cards={};
+ const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:lv,threshold:.1});
+ const add=el=>{el.classList.add('rv');lv.append(el);io2.observe(el)};
+ if(p==0){const c=document.createElement('div');c.className='card';c.innerHTML='<h1 style="font-size:20px">RAGEQUIT.EXE</h1>⚠️ Flashing colors, shaking and buzzers. The I give up button always works.<br>Page 1 of 2: scroll down. Levels 1-6 live here, 7-12 on page 2.<br>'+(S.live?'Good luck 😈':'<button id="st" class="px" style="font-size:13px;margin:8px">Only 5 easy levels!</button>')+'<div id="lbx" style="font-size:14px;margin-top:8px"></div>';add(c);const st=c.querySelector('#st');if(st)st.onclick=start}
+ for(let i=p*6;i<p*6+6;i++){const c=document.createElement('div');c.style.cssText='display:flex;flex-direction:column;align-items:center;gap:8px';c.innerHTML=`<div class="px" style="font-size:11px">Level ${i+1}: ${LV[i].name}</div><div class="area lock"></div>`;add(c);S.cards[i]=c}
+ if(p==0)board('#lbx');else{const c=document.createElement('div');c.className='px';c.style.fontSize='12px';c.textContent='Page 2 of 2: the last page. Honest.';lv.prepend(c)}
+ $('#lvn').textContent='Page '+(p+1)+'/2'}
+function activate(i){clearTimeout(S.mt);clean();clean=()=>{};S.l=i;S.f=0;const card=S.cards[i],a=card.querySelector('.area');a.classList.remove('lock');card.scrollIntoView({behavior:'smooth',block:'center'});$('#lvn').textContent='P'+(pg+1)+'/2 L'+(i+1);
+ let done=false;const win=()=>{if(done)return;done=true;snd.fan();clean();clean=()=>{};const m=$('#mercy');if(m)m.remove();a.innerHTML='<div class="px" style="font-size:14px">✅ cleared</div>';S.l++;
+  if(S.l>=12){say('You made it. Respect.');return setTimeout(()=>end(true),600)}
+  if(S.l==6){say('Page 1 done. Page 2 is worse.');const b=document.createElement('button');b.className='px';b.style.fontSize='13px';b.textContent='Next page →';b.onclick=()=>{build(1);activate(6)};$('#lv').append(b);b.scrollIntoView({behavior:'smooth',block:'center'});return}
+  say('Fine. Next.');setTimeout(()=>activate(S.l),900)};
+ S.win=win;S.mt=setTimeout(mercy,18000);clean=LV[i].init(a,win)||(()=>{});say()}
+function load0(){clearTimeout(S.mt);clean();const a=document.createElement('div');a.className='area';$('#lv').replaceChildren(a);
+ if(S.l>=LV.length){return end(true)}
+ $('#lvn').textContent='L'+(S.l+1)+(S.l>=5?'':'/5?');S.f=0;
+ const lvl=LV[S.l];let done=false;const win=()=>{if(done)return;done=true;snd.fan();say(S.l==LV.length-1?"…You waited. Respect.":"Fine. Next.");S.l++;setTimeout(load,S.l>=LV.length?200:900)};
+ const h=document.createElement('div');h.className='px';h.style.fontSize='11px';h.textContent=lvl.name;$('#lv').prepend(h);
+ S.win=win;S.mt=setTimeout(mercy,18000);clean=lvl.init(a,win)||(()=>{});say()}
+function end2(zen){S.live=false;clean();clean=()=>{};$('#s0').classList.remove('on');
+ const secs=((Date.now()-S.t0)/1000)|0,r=S.r|0;
+ const title=zen?"Zen Monk":r<25?"Mildly Annoyed":r<50?"Keyboard Warrior":r<80?"Table Flipper":"Monitor Defenestrator";
+ const score=Math.round((S.l+1)*100+secs-r);
+ $('#et').textContent=title;$('#es').innerHTML=`Time: ${secs}s<br>Level reached: ${Math.min(S.l+1,LV.length)}<br>Failed clicks: ${S.fails}<br>Rage: ${r}%<br>Score: ${score}`;
+ try{const k='rq_lb',l=JSON.parse(localStorage.getItem(k)||'[]');l.push({t:title,s:score});l.sort((a,b)=>b.s-a.s);localStorage.setItem(k,JSON.stringify(l.slice(0,5)))}catch(e){}
+ board('#lb2');const old=$('#res');if(old)old.remove();const c=document.createElement('div');c.id='res';c.className='card';c.style.fontSize='16px';c.innerHTML='<h2 style="font-size:16px">'+title+'</h2>'+$('#es').innerHTML+'<br><button id="rr" class="px" style="font-size:12px;margin:8px;background:var(--cyan)">🎁 Claim your Calm Certificate</button><br><button id="ra2" class="px" style="font-size:12px;margin:8px">Try Again (you won&#39;t)</button><div style="font-size:14px">'+$('#lb2').innerHTML+'</div>';$('#lv').append(c);$('#ra2').onclick=start;$('#rr').onclick=()=>{window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ','_blank','noopener');say('Rickrolled. Certificate revoked.')};c.scrollIntoView({behavior:'smooth',block:'center'})}
+end=end2;
+function board(sel){let l=[];try{l=JSON.parse(localStorage.getItem('rq_lb')||'[]')}catch(e){}
+ $(sel).innerHTML='<b>Shame Leaderboard</b><br>'+(l.length?l.map((x,i)=>`${i+1}. ${x.t} — ${x.s}`).join('<br>'):'Nobody has suffered yet.')}
+function start(){Object.assign(S,{r:0,l:0,f:0,fails:0,t0:Date.now(),live:true});rage(0);document.body.style.background='#fef3c7';
+ document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));$('#g').classList.add('on');pg=0;build(0);activate(0)}
+$('#go').onclick=start;$('#ra').onclick=start;$('#gu').onclick=()=>end2(false);
+$('#mu').onclick=()=>{S.mute=!S.mute;$('#mu').textContent=S.mute?'🔇':'🔊'};
+document.addEventListener('pointerdown',e=>{if(S.live&&e.target.closest('#lv')&&e.target.closest('button,.bn')===null)rage(0.5)});
+setInterval(()=>{if(!S.live)return;const s=((Date.now()-S.t0)/1000)|0;$('#tm').textContent=(s/60|0)+':'+String(s%60).padStart(2,'0');rage(.15);if(!(s%12))say()},1000);
+const s0=$('#s0'),sp=$('#sp'),px=$('#parx');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:s0,threshold:.2});
+[...s0.children].forEach(c=>{if(c.id!=='sp'&&c.id!=='parx'){c.classList.add('rv');io.observe(c)}});
+s0.onscroll=()=>{const p=s0.scrollTop/Math.max(1,s0.scrollHeight-s0.clientHeight);sp.style.width=(p<.8?p*100:p*50)+'%';px.style.transform=`translateX(${(p-.5)*60}vw) scale(${1+p*2}) rotate(${p*360}deg)`};
+board('#lb');
+build(0);
+})();
+</script></body></html>
