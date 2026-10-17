@@ -9,6 +9,12 @@ const VIDEO_FILES = [
   'vidssave.com Rickroll (Meme Template) 360p.mp4'
 ];
 
+const MEME_FILES = {
+  raigbait: 'raigbaitmeme.mp4',
+  garbage: 'computeringarbage.mp4',
+  rickroll: 'rickroll.mp4'
+};
+
 function findVideoFile() {
   for (const f of VIDEO_FILES) {
     const fullPath = path.join(BASE_DIR, f);
@@ -159,7 +165,12 @@ const server = http.createServer((req, res) => {
         staticFile: '/' + encodeURIComponent(videoInfo.filename),
         info: '/api/video-info',
         health: '/api/health'
-      }
+      },
+      memes: [
+        { key: 'raigbait', title: 'Ragebait Meme', file: 'raigbaitmeme.mp4', url: '/raigbaitmeme.mp4' },
+        { key: 'garbage', title: 'Computer In Garbage', file: 'computeringarbage.mp4', url: '/computeringarbage.mp4' },
+        { key: 'rickroll', title: 'Classic Rickroll', file: 'rickroll.mp4', url: '/video' }
+      ]
     }, null, 2));
   }
 

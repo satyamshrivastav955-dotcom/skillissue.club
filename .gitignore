@@ -1,0 +1,7 @@
+# Ignore oversized screen recordings (>100MB) that exceed GitHub limits
+Recording*.mp4
+FINAL*.mp4
+*.crswap
+node_modules/
+.DS_Store
+Thumbs.db

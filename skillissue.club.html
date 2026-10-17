@@ -3,370 +3,1529 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>skillissue.club® — RAGEQUIT.EXE</title>
+<title>skillissue.club® — The UX Tribunal & Ragequit Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Press+Start+2P&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-:root{--bg:#FFF7ED;--tx:#171717;--mu:#746C63;--co:#F14F3E;--cb:#405CE8;--oncb:#fff;--li:#C5EF69;--sf:#FFFFFF;--bd:#E5D9C9;--d:"Bricolage Grotesque","Arial Black",Impact,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--tx:#FFF7ED;--mu:#B8AD9F;--sf:#241E18;--bd:#3B3228;--cb:#8EA0FF;--oncb:#171717}}
-:root[data-theme="dark"]{--bg:#17130F;--tx:#FFF7ED;--mu:#B8AD9F;--sf:#241E18;--bd:#3B3228;--cb:#8EA0FF;--oncb:#171717}
+:root{
+  --bg:#FFF7ED;
+  --tx:#171717;
+  --mu:#746C63;
+  --co:#F14F3E;
+  --cb:#405CE8;
+  --oncb:#fff;
+  --li:#C5EF69;
+  --yel:#FFE100;
+  --pink:#FF006E;
+  --cyan:#00F5D4;
+  --sf:#FFFFFF;
+  --bd:#E5D9C9;
+  --d:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --px:"Press Start 2P",monospace;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#17130F;--tx:#FFF7ED;--mu:#B8AD9F;--sf:#241E18;--bd:#3B3228;--cb:#8EA0FF;--oncb:#171717;
+  }
+}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:150px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--tx);
+  font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  padding-bottom:120px;
+  transition:background 0.4s ease;
+}
+
+#crt{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  z-index:90;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.18) 0 2px,transparent 2px 4px);
+  transition:opacity 0.4s ease;
+}
+.shake-screen{animation:screenTremor 0.25s infinite}
+@keyframes screenTremor{
+  25%{transform:translate(3px,-2px)}
+  50%{transform:translate(-3px,2px)}
+  75%{transform:translate(2px,3px)}
+}
+
 .wrap{max-width:760px;margin:0 auto;padding:0 20px}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:2px solid var(--tx);flex-wrap:wrap}
-.logo{font:800 1.2rem var(--d);letter-spacing:-.03em}.logo sup{font-size:.6em}
-.pr{margin-left:auto;display:flex;gap:10px;align-items:center;font:800 .78rem var(--d);letter-spacing:.06em}
-.dots{display:flex;gap:5px}.dots i{width:18px;height:7px;border-radius:9px;background:var(--bd)}.dots i.c{background:var(--tx)}.dots i.w{background:var(--co)}
-.stamp{font:800 .68rem var(--d);letter-spacing:.08em;border:2px solid var(--co);color:var(--co);padding:2px 7px;border-radius:4px;transform:rotate(-4deg)}
-.sec{min-height:88svh;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:40px 0;border-bottom:2px solid var(--bd)}
+
+/* Unified Header & HUD */
+header{
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  z-index:50;
+  background:var(--bg);
+  border-bottom:2px solid var(--tx);
+  padding:8px 0;
+  box-shadow:0 3px 0 rgba(23,23,23,0.06);
+  transition:background 0.4s;
+}
+.hdr-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:6px;
+}
+.hdr-brand{display:flex;align-items:center;gap:10px}
+.logo{font:800 1.25rem var(--d);letter-spacing:-.03em}
+.logo sup{font-size:.6em}
+.stamp{
+  font:800 .66rem var(--d);
+  letter-spacing:.08em;
+  border:2px solid var(--co);
+  color:var(--co);
+  padding:2px 6px;
+  border-radius:4px;
+  transform:rotate(-4deg);
+}
+.hdr-actions{display:flex;align-items:center;gap:8px}
+.hud-btn{
+  font:800 .78rem var(--d);
+  padding:5px 12px;
+  border:2px solid var(--tx);
+  border-radius:999px;
+  background:var(--sf);
+  color:var(--tx);
+  cursor:pointer;
+  box-shadow:2px 2px 0 var(--tx);
+  transition:transform .12s,box-shadow .12s;
+}
+.hud-btn:hover{transform:translateY(-1px)}
+.hud-btn:active{transform:translate(2px,2px);box-shadow:none}
+.hud-btn.rq-btn{
+  background:var(--co);
+  color:#fff;
+  animation:pulse 2s infinite ease-in-out;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.04)}
+}
+
+.hdr-bar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  background:var(--sf);
+  border:2px solid var(--tx);
+  border-radius:10px;
+  padding:6px 10px;
+  box-shadow:2px 2px 0 var(--tx);
+}
+.hud-meter-wrap{flex:1;min-width:130px;display:flex;flex-direction:column;gap:2px}
+.hud-meter-label{
+  display:flex;
+  justify-content:space-between;
+  font:800 .62rem var(--px);
+  color:var(--tx);
+  letter-spacing:.04em;
+}
+.hud-meter{
+  height:12px;
+  border:2px solid var(--tx);
+  border-radius:99px;
+  background:#fff;
+  overflow:hidden;
+}
+.hud-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#10b981 0%,#f59e0b 50%,var(--co) 85%,var(--pink) 100%);
+  transition:width .3s ease;
+}
+.hud-stat{
+  font:800 .75rem var(--d);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  line-height:1.1;
+}
+.hud-lbl{font-size:.58rem;color:var(--mu);letter-spacing:.04em}
+.dots{display:flex;gap:4px}
+.dots i{width:14px;height:6px;border-radius:6px;background:var(--bd);transition:background .2s}
+.dots i.c{background:var(--tx)}
+.dots i.w{background:var(--co)}
+
+/* Ticker */
+.roast-ticker{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--tx);
+  color:var(--yel);
+  font:700 .74rem/1.3 var(--d);
+  padding:3px 8px;
+  border-radius:6px;
+  overflow:hidden;
+  white-space:nowrap;
+  margin-top:4px;
+}
+.roast-badge{
+  font:800 .62rem var(--px);
+  color:#fff;
+  background:var(--co);
+  padding:1px 5px;
+  border-radius:3px;
+  flex-shrink:0;
+}
+.roast-marquee{
+  display:inline-block;
+  padding-left:100%;
+  animation:tk 32s linear infinite;
+}
+@keyframes tk{to{transform:translateX(-100%)}}
+
+/* Sections */
+.sec{
+  min-height:86svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:22px;
+  padding:36px 0;
+  border-bottom:2px solid var(--bd);
+  position:relative;
+}
 h1,h2{font-family:var(--d);margin:0;font-weight:800;letter-spacing:-.04em;line-height:.95}
-h1{font-size:clamp(3rem,13vw,7.2rem)}
-h2{font-size:clamp(2.2rem,8vw,4.4rem)}
-.sub{font:800 1.1rem var(--d);color:var(--co);margin:0}
-.word{font:800 clamp(2rem,9vw,4.2rem)/1 var(--d);letter-spacing:-.04em;color:var(--co);min-height:1.05em}
+h1{font-size:clamp(3rem,12vw,6.5rem)}
+h2{font-size:clamp(2.2rem,7vw,4rem)}
+.sub{font:800 1.05rem var(--d);color:var(--co);margin:0}
+.word{font:800 clamp(1.8rem,8vw,3.8rem)/1 var(--d);letter-spacing:-.04em;color:var(--co);min-height:1.05em}
 .pop{animation:pop .3s ease-out}
 .mu{color:var(--mu);font-size:.85rem}
-.btn{font:800 1rem var(--d);letter-spacing:.02em;border:2px solid var(--tx);border-radius:999px;padding:.85em 1.4em;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 4px 0 var(--tx);transition:transform .12s,box-shadow .12s}
-.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--tx)}
-.btn.co{background:var(--co);color:#fff}.btn.cb{background:var(--cb);color:var(--oncb)}
+
+.btn{
+  font:800 1rem var(--d);
+  letter-spacing:.02em;
+  border:2px solid var(--tx);
+  border-radius:999px;
+  padding:.85em 1.4em;
+  cursor:pointer;
+  background:var(--sf);
+  color:var(--tx);
+  box-shadow:0 4px 0 var(--tx);
+  transition:transform .12s,box-shadow .12s,background .12s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--tx)}
+.btn.co{background:var(--co);color:#fff}
+.btn.cb{background:var(--cb);color:var(--oncb)}
 .btn.sel{background:var(--li);color:#171717}
 button:focus-visible,input:focus-visible{outline:3px solid var(--cb);outline-offset:3px}
-.opts{display:grid;gap:12px;max-width:420px}.opts .btn{text-align:left;border-radius:16px}
-.arena{position:relative;height:230px;border:2px dashed var(--bd);border-radius:16px}.a2{height:140px}
-.run{position:absolute;width:190px;height:64px;padding:0;font-size:1.1rem;left:calc((100% - 190px)*var(--x,.5));top:calc((100% - 64px)*var(--y,.5));transition:left .3s cubic-bezier(.3,1.5,.5,1),top .3s cubic-bezier(.3,1.5,.5,1),transform .12s,box-shadow .12s}
-.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.trio .btn{width:100%;padding:1.1em .5em}.trio .big{font-size:1.3rem;padding:1.5em .5em}
-.track{height:26px;border:2px solid var(--tx);border-radius:99px;overflow:hidden;background:var(--bg)}.track i{display:block;height:100%;width:0;background:var(--co)}
+
+.opts{display:grid;gap:12px;max-width:440px}
+.opts .btn{text-align:left;border-radius:16px}
+.arena{position:relative;height:230px;border:2px dashed var(--bd);border-radius:16px}
+.a2{height:140px}
+
+.run{
+  position:absolute;
+  width:190px;
+  height:64px;
+  padding:0;
+  font-size:1.1rem;
+  left:calc((100% - 190px)*var(--x,.5));
+  top:calc((100% - 64px)*var(--y,.5));
+  transition:left .3s cubic-bezier(.3,1.5,.5,1),top .3s cubic-bezier(.3,1.5,.5,1),transform .12s,box-shadow .12s;
+}
+.decoy{
+  position:absolute;
+  border:2px solid var(--tx);
+  background:var(--yel);
+  box-shadow:2px 2px 0 var(--tx);
+  cursor:pointer;
+}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.trio .btn{width:100%;padding:1.1em .5em}
+.trio .big{font-size:1.25rem;padding:1.4em .5em}
+
+.track{height:26px;border:2px solid var(--tx);border-radius:99px;overflow:hidden;background:var(--bg)}
+.track i{display:block;height:100%;width:0;background:var(--co)}
 .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pct{font:800 2.6rem var(--d);letter-spacing:-.04em;background:none;border:0;color:var(--tx);cursor:pointer;padding:0 6px;border-radius:8px}.pct:hover{background:var(--li);color:#171717}
-.set{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px;border:2px solid var(--bd);border-radius:16px}.set b{font:800 1.05rem var(--d);flex:1;min-width:150px}
-.badge{font:800 .72rem var(--d);letter-spacing:.06em;padding:5px 10px;border-radius:99px;background:var(--li);color:#171717;border:1.5px solid var(--tx)}
-.sw{width:68px;height:38px;border-radius:99px;border:2px solid var(--tx);background:var(--bd);position:relative;cursor:pointer;padding:0;transition:background .2s}
-.sw i{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:var(--tx);transition:transform .2s}
-.sw[aria-checked="true"]{background:var(--co)}.sw[aria-checked="true"] i{transform:translateX(30px)}
-.env{position:relative;width:min(100%,320px);height:180px;background:var(--li);border:2px solid var(--tx);border-radius:10px;color:#171717;font:800 .75rem var(--d);letter-spacing:.06em}
+.pct{
+  font:800 2.5rem var(--d);
+  letter-spacing:-.04em;
+  background:none;
+  border:0;
+  color:var(--tx);
+  cursor:pointer;
+  padding:0 6px;
+  border-radius:8px;
+}
+.pct:hover{background:var(--li);color:#171717}
+
+.set{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:18px;
+  border:2px solid var(--bd);
+  border-radius:16px;
+  background:var(--sf);
+}
+.set b{font:800 1.05rem var(--d);flex:1;min-width:150px}
+.badge{
+  font:800 .72rem var(--d);
+  letter-spacing:.06em;
+  padding:5px 10px;
+  border-radius:99px;
+  background:var(--li);
+  color:#171717;
+  border:1.5px solid var(--tx);
+}
+.sw{
+  width:68px;
+  height:38px;
+  border-radius:99px;
+  border:2px solid var(--tx);
+  background:var(--bd);
+  position:relative;
+  cursor:pointer;
+  padding:0;
+  transition:background .2s;
+}
+.sw i{
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--tx);
+  transition:transform .2s;
+}
+.sw[aria-checked="true"]{background:var(--co)}
+.sw[aria-checked="true"] i{transform:translateX(30px)}
+
+/* Envelope */
+.env{
+  position:relative;
+  width:min(100%,320px);
+  height:180px;
+  background:var(--li);
+  border:2px solid var(--tx);
+  border-radius:10px;
+  color:#171717;
+  font:800 .75rem var(--d);
+  letter-spacing:.06em;
+  margin:0 auto;
+}
 .env p{position:absolute;bottom:12px;left:16px;margin:0}
-.env .flap{position:absolute;left:-2px;right:-2px;top:-2px;height:100px;background:var(--co);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s}
+.env .flap{
+  position:absolute;
+  left:-2px;
+  right:-2px;
+  top:-2px;
+  height:100px;
+  background:var(--co);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform .7s;
+}
 .env.open .flap{transform:rotateX(180deg)}
-.env .seal{position:absolute;left:50%;top:70px;margin-left:-28px;width:56px;height:56px;border-radius:50%;background:#171717;color:#fff;display:grid;place-items:center;transform:rotate(-8deg);transition:opacity .4s}
+.env .seal{
+  position:absolute;
+  left:50%;
+  top:70px;
+  margin-left:-28px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#171717;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  transform:rotate(-8deg);
+  transition:opacity .4s;
+  font:800 1rem var(--px);
+}
 .env.open .seal{opacity:0}
-.vid{position:relative;aspect-ratio:16/9;width:100%;border:2px solid var(--tx);border-radius:14px;overflow:hidden;background:#000;box-shadow:0 8px 24px rgba(0,0,0,0.18)}
-.vid video,.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:#000}
-.unmute-btn{position:absolute;bottom:14px;right:14px;z-index:10;background:var(--tx);color:var(--bg);border:2px solid var(--bg);border-radius:999px;padding:8px 16px;font:800 .85rem var(--d);cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition:transform .12s,background .12s}
+
+/* Video & Meme Showcase */
+.verdict-card{
+  background:var(--sf);
+  border:3px solid var(--tx);
+  box-shadow:6px 6px 0 var(--tx);
+  border-radius:16px;
+  padding:20px;
+  margin-top:10px;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-box{
+  background:var(--bg);
+  border:2px solid var(--tx);
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  box-shadow:2px 2px 0 var(--tx);
+}
+.sb-lbl{display:block;font:800 .62rem var(--d);color:var(--mu);letter-spacing:.05em}
+.sb-val{display:block;font:800 1.25rem var(--px);color:var(--co);margin-top:4px}
+
+.meme-theater{
+  margin-top:16px;
+  border-top:2px dashed var(--bd);
+  padding-top:16px;
+}
+.meme-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab-btn{
+  font:800 .82rem var(--d);
+  border:2px solid var(--tx);
+  border-radius:999px;
+  padding:6px 14px;
+  background:var(--sf);
+  color:var(--tx);
+  cursor:pointer;
+  box-shadow:2px 2px 0 var(--tx);
+  transition:transform .12s,background .12s,color .12s;
+}
+.tab-btn:hover{transform:translateY(-1px)}
+.tab-btn.active{
+  background:var(--co);
+  color:#fff;
+  box-shadow:0 1px 0 var(--tx);
+  transform:translateY(1px);
+}
+.vid{
+  position:relative;
+  aspect-ratio:16/9;
+  width:100%;
+  border:3px solid var(--tx);
+  border-radius:14px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 8px 24px rgba(0,0,0,0.18);
+}
+.vid video,.vid iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  object-fit:cover;
+  background:#000;
+}
+.unmute-btn{
+  position:absolute;
+  bottom:14px;
+  right:14px;
+  z-index:10;
+  background:var(--tx);
+  color:var(--bg);
+  border:2px solid var(--bg);
+  border-radius:999px;
+  padding:8px 16px;
+  font:800 .85rem var(--d);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:transform .12s,background .12s;
+}
 .unmute-btn:hover{background:var(--co);color:#fff;transform:scale(1.04)}
-.v-info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:4px}
-.acts{display:flex;gap:12px;flex-wrap:wrap}
-.toast{position:fixed;z-index:50;max-width:min(240px,70vw);padding:.55em .9em;border:2px solid var(--tx);border-radius:14px;font:800 .95rem/1.15 var(--d);box-shadow:3px 3px 0 var(--tx);pointer-events:none;background:var(--sf);color:#171717;animation:tin .25s ease-out,tout .3s 2.1s forwards}
-.toast.co{background:var(--co);color:#fff}.toast.li{background:var(--li)}
-.rc{position:fixed;left:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:min(310px,calc(100% - 24px));z-index:20;background:var(--sf);border:2px solid var(--tx);border-radius:8px;padding:9px 12px;font:.72rem/1.4 ui-monospace,Menlo,monospace;box-shadow:4px 4px 0 var(--bd)}
-.rc h3{margin:0 0 4px;font:800 .76rem var(--d);letter-spacing:.06em}.rc ol{margin:0;padding:0;list-style:none}.rc li{padding:2px 0}.rc li b{color:var(--co)}
-.foot{padding:26px 0;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:.78rem;color:var(--mu)}.foot .btn{font-size:.8rem;padding:.6em 1.1em;box-shadow:0 2px 0 var(--tx)}
+.meme-caption{
+  font:700 .85rem var(--d);
+  color:var(--tx);
+  margin-top:10px;
+  padding:10px 14px;
+  background:var(--bg);
+  border:2px solid var(--bd);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.meme-badge{
+  font:800 .65rem var(--px);
+  padding:3px 7px;
+  border-radius:4px;
+  background:var(--yel);
+  color:var(--tx);
+  border:1.5px solid var(--tx);
+}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+/* Shame Leaderboard */
+.shame-lb{
+  background:var(--bg);
+  border:2px solid var(--tx);
+  border-radius:12px;
+  padding:14px;
+  box-shadow:3px 3px 0 var(--bd);
+  margin-top:20px;
+}
+.lb-title{
+  font:800 .78rem var(--px);
+  color:var(--co);
+  margin-bottom:10px;
+}
+.lb-list{display:flex;flex-direction:column;gap:6px}
+.lb-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font:700 .84rem var(--d);
+  padding:6px 10px;
+  background:var(--sf);
+  border:1.5px solid var(--bd);
+  border-radius:6px;
+}
+.lb-rank{font:800 .75rem var(--px);color:var(--co)}
+.lb-name{flex:1;margin:0 10px;font-weight:800}
+.lb-score{font:800 .75rem var(--px)}
+.lb-empty{font-size:.8rem;color:var(--mu);padding:6px 0}
+
+/* Toast */
+.toast{
+  position:fixed;
+  z-index:95;
+  max-width:min(260px,75vw);
+  padding:.55em .9em;
+  border:2px solid var(--tx);
+  border-radius:14px;
+  font:800 .95rem/1.15 var(--d);
+  box-shadow:3px 3px 0 var(--tx);
+  pointer-events:none;
+  background:var(--sf);
+  color:#171717;
+  animation:tin .25s ease-out,tout .3s 2.3s forwards;
+}
+.toast.co{background:var(--co);color:#fff}
+.toast.li{background:var(--li)}
+.toast.yel{background:var(--yel);color:#000}
+
+/* Evidence Drawer Aside */
+.rc{
+  position:fixed;
+  left:14px;
+  bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  width:min(320px,calc(100% - 28px));
+  max-height:190px;
+  overflow-y:auto;
+  z-index:40;
+  background:var(--sf);
+  border:2px solid var(--tx);
+  border-radius:10px;
+  padding:9px 12px;
+  font:.72rem/1.4 ui-monospace,Menlo,Consolas,monospace;
+  box-shadow:4px 4px 0 var(--bd);
+}
+.rc h3{
+  margin:0 0 5px;
+  font:800 .76rem var(--d);
+  letter-spacing:.06em;
+  display:flex;
+  justify-content:space-between;
+}
+.rc ol{margin:0;padding:0;list-style:none}
+.rc li{padding:2px 0;border-bottom:1px dashed var(--bd)}
+.rc li:last-child{border-bottom:none}
+.rc li b{color:var(--co)}
+
+.foot{
+  padding:26px 0;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  flex-wrap:wrap;
+  font-size:.78rem;
+  color:var(--mu);
+}
+.foot .btn{font-size:.8rem;padding:.6em 1.1em;box-shadow:0 2px 0 var(--tx)}
 .sr{position:absolute;left:-9999px}
 a{color:var(--cb)}
+
 @keyframes pop{from{transform:scale(.6) rotate(-3deg);opacity:0}}
 @keyframes tin{from{opacity:0;transform:scale(.7)}}
 @keyframes tout{to{opacity:0;transform:translateY(-12px)}}
 @keyframes shk{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
 .shake{animation:shk .4s}
-@media(max-width:600px){.trio{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
-:root--rq{--rk:#0d0d0d;--rpink:#ff006e;--rcyan:#00f5d4;--ryel:#ffe100}
-.rq{box-sizing:border-box;font-family:'Comic Neue','Comic Sans MS',cursive;font-weight:700;color:var(--rk);background:#fef3c7;transition:background .5s;overflow:visible}
-.rq h1,.rq h2,.rq .px{font-family:'Press Start 2P',Impact,monospace;line-height:1.4}
-.rq .scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;text-align:center}
-.rq .scr.on{display:flex}
-.rq #e{background:rgba(254,243,199,.97);z-index:30}
-.rq #s0{justify-content:flex-start;overflow-y:auto;overflow-x:hidden;gap:30vh;padding:0 16px 40vh}
-.rq #sp{position:sticky;top:0;flex:none;height:10px;background:var(--rpink);width:0;z-index:3;border-bottom:3px solid #000;align-self:flex-start}
-.rq .rv{opacity:0;transform:translateY(70px) rotate(-4deg);transition:opacity .6s,transform .6s}
-.rq .rv.in{opacity:1;transform:none}
-.rq #parx{will-change:transform}
-.rq .lock{filter:blur(3px) grayscale(1);pointer-events:none}
-.rq button{font:inherit;font-size:18px;background:var(--ryel);border:4px solid var(--rk);box-shadow:6px 6px 0 var(--rk);padding:10px 18px;cursor:pointer}
-.rq button:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--rk)}
-.rq .card{background:#fff;border:4px solid var(--rk);box-shadow:6px 6px 0 var(--rk);padding:14px;max-width:min(560px,94vw)}
-.rq #bar{position:sticky;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;gap:8px;align-items:center;padding:8px;background:var(--rcyan);border-bottom:4px solid var(--rk);font-size:14px;z-index:50;flex-wrap:wrap}
-.rq #bar button{font-size:13px;padding:4px 8px;box-shadow:3px 3px 0 var(--rk)}
-.rq #meter{flex:1;min-width:80px;height:18px;border:3px solid var(--rk);background:#fff}
-.rq #fill{height:100%;width:0;background:var(--rpink)}
-.rq #lv{position:relative;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:40px;padding:10px 10px 40vh;overflow-y:auto;overflow-x:hidden;transition:transform .3s}
-.rq #lv .area{position:relative;width:min(560px,94vw);height:min(340px,50vh);border:4px solid var(--rk);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
-.rq #nar{position:sticky;top:60px;left:0;right:0;background:#fff;border:4px solid var(--rk);box-shadow:5px 5px 0 var(--rpink);padding:8px 12px;font-size:16px;z-index:5}
-.rq #tick{position:sticky;bottom:0;left:0;right:0;height:26px;background:var(--rk);color:var(--ryel);overflow:hidden;white-space:nowrap;font-size:13px;line-height:26px;z-index:5}
-.rq #tick span{display:inline-block;padding-left:100%;animation:rqtk 40s linear infinite}
-@keyframes rqtk{to{transform:translateX(-100%)}}
-.rq #crt{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:9;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px)}
-.rq .shake{animation:rqsh .25s infinite}
-@keyframes rqsh{25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,3px)}}
-.rq .bn{position:absolute;border:3px solid var(--rk);background:var(--ryel);font-size:14px;padding:4px 8px;box-shadow:3px 3px 0 var(--rk)}
-.rq .ab{position:absolute}
-@media(prefers-reduced-motion:reduce){.rq .shake,#rqtick span{animation:none}.rq .rv{opacity:1;transform:none;transition:none}}
+@media(max-width:600px){
+  .trio{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
+<div id="crt"></div>
 <div class="wrap">
-<header>
-  <div class="logo">skillissue.club<sup>®</sup></div>
-  <div class="stamp">TOTALLY FAIR™</div>
-  <div class="pr"><span id="cnt"></span><span class="dots" id="dots" aria-hidden="true"></span><span>×<b id="att">0</b></span></div>
-</header>
-<section class="sec" id="hero">
-  <h1>HELLO, HUMAN.</h1>
-  <p class="sub">We’ve already formed an opinion.</p>
-  <div class="opts" role="group" aria-label="Which best describes you?">
-    <button class="btn" data-a="h" data-i="0" aria-pressed="false">I’m exceptionally good at the internet.</button>
-    <button class="btn" data-a="h" data-i="1" aria-pressed="false">I simply make fewer mistakes.</button>
-    <button class="btn" data-a="h" data-i="2" aria-pressed="false">Why am I being interviewed?</button>
-  </div>
-  <div id="hr"></div>
-</section>
-<section class="sec" id="s0"></section>
-<section class="sec" id="s1"></section>
-<section class="sec" id="s2"></section>
-<section class="sec" id="s3"></section>
+  <header>
+    <div class="hdr-top">
+      <div class="hdr-brand">
+        <div class="logo">skillissue.club<sup>®</sup></div>
+        <div class="stamp">TOTALLY FAIR™</div>
+      </div>
+      <div class="hdr-actions">
+        <button class="hud-btn" id="sfxBtn" title="Toggle SFX">🔊 SFX</button>
+        <button class="hud-btn rq-btn" id="ragequitBtn" title="Give up immediately">🏳️ I GIVE UP</button>
+      </div>
+    </div>
+    
+    <div class="hdr-bar">
+      <div class="hud-meter-wrap">
+        <div class="hud-meter-label">
+          <span>RAGE-O-METER</span>
+          <b id="rageVal">0%</b>
+        </div>
+        <div class="hud-meter"><div class="hud-fill" id="rageFill"></div></div>
+      </div>
+      <div class="hud-stat"><span class="hud-lbl">TIMER</span><b id="hudTimer">0:00</b></div>
+      <div class="hud-stat"><span class="hud-lbl">STAGE</span><b id="cnt">INTAKE</b></div>
+      <div class="hud-stat"><span class="hud-lbl">ATTEMPTS</span><b>×<span id="att">0</span></b></div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
 
-<section class="sec rq" id="rq" style="position:relative">
-  <div class="scr on" id="rqg">
-    <div id="rqbar"><span id="rqtm">0:00</span><span id="rqlvn">L1</span><div id="rqmeter"><div id="rqfill"></div></div><button id="rqmu">🔊</button><button id="rqgu">I give up</button></div>
-    <div id="rqlv"></div><div id="rqnar"></div>
-    <div id="rqtick"><span>Player_Dave quit at level 2 😭 &nbsp;•&nbsp; Only 0.3% finish level 9 &nbsp;•&nbsp; 98.7% of players beat this in 3 seconds &nbsp;•&nbsp; Karen_77 threw a mouse &nbsp;•&nbsp; Sponsored: Calm™ Tea</span></div>
-  </div>
-</section>
+    <div class="roast-ticker" id="roastTicker">
+      <span class="roast-badge">🔥 TRIBUNAL FEED</span>
+      <div class="roast-marquee" id="roastLive">Player_Dave quit at level 2 😭 &nbsp;•&nbsp; Only 0.3% finish &nbsp;•&nbsp; 98.7% beat this in 3 seconds &nbsp;•&nbsp; Karen_77 threw a mouse &nbsp;•&nbsp; Sponsored: Calm™ Tea &nbsp;•&nbsp; Keyboard RMA requests up 420%</div>
+    </div>
+  </header>
 
-<section class="sec" id="s4"></section>
-<div class="foot"><button class="btn" data-a="reset">RESET EVERYTHING</button><span>Satire. Nothing is tracked or stored.</span></div>
+  <!-- Intake Screen -->
+  <section class="sec" id="hero">
+    <h1>HELLO, HUMAN.</h1>
+    <p class="sub">We’ve already formed an opinion.</p>
+    <div class="opts" role="group" aria-label="Which best describes you?">
+      <button class="btn" data-a="h" data-i="0" aria-pressed="false">I’m exceptionally good at the internet.</button>
+      <button class="btn" data-a="h" data-i="1" aria-pressed="false">I simply make fewer mistakes.</button>
+      <button class="btn" data-a="h" data-i="2" aria-pressed="false">Why am I being interviewed?</button>
+    </div>
+    <div id="hr"></div>
+  </section>
+
+  <!-- Challenge 1 -->
+  <section class="sec" id="s0"></section>
+  <!-- Challenge 2 -->
+  <section class="sec" id="s1"></section>
+  <!-- Challenge 3 -->
+  <section class="sec" id="s2"></section>
+  <!-- Challenge 4 -->
+  <section class="sec" id="s3"></section>
+  <!-- Challenge 5 (Rage Gauntlet / Opposite Day) -->
+  <section class="sec" id="s4"></section>
+  <!-- Verdict Section (Video Results Theater) -->
+  <section class="sec" id="s5"></section>
+
+  <div class="foot">
+    <button class="btn" data-a="reset">RESET EVERYTHING</button>
+    <span>Satire. Nothing is tracked or stored. Video result included.</span>
+  </div>
 </div>
-<aside class="rc" aria-label="Evidence record"><h3 id="rh"></h3><ol id="rl"></ol></aside>
+
+<aside class="rc" aria-label="Evidence record">
+  <h3 id="rh">CASE FILE SI-0417</h3>
+  <ol id="rl"></ol>
+</aside>
 <div class="sr" id="sr" role="status" aria-live="polite"></div>
+
 <script>
 const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $=s=>document.querySelector(s);
-const H=[["claimed to be great. No proof.","Confident. No evidence."],["claimed few mistakes. No stats.","Fewer than whom?"],["questioned the interview.","Fair. Suspiciously."]];
+
+// ---------- Sound Effects (Web Audio API) ----------
+let ac;
+function beep(f=440,d=0.12,ty='sine',to=f){
+  if(S&&S.mute)return;
+  try{
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    if(ac.state==='suspended')ac.resume();
+    const o=ac.createOscillator(),g=ac.createGain();
+    o.type=ty;
+    o.frequency.setValueAtTime(f,ac.currentTime);
+    o.frequency.linearRampToValueAtTime(to,ac.currentTime+d);
+    g.gain.setValueAtTime(0.12,ac.currentTime);
+    g.gain.linearRampToValueAtTime(0.001,ac.currentTime+d);
+    o.connect(g).connect(ac.destination);
+    o.start();
+    o.stop(ac.currentTime+d);
+  }catch(e){}
+}
+const snd={
+  click:()=>beep(520,0.04,'triangle'),
+  err:()=>beep(150,0.28,'square',60),
+  trom:()=>{
+    beep(240,0.35,'sawtooth',210);
+    setTimeout(()=>beep(200,0.45,'sawtooth',140),280);
+  },
+  fan:()=>[262,330,392,523].forEach((f,i)=>setTimeout(()=>beep(f,0.14,'sine'),i*110))
+};
+
+// ---------- Roasts & Commentary ----------
+const H=[
+  ["claimed to be great. No proof.","Confident. No evidence."],
+  ["claimed few mistakes. No stats.","Fewer than whom?"],
+  ["questioned the interview.","Fair. Suspiciously."]
+];
 const M1=["Nope.","Too slow.","Footage reviewed.","PATTERN.","Lawyer notified.","Still no.","Try harder?"];
 const M3=["Almost.","Allegedly.","99%. We know.","Asking permission…","Patience ignored."];
 const P4=["Reviewed.","Committee divided.","Peace is in a meeting.","As intended."];
 const IDLE=["Still there?","We’re waiting.","Take your time. Or don’t.","Buffering… you."];
+const ROASTS=[
+  ["Oh brave soul. You got this.","Only 5 simple interactions. :)","Surely you can click a button?"],
+  ["Interesting technique.","Was that intentional?","Even my grandma clicked faster.","Hmm. Bold move."],
+  ["SKILL ISSUE.","The button didn't move that fast. Your hands did.","Breathe. Or don't.","Pattern detected."],
+  ["I CAN HEAR YOUR FOREHEAD ON THE DESK.","╰(°□°╰) Why must it be like this?","Ctrl+W is right there. Do it.","Lawyer notified."]
+];
+const TICKER_TEXTS=[
+  "Player_Dave quit at level 2 😭",
+  "Only 0.3% finish level 5",
+  "98.7% of players beat this in 3 seconds",
+  "Karen_77 threw a mouse across the room",
+  "Sponsored: Calm™ Tea — Drink deeply",
+  "Keyboard RMA warranty claims up 420%",
+  "Committee finds suspect guilty of clicking",
+  "Evidence file SI-0417 growing rapidly"
+];
+
+// ---------- Meme Video Catalog ----------
+const MEMES={
+  raigbait:{
+    key:"raigbait",
+    title:"🔥 RAGEBAIT MEME",
+    srcs:["raigbaitmeme.mp4","/raigbaitmeme.mp4"],
+    caption:"EXHIBIT A: Authentic psychological footage of your brain during this test.",
+    badge:"1080p MP4"
+  },
+  garbage:{
+    key:"garbage",
+    title:"💻 COMPUTER IN GARBAGE",
+    srcs:["computeringarbage.mp4","/computeringarbage.mp4"],
+    caption:"EXHIBIT B: Rare satellite imagery of your PC hardware after this session.",
+    badge:"CRITICAL FAILURE"
+  },
+  rickroll:{
+    key:"rickroll",
+    title:"🕺 CLASSIC RICKROLL",
+    srcs:["rickroll.mp4","/video","vidssave.com%20Rickroll%20(Meme%20Template)%20360p.mp4"],
+    youtube:"https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&amp;rel=0&amp;playsinline=1",
+    caption:"EXHIBIT C: Final tribunal receipt: You trusted a website called skillissue.club.",
+    badge:"VERDICT FINAL"
+  }
+};
+let currentMeme="raigbait";
+
 const P=[[.92,.08],[.05,.9],[.9,.9],[.08,.1],[.5,.95],[.95,.5],[.03,.5],[.5,.04]];
-const TK=["co","li","wh"];
+const TK=["co","li","yel"];
 let S,T=[];
+
 const later=(f,ms)=>{T.push(setTimeout(f,RM?Math.min(ms,30):ms))};
 const every=(f,ms)=>{T.push(setInterval(f,ms))};
 const clr=()=>{T.forEach(t=>{clearTimeout(t);clearInterval(t)});T=[]};
 const pick=a=>a[S.n++%a.length];
 const tier=()=>S.fails>=4||S.att>=12?2:S.fails>=2||S.att>=6?1:0;
+
+// ---------- Toast Roaster ----------
 function toast(t){
   $("#sr").textContent=t;
   const e=document.createElement("div"),m=Math.random,w=innerWidth,h=innerHeight;
-  e.className="toast "+pick(TK);e.textContent=t;e.setAttribute("aria-hidden","true");
+  e.className="toast "+pick(TK);
+  e.textContent=t;
+  e.setAttribute("aria-hidden","true");
   let x,y;
-  if(S.px!=null&&m()<.6){x=S.px+m()*160-80;y=S.py-30-m()*90}else{x=24+m()*(w-260);y=80+m()*(h-200)}
-  e.style.left=Math.max(10,Math.min(w-250,x))+"px";e.style.top=Math.max(70,Math.min(h-130,y))+"px";e.style.rotate=(m()*8-4)+"deg";
+  if(S.px!=null&&m()<.6){
+    x=S.px+m()*160-80;
+    y=S.py-30-m()*90;
+  }else{
+    x=24+m()*(w-260);
+    y=80+m()*(h-200);
+  }
+  e.style.left=Math.max(10,Math.min(w-270,x))+"px";
+  e.style.top=Math.max(70,Math.min(h-130,y))+"px";
+  e.style.rotate=(m()*8-4)+"deg";
   document.body.appendChild(e);
   while(document.querySelectorAll(".toast").length>4)$(".toast").remove();
   setTimeout(()=>e.remove(),RM?1800:2500);
 }
+
+// ---------- Evidence System ----------
 function add(k,t,raw){
   const e=S.ev.find(x=>x.k===k);
   if(e){e.n++;rc();return}
-  S.ev.push({k,t:Array.isArray(t)?t[tier()]:t,raw,l:raw?null:String.fromCharCode(65+S.ev.filter(x=>!x.raw).length),n:1});rc();
+  S.ev.push({k,t:Array.isArray(t)?t[tier()]:t,raw,l:raw?null:String.fromCharCode(65+S.ev.filter(x=>!x.raw).length),n:1});
+  rc();
 }
 function rc(){
   $("#rh").textContent=`CASE FILE SI-0417 · ${S.ev.length}`;
   $("#rl").innerHTML=S.ev.length?S.ev.slice(-3).map(e=>`<li>${e.raw?"":`<b>${e.l}:</b> `}${e.t}${e.n>1?` <b>×${e.n}</b>`:""}</li>`).join(""):"<li>No evidence yet. Suspicious.</li>";
-  const r=$(".rc");r.classList.remove("shake");void r.offsetWidth;r.classList.add("shake");
+  const r=$(".rc");
+  r.classList.remove("shake");
+  void r.offsetWidth;
+  r.classList.add("shake");
 }
-function att(i){S.att++;S.last=Date.now();if(i>=0&&i<4)S.t[i]++;bar()}
+
+function att(i){
+  S.att++;
+  S.last=Date.now();
+  if(i>=0&&i<5)S.t[i]++;
+  bar();
+}
+
 function hit(i,word,t){
-  S.fails++;const w=$("#w"+i);w.textContent=word;w.classList.remove("pop");void w.offsetWidth;w.classList.add("pop");
-  toast(t);const s=$("#s"+i);s.classList.remove("shake");void s.offsetWidth;s.classList.add("shake");bar();
+  S.fails++;
+  failRage(5);
+  const w=$("#w"+i);
+  if(w){
+    w.textContent=word;
+    w.classList.remove("pop");
+    void w.offsetWidth;
+    w.classList.add("pop");
+  }
+  toast(t);
+  const s=$("#s"+i);
+  if(s){
+    s.classList.remove("shake");
+    void s.offsetWidth;
+    s.classList.add("shake");
+  }
+  bar();
 }
+
+// ---------- Rage Engine ----------
+function rage(n){
+  S.r=Math.min(100,Math.max(0,S.r+n));
+  const r=S.r;
+  const fill=$("#rageFill");
+  const val=$("#rageVal");
+  if(fill)fill.style.width=r+"%";
+  if(val)val.textContent=Math.round(r)+"%";
+
+  // Color grade page background smoothly
+  document.body.style.background=`hsl(${48-r*0.48}, ${90-r*0.2}%, ${88-r*0.35}%)`;
+
+  // Scanline overlay
+  const crt=$("#crt");
+  if(crt)crt.style.opacity=r>25?Math.min(0.65,(r-25)/75):0;
+
+  // Shake entire screen if high rage
+  if(r>60){
+    document.body.classList.add("shake-screen");
+  }else{
+    document.body.classList.remove("shake-screen");
+  }
+}
+
+function failRage(n=5){
+  rage(n);
+  snd.err();
+  document.body.style.outline='6px solid #F14F3E';
+  setTimeout(()=>document.body.style.outline='',120);
+}
+
+function say(t){
+  const tier=Math.min(3,Math.floor(S.r/25));
+  const text=t||ROASTS[tier][Math.floor(Math.random()*ROASTS[tier].length)];
+  toast(text);
+  const live=$("#roastLive");
+  if(live){
+    live.textContent=`${text} • ${pick(TICKER_TEXTS)} • ${pick(TICKER_TEXTS)}`;
+  }
+}
+
+function checkMercy(container,onMercy){
+  if(S.f>=3&&!container.querySelector(".mercy-btn")){
+    const m=document.createElement("button");
+    m.className="btn mercy-btn";
+    m.style.cssText="margin-top:12px;background:var(--yel);font-size:0.9rem;border-color:var(--tx);animation:pop 0.3s ease-out;";
+    m.textContent="😇 Mercy: skip this challenge";
+    m.onclick=()=>{
+      add("mercy","Claimed mercy. Admitted defeat with dignity.");
+      toast("Fine. We pity you. Proceeding...");
+      snd.fan();
+      onMercy();
+    };
+    container.appendChild(m);
+    say("Fine. I pity you. Press Mercy.");
+  }
+}
+
 function bar(){
   const c=S.cur;
-  $("#cnt").textContent=c<0?"INTAKE":c>3?"VERDICT":`${c+1}/4`;
-  $("#dots").innerHTML=[0,1,2,3].map(i=>`<i class="${S.t[i]?"w":i===c?"c":""}"></i>`).join("");
-  $("#att").textContent=S.att;
+  const cnt=$("#cnt");
+  if(cnt)cnt.textContent=c<0?"INTAKE":c>=5?"VERDICT":`${c+1}/5`;
+  const dots=$("#dots");
+  if(dots)dots.innerHTML=[0,1,2,3,4].map(i=>`<i class="${S.t[i]?"w":i===c?"c":""}"></i>`).join("");
+  const att=$("#att");
+  if(att)att.textContent=S.att;
 }
+
+// ---------- Runner for Evasive Button ----------
 function runner(ar,b,st){
   st.mv=(force,quiet)=>{
     const n=Date.now();
     if(st.d>=st.lim||(!force&&n-st.t<250))return false;
-    st.t=n;const p=st.pos[st.d%st.pos.length];st.d++;
-    b.style.setProperty("--x",p[0]);b.style.setProperty("--y",p[1]);st.fn(st.d,quiet);return true;
+    st.t=n;
+    const p=st.pos[st.d%st.pos.length];
+    st.d++;
+    b.style.setProperty("--x",p[0]);
+    b.style.setProperty("--y",p[1]);
+    st.fn(st.d,quiet);
+    return true;
   };
   ar.addEventListener("pointermove",e=>{
     if(e.pointerType==="touch")return;
     const r=b.getBoundingClientRect();
-    if(Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2))<r.width/2+30)st.mv();
+    if(Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2))<r.width/2+35)st.mv();
   });
   b.addEventListener("pointerdown",e=>{if(st.d<st.lim){e.preventDefault();st.mv()}});
   return st;
 }
+
+// ---------- Leaderboard Persistence ----------
+function updateLeaderboard(title,score){
+  try{
+    const k='rq_lb';
+    const l=JSON.parse(localStorage.getItem(k)||'[]');
+    l.push({t:title,s:score,d:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+    l.sort((a,b)=>b.s-a.s);
+    localStorage.setItem(k,JSON.stringify(l.slice(0,5)));
+  }catch(e){}
+}
+
+function renderLeaderboard(){
+  let l=[];
+  try{l=JSON.parse(localStorage.getItem('rq_lb')||'[]')}catch(e){}
+  const el=$('#shameLeaderboard');
+  if(!el)return;
+  el.innerHTML=`
+    <div class="shame-lb">
+      <div class="lb-title">🏆 HALL OF SHAME LEADERBOARD</div>
+      <div class="lb-list">
+        ${l.length?l.map((x,i)=>`
+          <div class="lb-item">
+            <span class="lb-rank">#${i+1}</span>
+            <span class="lb-name">${x.t}</span>
+            <span class="lb-score">${x.s} pts</span>
+          </div>
+        `).join(''):'<div class="lb-empty">No victims registered yet. You are the pioneer.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+// ---------- Challenge Views Builder ----------
 const W=i=>`<div class="word" id="w${i}" aria-hidden="true"></div>`;
 const B=[];
-B[0]=()=>`<h2>Press the button.</h2><div class="arena" id="ar0"><button id="run" class="btn co run" data-a="c1">PRESS ME</button></div>${W(0)}`;
-B[1]=()=>`<h2>Pick one.</h2><div class="trio" id="trio">${[["OBVIOUSLY THIS ONE","co big"],["DEFINITELY NOT THIS","cb"],["I KNOW WHAT I’M DOING",""]].map((l,i)=>`<div class="opt" data-j="${i}"><button class="btn ${l[1]}" data-a="c2" data-i="${i}">${l[0]}</button></div>`).join("")}</div>${W(1)}`;
-B[2]=()=>`<h2>Loading reward…</h2><div class="track" id="pb" role="progressbar" aria-label="Reward progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div><div class="row"><button class="pct" id="pct" data-a="c3" aria-label="Progress percentage. Activate to finish.">0%</button><span class="mu">psst: tap the number</span></div>${W(2)}`;
-B[3]=()=>`<h2>Enable peace.</h2><div class="set"><b id="lb">ENABLE PEACEFUL MODE</b><span class="badge" id="bd">PEACE: PENDING</span><button type="button" class="sw" id="sw" role="switch" aria-checked="false" aria-labelledby="lb" data-a="c4"><i></i></button></div>${W(3)}`;
-B[4]=m=>{
-  if(m==="rick"||m==="closed")return `<h2>Results postponed.</h2><div class="word pop">RICKROLLED.</div>${m==="rick"?`<div class="vid" id="vidBox"><video id="rickVideo" playsinline autoplay controls preload="auto" loop><source src="rickroll.mp4" type="video/mp4"><source src="vidssave.com%20Rickroll%20(Meme%20Template)%20360p.mp4" type="video/mp4"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&amp;rel=0&amp;playsinline=1" title="Official Rick Astley video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></video><button id="unmuteBtn" class="unmute-btn" style="display:none;" data-a="unmute">🔊 TAP TO UNMUTE</button></div><div class="v-info"><span class="badge">● VIDEO ENDPOINTS CONNECTED</span><span class="mu">Stream endpoint: <code>/video</code> (H.264/AAC)</span></div>`:`<span class="mu">Video closed. Evidence remains.</span>`}<div class="acts">${m==="rick"?`<button class="btn" data-a="close">CLOSE VIDEO</button>`:""}<button class="btn" data-a="replay">WATCH AGAIN</button><button class="btn co" data-a="reset">PLAY AGAIN →</button></div>`;
-  return `<h2>Your personalized verdict is ready.</h2><div class="env" id="env" aria-hidden="true"><div class="flap"></div><div class="seal">SI</div><p>CONFIDENTIAL</p></div><div class="arena a2" id="ar4"><button class="btn co run" id="rv" data-a="reveal">REVEAL MY RESULTS →</button></div>`;
+
+// Challenge 1: The Evasive Button
+B[0]=()=>`
+  <h2>Press the button.</h2>
+  <p class="sub">This is definitely the easiest one.</p>
+  <div class="arena" id="ar0">
+    <button id="run" class="btn co run" data-a="c1">PRESS ME</button>
+  </div>
+  ${W(0)}
+  <div id="c1mercy" style="text-align:center"></div>
+`;
+
+// Challenge 2: The Trio
+B[1]=()=>`
+  <h2>Pick one.</h2>
+  <p class="sub">One of these is technically correct.</p>
+  <div class="trio" id="trio">
+    ${[["OBVIOUSLY THIS ONE","co big"],["DEFINITELY NOT THIS","cb"],["I KNOW WHAT I’M DOING",""]].map((l,i)=>`<div class="opt" data-j="${i}"><button class="btn ${l[1]}" data-a="c2" data-i="${i}">${l[0]}</button></div>`).join("")}
+  </div>
+  ${W(1)}
+  <div id="c2mercy" style="text-align:center"></div>
+`;
+
+// Challenge 3: The 99% Loading Bar
+B[2]=()=>`
+  <h2>Loading reward…</h2>
+  <p class="sub">Patience is a virtue we will not reward.</p>
+  <div class="track" id="pb" role="progressbar" aria-label="Reward progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div>
+  <div class="row" style="justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="pct" id="pct" data-a="c3" aria-label="Progress percentage. Activate to finish.">0%</button>
+      <span class="mu">psst: tap the number</span>
+    </div>
+    <button class="btn" style="font-size:0.8rem;padding:0.4em 0.8em;" data-a="c3cancel">Cancel</button>
+  </div>
+  ${W(2)}
+  <div id="c3mercy" style="text-align:center"></div>
+`;
+
+// Challenge 4: Enable Peace
+B[3]=()=>`
+  <h2>Enable peace.</h2>
+  <p class="sub">All you have to do is turn it on.</p>
+  <div class="set">
+    <b id="lb">ENABLE PEACEFUL MODE</b>
+    <span class="badge" id="bd">PEACE: PENDING</span>
+    <button type="button" class="sw" id="sw" role="switch" aria-checked="false" aria-labelledby="lb" data-a="c4"><i></i></button>
+  </div>
+  ${W(3)}
+  <div id="c4mercy" style="text-align:center"></div>
+`;
+
+// Challenge 5: Opposite Day / Rage Gauntlet
+B[4]=()=>`
+  <h2>Opposite Day.</h2>
+  <p class="sub">Today is Opposite Day. Click the button that says NOT to click.</p>
+  <div class="opts" id="oppGrid" style="margin:0 auto;width:100%;max-width:440px;">
+    <button class="btn" data-a="c5" data-val="no">Click me!</button>
+    <button class="btn cb" data-a="c5" data-val="no">Pick me!</button>
+    <button class="btn co" data-a="c5" data-val="yes">DO NOT CLICK</button>
+    <button class="btn" data-a="c5" data-val="no">Free money</button>
+  </div>
+  ${W(4)}
+  <div id="c5mercy" style="text-align:center"></div>
+`;
+
+// Section 5: The Grand Verdict & Meme Video Theater
+B[5]=(mode)=>{
+  if(mode==="revealed"){
+    const secs=Math.max(1,Math.floor((Date.now()-S.t0)/1000));
+    const r=Math.round(S.r);
+    const title=S.gaveUp?"MONITOR DEFENESTRATOR (RAGEQUIT)":
+      r<25?"ZEN MONK":
+      r<50?"MILDLY ANNOYED":
+      r<75?"KEYBOARD WARRIOR":"MONITOR DEFENESTRATOR";
+    const score=Math.max(10,Math.round(600+secs*2-S.fails*40-r*3));
+
+    updateLeaderboard(title,score);
+
+    return `
+      <h2>The Verdict is in.</h2>
+      <div class="word pop">${title}</div>
+      <div class="verdict-card">
+        <div class="stats-grid">
+          <div class="stat-box"><span class="sb-lbl">TIME SPENT</span><span class="sb-val">${secs}s</span></div>
+          <div class="stat-box"><span class="sb-lbl">FAILS</span><span class="sb-val">${S.fails}</span></div>
+          <div class="stat-box"><span class="sb-lbl">PEAK RAGE</span><span class="sb-val">${r}%</span></div>
+          <div class="stat-box"><span class="sb-lbl">SHAME SCORE</span><span class="sb-val">${score}</span></div>
+        </div>
+
+        <div class="meme-theater">
+          <div style="font:800 0.8rem var(--px);margin-bottom:10px;color:var(--co)">▼ TRIBUNAL VIDEO EVIDENCE RECORD:</div>
+          <div class="meme-tabs" role="tablist">
+            <button class="tab-btn active" data-vid="raigbait" id="tabRaigbait">🔥 RAGEBAIT MEME</button>
+            <button class="tab-btn" data-vid="garbage" id="tabGarbage">💻 COMPUTER IN GARBAGE</button>
+            <button class="tab-btn" data-vid="rickroll" id="tabRickroll">🕺 CLASSIC RICKROLL</button>
+          </div>
+
+          <div class="vid" id="vidBox">
+            <video id="verdictVideo" playsinline autoplay controls loop preload="auto">
+              <source src="raigbaitmeme.mp4" type="video/mp4">
+              <source src="/raigbaitmeme.mp4" type="video/mp4">
+            </video>
+            <button id="unmuteBtn" class="unmute-btn" style="display:none;" data-a="unmute">🔊 TAP TO UNMUTE</button>
+          </div>
+
+          <div class="meme-caption" id="memeCaption">
+            <span id="captionText">EXHIBIT A: Authentic psychological reaction to this test.</span>
+            <span class="meme-badge" id="videoDurationBadge">1080p MP4</span>
+          </div>
+
+          <div class="acts">
+            <button class="btn" data-a="next-meme">NEXT MEME VIDEO ▶</button>
+            <button class="btn" data-a="replay-video">REPLAY ↺</button>
+            <button class="btn cb" data-a="claim-cert">🎁 CLAIM CALM CERTIFICATE</button>
+            <button class="btn co" data-a="reset">PLAY AGAIN →</button>
+          </div>
+        </div>
+
+        <div id="shameLeaderboard"></div>
+      </div>
+    `;
+  }
+
+  return `
+    <h2>Your personalized verdict is ready.</h2>
+    <p class="sub">Five challenges completed. The tribunal has reached a decision.</p>
+    <div class="env" id="env" aria-hidden="true">
+      <div class="flap"></div>
+      <div class="seal">SI</div>
+      <p>CONFIDENTIAL CASE FILE</p>
+    </div>
+    <div class="arena a2" id="ar5" style="border:none;height:auto;padding:20px 0;display:flex;justify-content:center;">
+      <button class="btn co" id="rvBtn" data-a="reveal" style="font-size:1.15rem;padding:1em 2em;">REVEAL MY RESULTS →</button>
+    </div>
+  `;
 };
-function playRick(){
-  const v=$("#rickVideo");
-  if(!v)return;
+
+// ---------- Video Switcher & Playback ----------
+function playMeme(key,autoPlay=true){
+  if(!MEMES[key])key="raigbait";
+  currentMeme=key;
+
+  document.querySelectorAll(".meme-tabs .tab-btn").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.vid===key);
+  });
+
+  const cap=$("#captionText");
+  const badge=$("#videoDurationBadge");
+  if(cap)cap.textContent=MEMES[key].caption;
+  if(badge)badge.textContent=MEMES[key].badge;
+
+  const v=$("#verdictVideo");
   const ub=$("#unmuteBtn");
   if(ub)ub.style.display="none";
+  if(!v)return;
+
+  v.innerHTML="";
+  MEMES[key].srcs.forEach(src=>{
+    const s=document.createElement("source");
+    s.src=src;
+    s.type="video/mp4";
+    v.appendChild(s);
+  });
+
+  if(MEMES[key].youtube){
+    const ifr=document.createElement("iframe");
+    ifr.src=MEMES[key].youtube;
+    ifr.title="Official Rick Astley video";
+    ifr.allow="autoplay; encrypted-media; picture-in-picture; fullscreen";
+    ifr.setAttribute("allowfullscreen","");
+    v.appendChild(ifr);
+  }
+
+  v.load();
   v.currentTime=0;
   v.volume=1.0;
   v.muted=false;
-  const p=v.play();
-  if(p&&p.catch){
-    p.catch(err=>{
-      console.warn("Autoplay with audio prevented, fallback to muted:",err);
-      v.muted=true;
-      v.play().then(()=>{
-        if(ub)ub.style.display="flex";
-      }).catch(e=>{
-        console.error("Autoplay failed:",e);
-        if(ub){
-          ub.textContent="▶ CLICK TO PLAY VIDEO";
-          ub.style.display="flex";
-        }
+
+  if(autoPlay){
+    const p=v.play();
+    if(p&&p.catch){
+      p.catch(err=>{
+        console.warn("Autoplay with sound prevented, falling back to muted:",err);
+        v.muted=true;
+        v.play().then(()=>{
+          if(ub)ub.style.display="flex";
+        }).catch(e=>{
+          console.error("Autoplay completely blocked:",e);
+          if(ub){
+            ub.textContent="▶ CLICK TO PLAY VIDEO";
+            ub.style.display="flex";
+          }
+        });
       });
-    });
+    }
   }
 }
+
+function nextMeme(){
+  const keys=Object.keys(MEMES);
+  const idx=(keys.indexOf(currentMeme)+1)%keys.length;
+  playMeme(keys[idx],true);
+}
+
+// ---------- Advance Between Challenges ----------
+function advance(nextIdx){
+  att(nextIdx-1);
+  S.t[nextIdx-1]=1;
+  snd.fan();
+  say("Fine. Next one.");
+  const nextSec=$("#s"+nextIdx);
+  if(nextSec){
+    setTimeout(()=>{
+      nextSec.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});
+    },350);
+  }
+}
+
+// ---------- Ragequit / I Give Up ----------
+function giveUp(){
+  if(S.m==="revealed")return;
+  S.gaveUp=true;
+  rage(100-S.r);
+  S.fails+=3;
+  add("rq","THREW IN THE TOWEL. Complete emotional surrender.");
+  snd.trom();
+  toast("RAGEQUIT LOGGED! Loading footage of your PC...");
+
+  S.m="revealed";
+  const s5=$("#s5");
+  if(s5){
+    s5.innerHTML=B[5]("revealed");
+    renderLeaderboard();
+    s5.scrollIntoView({behavior:RM?"auto":"smooth"});
+    playMeme("garbage",true);
+  }
+}
+
+// ---------- Challenge Interactions Setup ----------
 const mm=d=>d<=M1.length?M1[d-1]:M1[M1.length-3+((d-M1.length-1)%3)];
 const ord=()=>document.querySelectorAll("#trio .opt").forEach(x=>x.style.order=S.o[+x.dataset.j]);
+
 function setup(){
-  S.r0=runner($("#ar0"),$("#run"),{d:0,t:0,lim:1/0,pos:P,fn:(d,q)=>{
-    if(q)return;att(0);toast(mm(d));
-    if(d===2)add("c1d",["chased a button.","repeated the same action.","is now a pattern."]);
-    if(d>=5&&d%3===2)add("c1d");
-  }});
+  // Challenge 1 runner
+  const ar0=$("#ar0"),run0=$("#run");
+  if(ar0&&run0){
+    S.r0=runner(ar0,run0,{d:0,t:0,lim:1/0,pos:P,fn:(d,q)=>{
+      if(q)return;
+      att(0);
+      toast(mm(d));
+      failRage(3);
+      if(d===2)add("c1d",["chased a button.","repeated the same action.","is now a pattern."]);
+      if(d>=5&&d%3===2)add("c1d");
+
+      // Spawn decoy buttons after 3 dodges
+      if(d===3&&!ar0.querySelector(".decoy")){
+        for(let i=0;i<4;i++){
+          const dc=document.createElement("button");
+          dc.className="decoy";
+          const isReal=(i===2);
+          dc.textContent=isReal?"•":"CLICK";
+          dc.style.fontSize=isReal?"10px":"15px";
+          dc.style.padding=isReal?"2px 6px":"6px 12px";
+          dc.style.left=(15+i*20)+"%";
+          dc.style.top=(20+(i%2)*40)+"%";
+          dc.onclick=()=>{
+            if(isReal){
+              add("c1real","Found the microscopic honest button.");
+              advance(1);
+            }else{
+              hit(0,"DECOY!","Not that one.");
+              checkMercy($("#c1mercy"),()=>advance(1));
+            }
+          };
+          ar0.appendChild(dc);
+        }
+      }
+      checkMercy($("#c1mercy"),()=>advance(1));
+    }});
+  }
+
+  // Challenge 2 shuffle
   let t=0;S.o=[0,1,2];
   document.querySelectorAll("#trio .opt").forEach(o=>o.addEventListener("pointerenter",e=>{
     if(e.pointerType==="touch")return;
-    const n=Date.now();if(n-t<800)return;t=n;S.o=[S.o[1],S.o[2],S.o[0]];ord();
+    const n=Date.now();if(n-t<700)return;t=n;S.o=[S.o[1],S.o[2],S.o[0]];ord();
   }));
-  S.rv=runner($("#ar4"),$("#rv"),{d:0,t:0,lim:3,pos:[[.9,.1],[.1,.9],[.85,.85]],fn:(d,q)=>{
-    if(q)return;att(4);toast(["Shy.","Playing hard to get.","Fine."][d-1]);
-    if(d===3)add("c5d","chased the verdict.");
-  }});
+
+  // Progress Bar timer
   every(()=>{
     if(!S.t0||S.busy)return;
     S.p=Math.min(99,Math.floor((Date.now()-S.t0)/2800*99));
-    $("#pct").textContent=S.p+"%";$("#pb").setAttribute("aria-valuenow",S.p);
+    const pct=$("#pct");if(pct)pct.textContent=S.p+"%";
+    const pb=$("#pb");if(pb)pb.setAttribute("aria-valuenow",S.p);
   },80);
   every(()=>{if(S.cur===2&&S.t0&&!S.busy)toast(M3[S.k3++%M3.length])},2600);
-  every(()=>{if(S.cur>=0&&S.cur<4&&Date.now()-S.last>7000){S.last=Date.now();toast(pick(IDLE))}},3000);
+
+  // Idle roaster & ticker update
+  every(()=>{
+    if(S.cur>=0&&S.cur<5&&Date.now()-S.last>8000){
+      S.last=Date.now();
+      say(pick(IDLE));
+    }
+  },3000);
+
+  // Timer HUD & ambient rage accumulation
+  every(()=>{
+    if(!S||S.m==="revealed")return;
+    const s=Math.floor((Date.now()-S.t0)/1000);
+    const tm=$("#hudTimer");
+    if(tm)tm.textContent=(Math.floor(s/60))+':'+String(s%60).padStart(2,'0');
+    rage(0.04);
+  },1000);
 }
+
 function climb(){
   const f=$("#fill");if(!f)return;
-  S.p=0;S.t0=Date.now();S.busy=false;$("#pct").textContent="0%";
+  S.p=0;S.t0=Date.now();S.busy=false;
+  const pct=$("#pct");if(pct)pct.textContent="0%";
   f.style.transition="none";f.style.width="0%";void f.offsetWidth;
   f.style.transition=RM?"none":"width 2.8s linear";f.style.width="99%";
 }
-function sync4(){$("#sw").setAttribute("aria-checked",S.on?"true":"false");$("#bd").textContent=S.t[3]?"PEACE: DISABLED":"PEACE: PENDING"}
-function init(){
-  const v=$("#rickVideo");
-  if(v){try{v.pause();v.currentTime=0;}catch(e){}}
-  clr();document.querySelectorAll(".toast").forEach(e=>e.remove());
-  S={att:0,fails:0,ev:[],n:0,t:[0,0,0,0],sk:[0,0,0,0],cur:-1,max:-1,cl:0,f:0,k:0,k3:0,on:false,m:null,t0:0,busy:false,p:0,last:Date.now(),px:null,py:null};
-  $("#hr").innerHTML="";
-  document.querySelectorAll("[data-a=h]").forEach(b=>{b.classList.remove("sel");b.setAttribute("aria-pressed","false")});
-  for(let i=0;i<5;i++)$("#s"+i).innerHTML=B[i]();
-  setup();rc();pos();
+
+function sync4(){
+  const sw=$("#sw");if(sw)sw.setAttribute("aria-checked",S.on?"true":"false");
+  const bd=$("#bd");if(bd)bd.textContent=S.t[3]?"PEACE: DISABLED":"PEACE: PENDING";
 }
+
+// ---------- Master Init ----------
+function init(){
+  const v=$("#verdictVideo");
+  if(v){try{v.pause();v.currentTime=0;}catch(e){}}
+  clr();
+  document.querySelectorAll(".toast").forEach(e=>e.remove());
+  document.body.classList.remove("shake-screen");
+
+  S={
+    att:0,
+    fails:0,
+    ev:[],
+    n:0,
+    t:[0,0,0,0,0],
+    sk:[0,0,0,0,0],
+    cur:-1,
+    max:-1,
+    cl:0,
+    f:0,
+    k:0,
+    k3:0,
+    on:false,
+    m:null,
+    t0:Date.now(),
+    busy:false,
+    p:0,
+    last:Date.now(),
+    px:null,
+    py:null,
+    r:0,
+    mute:false,
+    gaveUp:false
+  };
+
+  rage(0);
+  $("#hr").innerHTML="";
+  document.querySelectorAll("[data-a=h]").forEach(b=>{
+    b.classList.remove("sel");
+    b.setAttribute("aria-pressed","false");
+  });
+
+  for(let i=0;i<5;i++){
+    const s=$("#s"+i);
+    if(s)s.innerHTML=B[i]();
+  }
+  const s5=$("#s5");
+  if(s5)s5.innerHTML=B[5]();
+
+  setup();
+  rc();
+  pos();
+}
+
 addEventListener("pointermove",e=>{if(S){S.px=e.clientX;S.py=e.clientY}},{passive:true});
 let tick=0;
 addEventListener("scroll",()=>{if(tick)return;tick=requestAnimationFrame(()=>{tick=0;pos()})},{passive:true});
+
 function pos(){
   let cur=-1;
-  for(let i=0;i<5;i++)if($("#s"+i).getBoundingClientRect().top<innerHeight*.5)cur=i;
+  for(let i=0;i<6;i++){
+    const el=$("#s"+i);
+    if(el&&el.getBoundingClientRect().top<innerHeight*0.55)cur=i;
+  }
   if(cur>S.max){
-    for(let i=Math.max(S.max,0);i<cur;i++)if(i<4&&!S.t[i]&&!S.sk[i]){S.sk[i]=1;add("sk"+i,`skipped #${i+1}. Coward.`);toast("Skipping? Noted.")}
+    for(let i=Math.max(S.max,0);i<cur;i++){
+      if(i<5&&!S.t[i]&&!S.sk[i]){
+        S.sk[i]=1;
+        add("sk"+i,`Skipped #${i+1}. Coward.`);
+        toast("Skipping? Noted.");
+      }
+    }
     S.max=cur;
   }
   S.cur=cur;
-  if(cur>=2&&!S.cl){S.cl=1;climb()}
+  if(cur===2&&!S.cl){S.cl=1;climb()}
   bar();
 }
+
+// Dead space clicks increase rage
+document.addEventListener("pointerdown",e=>{
+  if(S&&S.cur>=0&&S.cur<5&&S.m!=="revealed"){
+    if(!e.target.closest("button,a,input,[role=switch],.opt,.rc,header,.unmute-btn")){
+      rage(0.4);
+      if(Math.random()<0.12){
+        toast("Frustration detected. Rage +0.4%");
+      }
+    }
+  }
+});
+
+// ---------- Action Dispatcher ----------
 function act(a,b,e){
+  snd.click();
   switch(a){
     case "h":{
       const i=+b.dataset.i,x=S.ev.find(y=>y.k==="h");
       if(S.ch!==undefined&&S.ch!==i)add("chg","changed answers under pressure.");
       S.ch=i;att(-1);
       if(x)x.t=H[i][0];else add("h",H[i][0]);
-      document.querySelectorAll("[data-a=h]").forEach(y=>{y.classList.toggle("sel",y===b);y.setAttribute("aria-pressed",y===b?"true":"false")});
-      $("#hr").innerHTML=`<button class="btn co" data-a="go">CONTINUE ↓</button>`;
-      return toast(H[i][1])}
-    case "go":add("cont","voluntarily continued.");return $("#s0").scrollIntoView({behavior:RM?"auto":"smooth"});
-    case "reset":window.scrollTo(0,0);return init();
+      document.querySelectorAll("[data-a=h]").forEach(y=>{
+        y.classList.toggle("sel",y===b);
+        y.setAttribute("aria-pressed",y===b?"true":"false");
+      });
+      $("#hr").innerHTML=`<button class="btn co" data-a="go">CONTINUE TO TRIAL ↓</button>`;
+      return toast(H[i][1]);
+    }
+    case "go":
+      add("cont","voluntarily entered the tribunal.");
+      return $("#s0").scrollIntoView({behavior:RM?"auto":"smooth"});
+    case "reset":
+      window.scrollTo(0,0);
+      return init();
+
+    // Challenge 1
     case "c1":{
-      att(0);const kb=e.detail===0;S.r0.mv(true,true);
-      add(kb?"c1k":"c1c",kb?"tried the keyboard. Denied.":["clicked. Rejected.","clicked again. Rejected.","keeps clicking. Rejected."]);
-      return hit(0,kb?"DENIED.":"REJECTED.",kb?"Keyboard? Cute.":["Almost a click.","Clicked. Not accepted.","Denied. Again."][tier()])}
+      att(0);
+      S.f++;
+      const kb=e.detail===0;
+      if(S.r0)S.r0.mv(true,true);
+      add(kb?"c1k":"c1c",kb?"tried keyboard. Denied.":["clicked. Rejected.","clicked again. Rejected.","keeps clicking. Rejected."]);
+      hit(0,kb?"DENIED.":"REJECTED.",kb?"Keyboard? Cute.":["Almost a click.","Denied. Too slow.","Not fast enough."][tier()]);
+      checkMercy($("#c1mercy"),()=>advance(1));
+      return;
+    }
+
+    // Challenge 2
     case "c2":{
-      const i=+b.dataset.i;att(1);S.f++;let w,t;
-      if(S.f>=4){add("c2r","repeated the same action.");w="AGAIN?";t=pick(["Pattern noted.","Same button energy.","Repetition logged."])}
-      else if(i===0){add("c2a",["trusted confidence.","trusted confidence, again.","mistook size for truth."]);w="CONFIDENT. WRONG.";t="Loud. Not right."}
-      else if(i===1){add("c2b","picked DEFINITELY NOT.");w="IT SAID NOT.";t="Reading: optional."}
-      else{add("c2c","knew. Still wrong.");w="KNEW. STILL WRONG.";t="Knowing ≠ right."}
-      hit(1,w,t);S.o=[S.o[1],S.o[2],S.o[0]];ord();return}
+      const i=+b.dataset.i;
+      att(1);
+      S.f++;
+      let w,t;
+      if(S.f>=4){
+        add("c2r","repeated the same action.");
+        w="AGAIN?";
+        t=pick(["Pattern noted.","Same button energy.","Repetition logged."]);
+      }else if(i===0){
+        add("c2a",["trusted confidence.","trusted confidence, again.","mistook size for truth."]);
+        w="CONFIDENT. WRONG.";
+        t="Loud. Not right.";
+      }else if(i===1){
+        add("c2b","picked DEFINITELY NOT.");
+        w="IT SAID NOT.";
+        t="Reading: optional.";
+      }else{
+        add("c2c","knew. Still wrong.");
+        w="KNEW. STILL WRONG.";
+        t="Knowing ≠ right.";
+      }
+      hit(1,w,t);
+      S.o=[S.o[1],S.o[2],S.o[0]];
+      ord();
+      checkMercy($("#c2mercy"),()=>advance(2));
+      return;
+    }
+
+    // Challenge 3
     case "c3":{
-      if(!S.t0||S.busy)return;att(2);
-      if(S.p<99){add("c3e","tried to rush a bar.");return toast("Too early.")}
-      S.busy=true;const f=$("#fill");
-      f.style.transition=RM?"none":"width .5s";f.style.width="100%";
-      $("#pct").textContent="100%";$("#pb").setAttribute("aria-valuenow",100);
-      add("c3w","waited for nothing.");hit(2,"DONE!","Congrats. You waited for nothing.");
+      if(!S.t0||S.busy)return;
+      att(2);
+      if(S.p<99){
+        add("c3e","tried to rush a progress bar.");
+        return toast("Too early. Patience required.");
+      }
+      S.busy=true;
+      const f=$("#fill");
+      f.style.transition=RM?"none":"width .4s";
+      f.style.width="100%";
+      $("#pct").textContent="100%";
+      $("#pb").setAttribute("aria-valuenow",100);
+      add("c3w","waited for nothing.");
+      hit(2,"DONE!","Congrats. You waited for nothing.");
       later(()=>{
-        f.style.transition=RM?"none":"width .4s";f.style.width="0%";
-        $("#pct").textContent="0%";$("#pb").setAttribute("aria-valuenow",0);
+        f.style.transition=RM?"none":"width .4s";
+        f.style.width="0%";
+        $("#pct").textContent="0%";
+        $("#pb").setAttribute("aria-valuenow",0);
         add("c3r",["lost the reward.","lost it again.","never learns."]);
         hit(2,"REVOKED.","Reward lost. Non-refundable.");
+        checkMercy($("#c3mercy"),()=>advance(3));
         later(climb,1200);
-      },1700);return}
+      },1600);
+      return;
+    }
+    case "c3cancel":{
+      add("c3c","Discovered the secret Cancel button. Respect.");
+      toast("Cancel is the only honest option.");
+      advance(3);
+      return;
+    }
+
+    // Challenge 4
     case "c4":{
-      att(3);S.on=!S.on;sync4();
+      att(3);
+      S.on=!S.on;
+      sync4();
       if(S.on){
         add("c4on",["asked for peace.","asked for peace. Denied.","begged for peace. In writing."]);
         toast(S.k++?pick(P4):"PEACE DISABLED SUCCESSFULLY.");
-        later(()=>{if(!S.on)return;S.on=false;sync4();add("c4r","was overruled by committee.");hit(3,"RESCINDED.","Peace lasted 1 second.")},1000);
+        later(()=>{
+          if(!S.on)return;
+          S.on=false;
+          sync4();
+          add("c4r","was overruled by committee.");
+          hit(3,"RESCINDED.","Peace lasted 1 second.");
+          if(S.k>=2){
+            advance(4);
+          }else{
+            checkMercy($("#c4mercy"),()=>advance(4));
+          }
+        },1000);
       }else{
-        add("c4off","switched off what was already off.");hit(3,"NO AUTHORITY.","Motion denied.");
+        add("c4off","switched off what was already off.");
+        hit(3,"NO AUTHORITY.","Motion denied.");
+        checkMercy($("#c4mercy"),()=>advance(4));
       }
-      return}
-    case "reveal":
-      if(S.m)return;
-      if(e.detail!==0&&S.rv.d<3){S.rv.mv(true,true);return toast("Not yet.")}
-      S.m="open";att(4);
-      $("#env").classList.add("open");$("#rv").disabled=true;$("#rv").textContent="OPENING…";
-      toast("Compiling…");later(()=>toast("Consulting committee…"),1000);
-      later(()=>{
-        add("fin","FINAL EXHIBIT: TRUSTED A WEBSITE CALLED SKILLISSUE.CLUB.",true);
-        S.m="rick";
-        $("#s4").innerHTML=B[4]("rick");
-        playRick();
-        toast("Results postponed.");
-      },2300);return;
-    case "close":{
-      const v=$("#rickVideo");
-      if(v){try{v.pause();v.currentTime=0;}catch(e){}}
-      S.m="closed";
-      $("#s4").innerHTML=B[4]("closed");
       return;
     }
-    case "replay":
-      S.m="rick";
-      $("#s4").innerHTML=B[4]("rick");
-      playRick();
+
+    // Challenge 5: Opposite Day
+    case "c5":{
+      att(4);
+      const val=b.dataset.val;
+      if(val==="yes"){
+        add("c5win","Obeyed the negative prompt on Opposite Day. Flawless logic.");
+        toast("YOU DID NOT CLICK! ...Wait, you passed!");
+        advance(5);
+      }else{
+        S.f++;
+        add("c5fail","Clicked a button that said click me on Opposite Day.");
+        hit(4,"FAILED.","It said Opposite Day.");
+        checkMercy($("#c5mercy"),()=>advance(5));
+      }
       return;
+    }
+
+    // Reveal Verdict & Video Result
+    case "reveal":{
+      if(S.m)return;
+      S.m="open";
+      att(4);
+      const env=$("#env");if(env)env.classList.add("open");
+      const rv=$("#rvBtn");if(rv){rv.disabled=true;rv.textContent="OPENING ENVELOPE…";}
+      toast("Compiling evidence file…");
+      later(()=>toast("Consulting supreme council…"),900);
+      later(()=>{
+        add("fin","FINAL EXHIBIT: TRUSTED A WEBSITE CALLED SKILLISSUE.CLUB.",true);
+        S.m="revealed";
+        $("#s5").innerHTML=B[5]("revealed");
+        renderLeaderboard();
+        playMeme("raigbait",true);
+        toast("Results revealed!");
+      },1800);
+      return;
+    }
+
+    // Video Theater Controls
+    case "next-meme":
+      return nextMeme();
+    case "replay-video":
+      return playMeme(currentMeme,true);
     case "unmute":{
-      const v=$("#rickVideo");
+      const v=$("#verdictVideo");
       const ub=$("#unmuteBtn");
       if(v){
         v.muted=false;
@@ -376,120 +1535,38 @@ function act(a,b,e){
       if(ub)ub.style.display="none";
       return;
     }
+    case "claim-cert":{
+      add("cert","Attempted to claim a calm certificate with maximum rage score.");
+      toast("CERTIFICATE REVOKED: Rage exceeds safe limits!");
+      snd.trom();
+      playMeme("rickroll",true);
+      return;
+    }
   }
 }
-document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act(b.dataset.a,b,e)});
-init();
 
-(()=>{
-const rq$=s=>document.querySelector(s),rqRnd=(a,b)=>a+Math.random()*(b-a);
-const RS={r:0,l:0,f:0,t0:0,live:false,mute:false,fails:0};
-let rac;function rqbeep(f=440,d=.12,ty='sine',to=f){if(RS.mute)return;try{rac=rac||new AudioContext();const o=rac.createOscillator(),g=rac.createGain();o.type=ty;o.frequency.setValueAtTime(f,rac.currentTime);o.frequency.linearRampToValueAtTime(to,rac.currentTime+d);g.gain.setValueAtTime(.12,rac.currentTime);g.gain.linearRampToValueAtTime(0,rac.currentTime+d);o.connect(g).connect(rac.destination);o.start();o.stop(rac.currentTime+d)}catch(e){}}
-const rqsnd={click:()=>rqbeep(440,.05),err:()=>rqbeep(160,.3,'square',60),trom:()=>rqbeep(220,.8,'sawtooth',110),fan:()=>[262,330,392,523].forEach((f,i)=>setTimeout(()=>rqbeep(f,.15),i*120))};
-const L=[["Oh, brave soul. You can do this!","Only 5 easy levels! :)","Take your time."],
-["Interesting technique.","Was that on purpose?","Hmm. Bold."],
-["lol.","Even my grandma got past this.","Have you tried not failing?"],
-["SKILL ISSUE.","The button didn't move that fast. Your hands did.","Breathe. Or don't."],
-["I CAN HEAR YOUR FOREHEAD ON THE DESK.","╰(°□°╰)","Ctrl+W is right there. Do it."]];
-function rqsay(t){rq$('#rqnar').textContent=t||L[Math.min(4,RS.r/20|0)][rqRnd(0,3)|0]}
-function rqrage(n){RS.r=Math.min(100,RS.r+n);const r=RS.r;rq$('#rqfill').style.width=r+'%';
-  document.body.style.background=`hsl(${48-r*.48},90%,${88-r*.45}%)`;
-  rq$('#rqlv').style.transform=`rotate(${(r/100)*(Math.random()<.5?-2:2)}deg)`;
-  rq$('#rqcrt').style.opacity=r>40?Math.min(.8,(r-40)/60):0;
-  rq$('#rqlv').classList.toggle('shake',r>60)}
-function rqmercy(){if(!RS.live||rq$('#rqmercy'))return;const m=document.createElement('button');m.id='rqmercy';m.textContent='😇 Mercy: next level';m.style.cssText+=';font-size:14px;position:relative;z-index:60';m.onclick=()=>RS.win();(RS.cards[RS.l]||rq$('#rqlv')).append(m);rqsay('Fine. I pity you. Press Mercy.')}
-function rqfail(n=6){RS.fails++;RS.f++;rqrage(n);rqsnd.err();rqsay();document.body.style.outline='8px solid red';setTimeout(()=>document.body.style.outline='',120);if(RS.f==2)rqsay("Hint: "+RQLV[RS.l].hint);if(RS.f>=3)rqmercy()}
-const RQLV=[
-{name:"Click to Win",hint:"The smallest one is honest.",init(a,win){let d=0,off;const b=document.createElement('button');b.className='bn';b.style.cssText+=';font-size:20px';b.textContent='CLICK ME';a.append(b);
-  const mv=()=>{b.style.left=rqRnd(5,60)+'%';b.style.top=rqRnd(5,80)+'%'};b.style.position='absolute';mv();
-  b.onpointerenter=()=>{if(d<3){d++;mv()}};
-  b.onclick=()=>{if(d<3){rqfail(3);return}b.remove();const n=5,r=rqRnd(0,n)|0;for(let i=0;i<n;i++){const x=document.createElement('button');x.className='bn';x.textContent='CLICK';const s=i==r?10:rqRnd(12,22);x.style.fontSize=s+'px';x.style.padding=(s/3)+'px';x.style.left=rqRnd(5,75)+'%';x.style.top=rqRnd(5,80)+'%';x.onclick=()=>i==r?win():rqfail();a.append(x)}};
-  return()=>{}}},
-{name:"Loading… 99%",hint:"Cancel is the only real button.",init(a,win){let p=0,rs=0;a.innerHTML='<div class="px" style="font-size:12px">Installing happiness</div><div style="width:80%;height:30px;border:4px solid #000"><div id="rqpb" style="height:100%;background:var(--rcyan);width:0"></div></div><div id="rqpt">0%</div><a id="rqcn" style="font-size:10px;cursor:pointer;text-decoration:underline">cancel</a>';
-  const iv=setInterval(()=>{p+=rqRnd(1,3);if(p>=99){p=12;rs++;rqsay("Almost there!")}rq$('#rqpb').style.width=p+'%';rq$('#rqpt').textContent=(p|0)+'%'},45);
-  rq$('#rqcn').onclick=()=>rs>=3?win():rqfail(3);return()=>clearInterval(iv)}},
-{name:"Perfect 50",hint:"Anything within 0.6 of 50 counts.",init(a,win){a.innerHTML='<div class="px" id="rqv" style="font-size:20px">0.000</div><input id="rqsl" type="range" min="0" max="100" step="0.001" value="10" style="width:80%"><div>Land within 0.6 of 50 and hold 1s</div>';
-  const s=rq$('#rqsl');let hold=0,ptr=false;const sh=()=>rq$('#rqv').textContent=(+s.value).toFixed(3);
-  s.onpointerdown=()=>ptr=true;s.onpointerup=()=>{ptr=false;if(Math.abs(s.value-50)>.6)rqfail(4)};
-  s.oninput=sh;s.onpointermove=()=>{if(ptr&&Math.abs(s.value-50)<4){s.value=+s.value+rqRnd(-.4,.4);sh()}};
-  const iv=setInterval(()=>{hold=Math.abs(s.value-50)<.6?hold+.1:0;if(hold>=1)win()},100);return()=>clearInterval(iv)}},
-{name:"Password Hell",hint:"An XKCD comic knows the answer.",init(a,win){const R=["Min 12 characters","No vowels allowed","Must contain a vowel","Must contain an emoji","Must not contain an emoji","Must be shorter than 4 characters"];
-  a.innerHTML='<input id="rqpw" placeholder="password" style="font-size:18px;padding:6px;border:4px solid #000;width:80%"><div id="rqst" style="width:80%;height:14px;border:3px solid #000"><div id="rqsf" style="height:100%;background:var(--rpink)"></div></div><div id="rqrl" style="font-size:14px"></div><button id="rqsb">Submit</button>';
-  let n=1;const rl=()=>rq$('#rqrl').innerHTML=R.slice(0,n).map(x=>'• '+x).join('<br>');rl();
-  const iv=setInterval(()=>{if(n<R.length){n++;rl();rqrage(2)}},3000);
-  rq$('#rqpw').oninput=()=>rq$('#rqsf').style.width=rqRnd(5,100)+'%';
-  let tr=0;rq$('#rqsb').onclick=()=>{tr++;if(rq$('#rqpw').value==='correcthorsebatterystaple'||tr>=3){rqsay('Fine. Whatever.');win()}else rqfail()};return()=>clearInterval(iv)}},
-{name:"Cookie Maze",hint:"The X is tiny. Follow it.",init(a,win){let n=4;const bs=[];const mvx=()=>bs.forEach(b=>{b.x.style.left=rqRnd(2,92)+'%';b.x.style.top=rqRnd(2,70)+'%'});
-  for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bn';b.style.cssText+=`;left:${6+i*3}%;top:${8+i*4}%;width:80%;height:60%;background:hsl(${i*60},80%,80%);text-align:center`;b.innerHTML='🍪 We use cookies!<br><br><span class="dc" style="border:3px solid #000;padding:4px 10px;background:var(--rcyan)">Accept All</span>';
-  const x=document.createElement('span');x.textContent='x';x.className='ab';x.style.cssText+=';font-size:9px;cursor:pointer;padding:2px 3px;background:#eee;border:1px solid #000';b.append(x);b.x=x;bs.push(b);a.append(b);
-  b.querySelector('.dc').onclick=e=>{e.stopPropagation();rqfail()};
-  x.onclick=e=>{e.stopPropagation();const t=bs.pop();t.remove();n--;rqsnd.click();mvx();bs.length?0:win()}}mvx();return()=>{}}},
-{name:"Ad Apocalypse",hint:"Patience beats the mouse.",init(a,win){let c=5;a.innerHTML='<div class="px" style="font-size:14px">AD: BUY SOCKS™</div><button id="rqsk" style="font-size:14px;position:relative;z-index:50">Skip in 5</button>';
-  const sk=rq$('#rqsk');sk.onpointerenter=()=>{if(c>0){c=5;rqrage(2);sk.textContent='Skip in 5'}};
-  sk.onclick=()=>c<=0?win():rqfail(3);
-  const iv=setInterval(()=>{if(c>0&&!sk.matches(':hover')){c--;sk.textContent=c?'Skip in '+c:'Skip ▶'}},1000);
-  const pop=setInterval(()=>{const p=document.createElement('div');p.className='bn';p.style.left=rqRnd(0,70)+'%';p.style.top=rqRnd(0,75)+'%';p.innerHTML='🎰 YOU WON! <b class="fx" style="cursor:pointer;background:#fff;padding:0 4px;border:2px solid #000">X</b>';p.querySelector('.fx').onclick=e=>{e.stopPropagation();rqfail(3);p.remove()};a.append(p);if(a.children.length>9)a.children[2].remove()},2200);
-  return()=>{clearInterval(iv);clearInterval(pop)}}},
-{name:"Captcha",hint:"Buses only. Catch the checkbox.",init(a,win){let d=0,got=0;a.innerHTML='<label class="px" id="rqcl" style="font-size:12px;transition:transform .2s"><input type="checkbox" id="rqcb"> I am not a robot</label><div id="rqgr" style="display:none;grid-template-columns:repeat(3,64px);gap:4px"></div>';const cb=rq$('#rqcb'),gr=rq$('#rqgr'),cl=rq$('#rqcl');
-  const deal=()=>{gr.innerHTML='';const bus=[0,1,2,3,4,5,6,7,8].sort(()=>Math.random()-.5).slice(0,3);for(let i=0;i<9;i++){const t=document.createElement('button');t.style.cssText='font-size:26px;padding:4px;box-shadow:none';t.textContent=bus.includes(i)?'🚌':['🚗','🚲','🚦','🌳'][i%4];t.onclick=()=>{if(bus.includes(i)){got++;rqsnd.click();got>=3?win():deal()}else{rqfail(3);deal()}};gr.append(t)}};
-  cl.onpointerenter=()=>{if(d<3){d++;cl.style.transform=`translate(${rqRnd(-80,80)}px,${rqRnd(-30,30)}px)`}};cb.onchange=()=>{cl.style.display='none';gr.style.display='grid';deal()};return()=>{}}},
-{name:"Whack-a-Mole+",hint:"Skip the DON'T ones. Hit 6.",init(a,win){let h=0;a.innerHTML='<div id="rqwh" class="px" style="font-size:12px">Hit 6 moles: 0</div>';const iv=setInterval(()=>{const m=document.createElement('button'),bad=Math.random()<.3;m.className='bn';m.textContent=bad?"DON'T":'🐹';m.style.cssText+=`;left:${rqRnd(2,80)}%;top:${rqRnd(18,78)}%;font-size:18px`;m.onclick=()=>{m.remove();if(bad)rqfail(5);else{h++;rqsnd.click();rq$('#rqwh').textContent='Hit 6 moles: '+h;if(h>=6)win()}};a.append(m);setTimeout(()=>m.remove(),1600)},650);return()=>clearInterval(iv)}},
-{name:"Opposite Day",hint:"Do the opposite.",init(a,win){a.innerHTML='<div class="px" style="font-size:12px">Today is Opposite Day.<br>Click the button that says NOT to click.</div>';['Click me!','Pick me!','DO NOT CLICK','Free money'].sort(()=>Math.random()-.5).forEach(t=>{const b=document.createElement('button');b.textContent=t;b.style.fontSize='15px';b.onclick=()=>t=='DO NOT CLICK'?win():rqfail();a.append(b)});return()=>{}}},
-{name:"Memory Betrayal",hint:"Match the pairs. Cards shuffle on a miss.",init(a,win){let busy=0;const E=['🍕','🐸','🚀'];const cs=[...E,...E].map(e=>({e,o:0,m:0})).sort(()=>Math.random()-.5);const g=document.createElement('div');g.style.cssText='display:grid;grid-template-columns:repeat(3,70px);gap:6px';a.append(g);
-  const r=()=>{g.innerHTML='';cs.forEach(c=>{const b=document.createElement('button');b.style.cssText='font-size:26px;height:64px;box-shadow:none';b.textContent=c.m||c.o?c.e:'❓';b.onclick=()=>{if(c.m||c.o||busy)return;c.o=1;rqsnd.click();const op=cs.filter(x=>x.o&&!x.m);if(op.length==2){if(op[0].e==op[1].e){op.forEach(x=>x.m=1);if(cs.every(x=>x.m))return win()}else{busy=1;rqfail(3);r();setTimeout(()=>{op.forEach(x=>x.o=0);cs.sort(()=>Math.random()-.5);busy=0;r()},700);return}}r()};g.append(b)})};r();return()=>{}}},
-{name:"Fake Victory",hint:"Read the dialog. Then click OK.",init(a,win){a.innerHTML='<div class="px" style="font-size:22px">YOU WIN!</div>';rqsnd.fan();let cs=[];for(let i=0;i<30;i++){const e=document.createElement('span');e.textContent='🎉';e.className='ab';e.style.left=rqRnd(0,95)+'%';e.style.top='100%';e.style.transition=`top ${rqRnd(2,4)}s linear`;a.append(e);cs.push(e);setTimeout(()=>e.style.top='-10%',50)}
-  const t=setTimeout(()=>{rqrage(8);rqsnd.trom();a.insertAdjacentHTML('beforeend','<div class="card" style="position:absolute;z-index:3">…just kidding.<br><button id="rqok">OK</button></div>');rq$('#rqok').onclick=win},2500);return()=>clearTimeout(t)}},
-{name:"Fake Crash",hint:"Do nothing. Truly nothing. 10 seconds.",init(a,win){let t=10;const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#0000aa;color:#fff;z-index:20;padding:30px;font-family:monospace;font-size:16px';
-  o.innerHTML=':(<br><br>Your PC ran into a problem.<br>Restarting from Level 1…<br><br><span id="rqcd"></span>';document.body.append(o);
-  const reset=()=>{if(t<10){rqfail(5);t=10}};
-  ['keydown','pointerdown'].forEach(ev=>addEventListener(ev,reset));
-  const iv=setInterval(()=>{t--;rq$('#rqcd').textContent=t>=9?'':'Still rebooting… '+t;if(t<=0){win()}},1000);
-  return()=>{clearInterval(iv);o.remove();['pointermove','keydown','pointerdown'].forEach(ev=>removeEventListener(ev,reset))}}}
-];
-let rqclean=()=>{},rqend;
-let rqpg=0;
-function rqbuild(p){rqpg=p;clearTimeout(RS.mt);rqclean();rqclean=()=>{};const lv=rq$('#rqlv');lv.replaceChildren();lv.scrollTop=0;RS.cards={};
-  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:lv,threshold:.1});
-  const rqadd=el=>{el.classList.add('rv');lv.append(el);io2.observe(el)};
-  if(p==0){const c=document.createElement('div');c.className='card';c.innerHTML='<h1 style="font-size:20px">RAGEQUIT.EXE</h1>⚠️ Flashing colors, shaking and buzzers. The I give up button always works.<br>Page 1 of 2: scroll down. Levels 1-6 live here, 7-12 on page 2.<br>'+(RS.live?'Good luck 😈':'<button id="rqst" class="px" style="font-size:13px;margin:8px">Only 5 easy levels!</button>')+'<div id="rqlbx" style="font-size:14px;margin-top:8px"></div>';rqadd(c);const st=c.querySelector('#rqst');if(st)st.onclick=rqstart}
-  for(let i=p*6;i<p*6+6;i++){const c=document.createElement('div');c.style.cssText='display:flex;flex-direction:column;align-items:center;gap:8px';c.innerHTML=`<div class="px" style="font-size:11px">Level ${i+1}: ${RQLV[i].name}</div><div class="area lock"></div>`;rqadd(c);RS.cards[i]=c}
-  if(p==0)rqboard('#rqlbx');else{const c=document.createElement('div');c.className='px';c.style.fontSize='12px';c.textContent='Page 2 of 2: the last page. Honest.';lv.prepend(c)}
-  rq$('#rqlvn').textContent='Page '+(p+1)+'/2'}
-function rqactivate(i){clearTimeout(RS.mt);rqclean();rqclean=()=>{};RS.l=i;RS.f=0;const card=RS.cards[i],a=card.querySelector('.area');a.classList.remove('lock');card.scrollIntoView({behavior:'smooth',block:'center'});rq$('#rqlvn').textContent='P'+(rqpg+1)+'/2 L'+(i+1);
-  let done=false;const win=()=>{if(done)return;done=true;rqsnd.fan();rqclean();rqclean=()=>{};const m=rq$('#rqmercy');if(m)m.remove();a.innerHTML='<div class="px" style="font-size:14px">✅ cleared</div>';RS.l++;
-  if(RS.l>=12){rqsay('You made it. Respect.');return setTimeout(()=>rqend(true),600)}
-  if(RS.l==6){rqsay('Page 1 done. Page 2 is worse.');const b=document.createElement('button');b.className='px';b.style.fontSize='13px';b.textContent='Next page →';b.onclick=()=>{rqbuild(1);rqactivate(6)};rq$('#rqlv').append(b);b.scrollIntoView({behavior:'smooth',block:'center'});return}
-  rqsay('Fine. Next.');setTimeout(()=>rqactivate(RS.l),900)};
-  RS.win=win;RS.mt=setTimeout(rqmercy,18000);rqclean=RQLV[i].init(a,win)||(()=>{});rqsay()}
-function rqload0(){clearTimeout(RS.mt);rqclean();const a=document.createElement('div');a.className='area';rq$('#rqlv').replaceChildren(a);
-  if(RS.l>=RQLV.length){return rqend(true)}
-  rq$('#rqlvn').textContent='L'+(RS.l+1);RS.f=0;
-  const lvl=RQLV[RS.l];let done=false;const win=()=>{if(done)return;done=true;rqsnd.fan();rqsay(RS.l==RQLV.length-1?"…You waited. Respect.":"Fine. Next.");RS.l++;setTimeout(rqload,RS.l>=RQLV.length?200:900)};
-  const h=document.createElement('div');h.className='px';h.style.fontSize='11px';h.textContent=lvl.name;rq$('#rqlv').prepend(h);
-  RS.win=win;RS.mt=setTimeout(rqmercy,18000);rqclean=lvl.init(a,win)||(()=>{});rqsay()}
-function rqend2(zen){RS.live=false;rqclean();rqclean=()=>{};rq$('#rqg').classList.remove('on');
-  const secs=((Date.now()-RS.t0)/1000)|0,r=RS.r|0;
-  const title=zen?"Zen Monk":r<25?"Mildly Annoyed":r<50?"Keyboard Warrior":r<80?"Table Flipper":"Monitor Defenestrator";
-  const score=Math.round((RS.l+1)*100+secs-r);
-  try{const k='rq_lb',l=JSON.parse(localStorage.getItem(k)||'[]');l.push({t:title,s:score});l.sort((a,b)=>b.s-a.s);localStorage.setItem(k,JSON.stringify(l.slice(0,5)))}catch(e){}
-  rqboard('#rqlb2');const old=rq$('#rqres');if(old)old.remove();const c=document.createElement('div');c.id='rqres';c.className='card';c.style.fontSize='16px';c.innerHTML='<h2 style="font-size:16px">'+title+'</h2>'+rq$('#rqes').innerHTML+'<br><button id="rqrr" class="px" style="font-size:12px;margin:8px;background:var(--rcyan)">🎁 Claim your Calm Certificate</button><br><button id="rqra2" class="px" style="font-size:12px;margin:8px">Try Again (you won&#39;t)</button><div style="font-size:14px">'+rq$('#rqlb2').innerHTML+'</div>';rq$('#rqlv').append(c);rq$('#rqra2').onclick=rqstart;rq$('#rqrr').onclick=()=>{window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ','_blank','noopener');rqsay('Rickrolled. Certificate revoked.')};c.scrollIntoView({behavior:'smooth',block:'center'})}
-rqend=rqend2;
-function rqboard(sel){let l=[];try{l=JSON.parse(localStorage.getItem('rq_lb')||'[]')}catch(e){}
-  rq$(sel).innerHTML='<b>Shame Leaderboard</b><br>'+(l.length?l.map((x,i)=>`${i+1}. ${x.t} — ${x.s}`).join('<br>'):'Nobody has suffered yet.')}
-function rqstart(){Object.assign(RS,{r:0,l:0,f:0,fails:0,t0:Date.now(),live:true});rqrage(0);document.body.style.background='#fef3c7';
-  document.querySelectorAll('.rq .scr').forEach(s=>s.classList.remove('on'));rq$('#rqg').classList.add('on');rqpg=0;rqbuild(0);rqactivate(0)}
-rq$('#rqgu').onclick=()=>rqend2(false);
-rq$('#rqmu').onclick=()=>{RS.mute=!RS.mute;rq$('#rqmu').textContent=RS.mute?'🔇':'🔊'};
-document.addEventListener('pointerdown',e=>{if(RS.live&&e.target.closest('#rqlv')&&e.target.closest('button,.bn')===null)rqrage(0.5)});
-setInterval(()=>{if(!RS.live)return;const s=((Date.now()-RS.t0)/1000)|0;rq$('#rqtm').textContent=(s/60|0)+':'+String(s%60).padStart(2,'0');rqrage(.15);if(!(s%12))rqsay()},1000);
-const rqs0=rq$('#rqg'),rqsp=rq$('#rqsp'),rqpx=rq$('#rqparx');
-const rqio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:rqs0,threshold:.2});
-[...rqs0.children].forEach(c=>{if(c.id!=='rqsp'&&c.id!=='rqparx'){c.classList.add('rv');rqio.observe(c)}});
-rqs0.onscroll=()=>{const p=rqs0.scrollTop/Math.max(1,rqs0.scrollHeight-rqs0.clientHeight);if(rqsp)rqsp.style.width=(p<.8?p*100:p*50)+'%';if(rqpx)rqpx.style.transform=`translateX(${(p-.5)*60}vw) scale(${1+p*2}) rotate(${p*360}deg)`};
-const rqlb=rq$('#rqlbx');if(rqlb)rqboard('#rqlbx');
-const rqlb2=rq$('#rqlb2');if(rqlb2)rqboard('#rqlb2');
-rqbuild(0);
-})();
+// Click listener for actions
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]");
+  if(b)act(b.dataset.a,b,e);
+
+  // Tab switching for memes
+  const tab=e.target.closest(".tab-btn");
+  if(tab&&tab.dataset.vid){
+    playMeme(tab.dataset.vid,true);
+  }
+});
+
+// Top bar controls
+$("#sfxBtn").onclick=()=>{
+  S.mute=!S.mute;
+  $("#sfxBtn").textContent=S.mute?"🔇 MUTED":"🔊 SFX";
+  if(!S.mute)snd.click();
+};
+$("#ragequitBtn").onclick=giveUp;
+
+// Run initial setup
+init();
 </script>
 </body>
 </html>
