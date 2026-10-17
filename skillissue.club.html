@@ -305,9 +305,36 @@ function act(a,b,e){
       S.m="open";att(4);
       $("#env").classList.add("open");$("#rv").disabled=true;$("#rv").textContent="OPENING…";
       toast("Compiling…");later(()=>toast("Consulting committee…"),1000);
-      later(()=>{add("fin","FINAL EXHIBIT: TRUSTED A WEBSITE CALLED SKILLISSUE.CLUB.",true);S.m="rick";$("#s4").innerHTML=B[4]("rick");toast("Results postponed.")},2300);return;
-    case "close":S.m="closed";$("#s4").innerHTML=B[4]("closed");return;
-    case "replay":S.m="rick";$("#s4").innerHTML=B[4]("rick");return;
+      later(()=>{
+        add("fin","FINAL EXHIBIT: TRUSTED A WEBSITE CALLED SKILLISSUE.CLUB.",true);
+        S.m="rick";
+        $("#s4").innerHTML=B[4]("rick");
+        playRick();
+        toast("Results postponed.");
+      },2300);return;
+    case "close":{
+      const v=$("#rickVideo");
+      if(v){try{v.pause();v.currentTime=0;}catch(e){}}
+      S.m="closed";
+      $("#s4").innerHTML=B[4]("closed");
+      return;
+    }
+    case "replay":
+      S.m="rick";
+      $("#s4").innerHTML=B[4]("rick");
+      playRick();
+      return;
+    case "unmute":{
+      const v=$("#rickVideo");
+      const ub=$("#unmuteBtn");
+      if(v){
+        v.muted=false;
+        v.volume=1.0;
+        if(v.paused)v.play();
+      }
+      if(ub)ub.style.display="none";
+      return;
+    }
   }
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act(b.dataset.a,b,e)});

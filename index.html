@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>skillissue.club®</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--bg:#FFF7ED;--tx:#171717;--mu:#746C63;--co:#F14F3E;--cb:#405CE8;--oncb:#fff;--li:#C5EF69;--sf:#FFFFFF;--bd:#E5D9C9;--d:"Bricolage Grotesque","Arial Black",Impact,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--tx:#FFF7ED;--mu:#B8AD9F;--sf:#241E18;--bd:#3B3228;--cb:#8EA0FF;--oncb:#171717}}
+:root[data-theme="dark"]{--bg:#17130F;--tx:#FFF7ED;--mu:#B8AD9F;--sf:#241E18;--bd:#3B3228;--cb:#8EA0FF;--oncb:#171717}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:150px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:2px solid var(--tx);flex-wrap:wrap}
+.logo{font:800 1.2rem var(--d);letter-spacing:-.03em}.logo sup{font-size:.6em}
+.pr{margin-left:auto;display:flex;gap:10px;align-items:center;font:800 .78rem var(--d);letter-spacing:.06em}
+.dots{display:flex;gap:5px}.dots i{width:18px;height:7px;border-radius:9px;background:var(--bd)}.dots i.c{background:var(--tx)}.dots i.w{background:var(--co)}
+.stamp{font:800 .68rem var(--d);letter-spacing:.08em;border:2px solid var(--co);color:var(--co);padding:2px 7px;border-radius:4px;transform:rotate(-4deg)}
+.sec{min-height:88svh;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:40px 0;border-bottom:2px solid var(--bd)}
+h1,h2{font-family:var(--d);margin:0;font-weight:800;letter-spacing:-.04em;line-height:.95}
+h1{font-size:clamp(3rem,13vw,7.2rem)}
+h2{font-size:clamp(2.2rem,8vw,4.4rem)}
+.sub{font:800 1.1rem var(--d);color:var(--co);margin:0}
+.word{font:800 clamp(2rem,9vw,4.2rem)/1 var(--d);letter-spacing:-.04em;color:var(--co);min-height:1.05em}
+.pop{animation:pop .3s ease-out}
+.mu{color:var(--mu);font-size:.85rem}
+.btn{font:800 1rem var(--d);letter-spacing:.02em;border:2px solid var(--tx);border-radius:999px;padding:.85em 1.4em;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 4px 0 var(--tx);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--tx)}
+.btn.co{background:var(--co);color:#fff}.btn.cb{background:var(--cb);color:var(--oncb)}
+.btn.sel{background:var(--li);color:#171717}
+button:focus-visible,input:focus-visible{outline:3px solid var(--cb);outline-offset:3px}
+.opts{display:grid;gap:12px;max-width:420px}.opts .btn{text-align:left;border-radius:16px}
+.arena{position:relative;height:230px;border:2px dashed var(--bd);border-radius:16px}.a2{height:140px}
+.run{position:absolute;width:190px;height:64px;padding:0;font-size:1.1rem;left:calc((100% - 190px)*var(--x,.5));top:calc((100% - 64px)*var(--y,.5));transition:left .3s cubic-bezier(.3,1.5,.5,1),top .3s cubic-bezier(.3,1.5,.5,1),transform .12s,box-shadow .12s}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.trio .btn{width:100%;padding:1.1em .5em}.trio .big{font-size:1.3rem;padding:1.5em .5em}
+.track{height:26px;border:2px solid var(--tx);border-radius:99px;overflow:hidden;background:var(--bg)}.track i{display:block;height:100%;width:0;background:var(--co)}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pct{font:800 2.6rem var(--d);letter-spacing:-.04em;background:none;border:0;color:var(--tx);cursor:pointer;padding:0 6px;border-radius:8px}.pct:hover{background:var(--li);color:#171717}
+.set{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px;border:2px solid var(--bd);border-radius:16px}.set b{font:800 1.05rem var(--d);flex:1;min-width:150px}
+.badge{font:800 .72rem var(--d);letter-spacing:.06em;padding:5px 10px;border-radius:99px;background:var(--li);color:#171717;border:1.5px solid var(--tx)}
+.sw{width:68px;height:38px;border-radius:99px;border:2px solid var(--tx);background:var(--bd);position:relative;cursor:pointer;padding:0;transition:background .2s}
+.sw i{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:var(--tx);transition:transform .2s}
+.sw[aria-checked="true"]{background:var(--co)}.sw[aria-checked="true"] i{transform:translateX(30px)}
+.env{position:relative;width:min(100%,320px);height:180px;background:var(--li);border:2px solid var(--tx);border-radius:10px;color:#171717;font:800 .75rem var(--d);letter-spacing:.06em}
+.env p{position:absolute;bottom:12px;left:16px;margin:0}
+.env .flap{position:absolute;left:-2px;right:-2px;top:-2px;height:100px;background:var(--co);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s}
+.env.open .flap{transform:rotateX(180deg)}
+.env .seal{position:absolute;left:50%;top:70px;margin-left:-28px;width:56px;height:56px;border-radius:50%;background:#171717;color:#fff;display:grid;place-items:center;transform:rotate(-8deg);transition:opacity .4s}
+.env.open .seal{opacity:0}
+.vid{position:relative;aspect-ratio:16/9;width:100%;border:2px solid var(--tx);border-radius:14px;overflow:hidden;background:#000;box-shadow:0 8px 24px rgba(0,0,0,0.18)}
+.vid video,.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;background:#000}
+.unmute-btn{position:absolute;bottom:14px;right:14px;z-index:10;background:var(--tx);color:var(--bg);border:2px solid var(--bg);border-radius:999px;padding:8px 16px;font:800 .85rem var(--d);cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition:transform .12s,background .12s}
+.unmute-btn:hover{background:var(--co);color:#fff;transform:scale(1.04)}
+.v-info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:4px}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;z-index:50;max-width:min(240px,70vw);padding:.55em .9em;border:2px solid var(--tx);border-radius:14px;font:800 .95rem/1.15 var(--d);box-shadow:3px 3px 0 var(--tx);pointer-events:none;background:var(--sf);color:#171717;animation:tin .25s ease-out,tout .3s 2.1s forwards}
+.toast.co{background:var(--co);color:#fff}.toast.li{background:var(--li)}
+.rc{position:fixed;left:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:min(310px,calc(100% - 24px));z-index:20;background:var(--sf);border:2px solid var(--tx);border-radius:8px;padding:9px 12px;font:.72rem/1.4 ui-monospace,Menlo,monospace;box-shadow:4px 4px 0 var(--bd)}
+.rc h3{margin:0 0 4px;font:800 .76rem var(--d);letter-spacing:.06em}.rc ol{margin:0;padding:0;list-style:none}.rc li{padding:2px 0}.rc li b{color:var(--co)}
+.foot{padding:26px 0;display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:.78rem;color:var(--mu)}.foot .btn{font-size:.8rem;padding:.6em 1.1em;box-shadow:0 2px 0 var(--tx)}
+.sr{position:absolute;left:-9999px}
+a{color:var(--cb)}
+@keyframes pop{from{transform:scale(.6) rotate(-3deg);opacity:0}}
+@keyframes tin{from{opacity:0;transform:scale(.7)}}
+@keyframes tout{to{opacity:0;transform:translateY(-12px)}}
+@keyframes shk{20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.shake{animation:shk .4s}
+@media(max-width:600px){.trio{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">skillissue.club<sup>®</sup></div>
+  <div class="stamp">TOTALLY FAIR™</div>
+  <div class="pr"><span id="cnt"></span><span class="dots" id="dots" aria-hidden="true"></span><span>×<b id="att">0</b></span></div>
+</header>
+<section class="sec" id="hero">
+  <h1>HELLO, HUMAN.</h1>
+  <p class="sub">We’ve already formed an opinion.</p>
+  <div class="opts" role="group" aria-label="Which best describes you?">
+    <button class="btn" data-a="h" data-i="0" aria-pressed="false">I’m exceptionally good at the internet.</button>
+    <button class="btn" data-a="h" data-i="1" aria-pressed="false">I simply make fewer mistakes.</button>
+    <button class="btn" data-a="h" data-i="2" aria-pressed="false">Why am I being interviewed?</button>
+  </div>
+  <div id="hr"></div>
+</section>
+<section class="sec" id="s0"></section>
+<section class="sec" id="s1"></section>
+<section class="sec" id="s2"></section>
+<section class="sec" id="s3"></section>
+<section class="sec" id="s4"></section>
+<div class="foot"><button class="btn" data-a="reset">RESET EVERYTHING</button><span>Satire. Nothing is tracked or stored.</span></div>
+</div>
+<aside class="rc" aria-label="Evidence record"><h3 id="rh"></h3><ol id="rl"></ol></aside>
+<div class="sr" id="sr" role="status" aria-live="polite"></div>
+<script>
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $=s=>document.querySelector(s);
+const H=[["claimed to be great. No proof.","Confident. No evidence."],["claimed few mistakes. No stats.","Fewer than whom?"],["questioned the interview.","Fair. Suspiciously."]];
+const M1=["Nope.","Too slow.","Footage reviewed.","PATTERN.","Lawyer notified.","Still no.","Try harder?"];
+const M3=["Almost.","Allegedly.","99%. We know.","Asking permission…","Patience ignored."];
+const P4=["Reviewed.","Committee divided.","Peace is in a meeting.","As intended."];
+const IDLE=["Still there?","We’re waiting.","Take your time. Or don’t.","Buffering… you."];
+const P=[[.92,.08],[.05,.9],[.9,.9],[.08,.1],[.5,.95],[.95,.5],[.03,.5],[.5,.04]];
+const TK=["co","li","wh"];
+let S,T=[];
+const later=(f,ms)=>{T.push(setTimeout(f,RM?Math.min(ms,30):ms))};
+const every=(f,ms)=>{T.push(setInterval(f,ms))};
+const clr=()=>{T.forEach(t=>{clearTimeout(t);clearInterval(t)});T=[]};
+const pick=a=>a[S.n++%a.length];
+const tier=()=>S.fails>=4||S.att>=12?2:S.fails>=2||S.att>=6?1:0;
+function toast(t){
+  $("#sr").textContent=t;
+  const e=document.createElement("div"),m=Math.random,w=innerWidth,h=innerHeight;
+  e.className="toast "+pick(TK);e.textContent=t;e.setAttribute("aria-hidden","true");
+  let x,y;
+  if(S.px!=null&&m()<.6){x=S.px+m()*160-80;y=S.py-30-m()*90}else{x=24+m()*(w-260);y=80+m()*(h-200)}
+  e.style.left=Math.max(10,Math.min(w-250,x))+"px";e.style.top=Math.max(70,Math.min(h-130,y))+"px";e.style.rotate=(m()*8-4)+"deg";
+  document.body.appendChild(e);
+  while(document.querySelectorAll(".toast").length>4)$(".toast").remove();
+  setTimeout(()=>e.remove(),RM?1800:2500);
+}
+function add(k,t,raw){
+  const e=S.ev.find(x=>x.k===k);
+  if(e){e.n++;rc();return}
+  S.ev.push({k,t:Array.isArray(t)?t[tier()]:t,raw,l:raw?null:String.fromCharCode(65+S.ev.filter(x=>!x.raw).length),n:1});rc();
+}
+function rc(){
+  $("#rh").textContent=`CASE FILE SI-0417 · ${S.ev.length}`;
+  $("#rl").innerHTML=S.ev.length?S.ev.slice(-3).map(e=>`<li>${e.raw?"":`<b>${e.l}:</b> `}${e.t}${e.n>1?` <b>×${e.n}</b>`:""}</li>`).join(""):"<li>No evidence yet. Suspicious.</li>";
+  const r=$(".rc");r.classList.remove("shake");void r.offsetWidth;r.classList.add("shake");
+}
+function att(i){S.att++;S.last=Date.now();if(i>=0&&i<4)S.t[i]++;bar()}
+function hit(i,word,t){
+  S.fails++;const w=$("#w"+i);w.textContent=word;w.classList.remove("pop");void w.offsetWidth;w.classList.add("pop");
+  toast(t);const s=$("#s"+i);s.classList.remove("shake");void s.offsetWidth;s.classList.add("shake");bar();
+}
+function bar(){
+  const c=S.cur;
+  $("#cnt").textContent=c<0?"INTAKE":c>3?"VERDICT":`${c+1}/4`;
+  $("#dots").innerHTML=[0,1,2,3].map(i=>`<i class="${S.t[i]?"w":i===c?"c":""}"></i>`).join("");
+  $("#att").textContent=S.att;
+}
+function runner(ar,b,st){
+  st.mv=(force,quiet)=>{
+    const n=Date.now();
+    if(st.d>=st.lim||(!force&&n-st.t<250))return false;
+    st.t=n;const p=st.pos[st.d%st.pos.length];st.d++;
+    b.style.setProperty("--x",p[0]);b.style.setProperty("--y",p[1]);st.fn(st.d,quiet);return true;
+  };
+  ar.addEventListener("pointermove",e=>{
+    if(e.pointerType==="touch")return;
+    const r=b.getBoundingClientRect();
+    if(Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2))<r.width/2+30)st.mv();
+  });
+  b.addEventListener("pointerdown",e=>{if(st.d<st.lim){e.preventDefault();st.mv()}});
+  return st;
+}
+const W=i=>`<div class="word" id="w${i}" aria-hidden="true"></div>`;
+const B=[];
+B[0]=()=>`<h2>Press the button.</h2><div class="arena" id="ar0"><button id="run" class="btn co run" data-a="c1">PRESS ME</button></div>${W(0)}`;
+B[1]=()=>`<h2>Pick one.</h2><div class="trio" id="trio">${[["OBVIOUSLY THIS ONE","co big"],["DEFINITELY NOT THIS","cb"],["I KNOW WHAT I’M DOING",""]].map((l,i)=>`<div class="opt" data-j="${i}"><button class="btn ${l[1]}" data-a="c2" data-i="${i}">${l[0]}</button></div>`).join("")}</div>${W(1)}`;
+B[2]=()=>`<h2>Loading reward…</h2><div class="track" id="pb" role="progressbar" aria-label="Reward progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div><div class="row"><button class="pct" id="pct" data-a="c3" aria-label="Progress percentage. Activate to finish.">0%</button><span class="mu">psst: tap the number</span></div>${W(2)}`;
+B[3]=()=>`<h2>Enable peace.</h2><div class="set"><b id="lb">ENABLE PEACEFUL MODE</b><span class="badge" id="bd">PEACE: PENDING</span><button type="button" class="sw" id="sw" role="switch" aria-checked="false" aria-labelledby="lb" data-a="c4"><i></i></button></div>${W(3)}`;
+B[4]=m=>{
+  if(m==="rick"||m==="closed")return `<h2>Results postponed.</h2><div class="word pop">RICKROLLED.</div>${m==="rick"?`<div class="vid" id="vidBox"><video id="rickVideo" playsinline autoplay controls preload="auto" loop><source src="/video" type="video/mp4"><source src="rickroll.mp4" type="video/mp4"><source src="vidssave.com%20Rickroll%20(Meme%20Template)%20360p.mp4" type="video/mp4"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&amp;rel=0&amp;playsinline=1" title="Official Rick Astley video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></video><button id="unmuteBtn" class="unmute-btn" style="display:none;" data-a="unmute">🔊 TAP TO UNMUTE</button></div><div class="v-info"><span class="badge">● VIDEO ENDPOINTS CONNECTED</span><span class="mu">Stream endpoint: <code>/video</code> (H.264/AAC)</span></div>`:`<span class="mu">Video closed. Evidence remains.</span>`}<div class="acts">${m==="rick"?`<button class="btn" data-a="close">CLOSE VIDEO</button>`:""}<button class="btn" data-a="replay">WATCH AGAIN</button><button class="btn co" data-a="reset">PLAY AGAIN →</button></div>`;
+  return `<h2>Your personalized verdict is ready.</h2><div class="env" id="env" aria-hidden="true"><div class="flap"></div><div class="seal">SI</div><p>CONFIDENTIAL</p></div><div class="arena a2" id="ar4"><button class="btn co run" id="rv" data-a="reveal">REVEAL MY RESULTS →</button></div>`;
+};
+function playRick(){
+  const v=$("#rickVideo");
+  if(!v)return;
+  const ub=$("#unmuteBtn");
+  if(ub)ub.style.display="none";
+  v.currentTime=0;
+  v.volume=1.0;
+  v.muted=false;
+  const p=v.play();
+  if(p&&p.catch){
+    p.catch(err=>{
+      console.warn("Autoplay with audio prevented, fallback to muted:",err);
+      v.muted=true;
+      v.play().then(()=>{
+        if(ub)ub.style.display="flex";
+      }).catch(e=>{
+        console.error("Autoplay failed:",e);
+        if(ub){
+          ub.textContent="▶ CLICK TO PLAY VIDEO";
+          ub.style.display="flex";
+        }
+      });
+    });
+  }
+}
+const mm=d=>d<=M1.length?M1[d-1]:M1[M1.length-3+((d-M1.length-1)%3)];
+const ord=()=>document.querySelectorAll("#trio .opt").forEach(x=>x.style.order=S.o[+x.dataset.j]);
+function setup(){
+  S.r0=runner($("#ar0"),$("#run"),{d:0,t:0,lim:1/0,pos:P,fn:(d,q)=>{
+    if(q)return;att(0);toast(mm(d));
+    if(d===2)add("c1d",["chased a button.","repeated the same action.","is now a pattern."]);
+    if(d>=5&&d%3===2)add("c1d");
+  }});
+  let t=0;S.o=[0,1,2];
+  document.querySelectorAll("#trio .opt").forEach(o=>o.addEventListener("pointerenter",e=>{
+    if(e.pointerType==="touch")return;
+    const n=Date.now();if(n-t<800)return;t=n;S.o=[S.o[1],S.o[2],S.o[0]];ord();
+  }));
+  S.rv=runner($("#ar4"),$("#rv"),{d:0,t:0,lim:3,pos:[[.9,.1],[.1,.9],[.85,.85]],fn:(d,q)=>{
+    if(q)return;att(4);toast(["Shy.","Playing hard to get.","Fine."][d-1]);
+    if(d===3)add("c5d","chased the verdict.");
+  }});
+  every(()=>{
+    if(!S.t0||S.busy)return;
+    S.p=Math.min(99,Math.floor((Date.now()-S.t0)/2800*99));
+    $("#pct").textContent=S.p+"%";$("#pb").setAttribute("aria-valuenow",S.p);
+  },80);
+  every(()=>{if(S.cur===2&&S.t0&&!S.busy)toast(M3[S.k3++%M3.length])},2600);
+  every(()=>{if(S.cur>=0&&S.cur<4&&Date.now()-S.last>7000){S.last=Date.now();toast(pick(IDLE))}},3000);
+}
+function climb(){
+  const f=$("#fill");if(!f)return;
+  S.p=0;S.t0=Date.now();S.busy=false;$("#pct").textContent="0%";
+  f.style.transition="none";f.style.width="0%";void f.offsetWidth;
+  f.style.transition=RM?"none":"width 2.8s linear";f.style.width="99%";
+}
+function sync4(){$("#sw").setAttribute("aria-checked",S.on?"true":"false");$("#bd").textContent=S.t[3]?"PEACE: DISABLED":"PEACE: PENDING"}
+function init(){
+  const v=$("#rickVideo");
+  if(v){try{v.pause();v.currentTime=0;}catch(e){}}
+  clr();document.querySelectorAll(".toast").forEach(e=>e.remove());
+  S={att:0,fails:0,ev:[],n:0,t:[0,0,0,0],sk:[0,0,0,0],cur:-1,max:-1,cl:0,f:0,k:0,k3:0,on:false,m:null,t0:0,busy:false,p:0,last:Date.now(),px:null,py:null};
+  $("#hr").innerHTML="";
+  document.querySelectorAll("[data-a=h]").forEach(b=>{b.classList.remove("sel");b.setAttribute("aria-pressed","false")});
+  for(let i=0;i<5;i++)$("#s"+i).innerHTML=B[i]();
+  setup();rc();pos();
+}
+addEventListener("pointermove",e=>{if(S){S.px=e.clientX;S.py=e.clientY}},{passive:true});
+let tick=0;
+addEventListener("scroll",()=>{if(tick)return;tick=requestAnimationFrame(()=>{tick=0;pos()})},{passive:true});
+function pos(){
+  let cur=-1;
+  for(let i=0;i<5;i++)if($("#s"+i).getBoundingClientRect().top<innerHeight*.5)cur=i;
+  if(cur>S.max){
+    for(let i=Math.max(S.max,0);i<cur;i++)if(i<4&&!S.t[i]&&!S.sk[i]){S.sk[i]=1;add("sk"+i,`skipped #${i+1}. Coward.`);toast("Skipping? Noted.")}
+    S.max=cur;
+  }
+  S.cur=cur;
+  if(cur>=2&&!S.cl){S.cl=1;climb()}
+  bar();
+}
+function act(a,b,e){
+  switch(a){
+    case "h":{
+      const i=+b.dataset.i,x=S.ev.find(y=>y.k==="h");
+      if(S.ch!==undefined&&S.ch!==i)add("chg","changed answers under pressure.");
+      S.ch=i;att(-1);
+      if(x)x.t=H[i][0];else add("h",H[i][0]);
+      document.querySelectorAll("[data-a=h]").forEach(y=>{y.classList.toggle("sel",y===b);y.setAttribute("aria-pressed",y===b?"true":"false")});
+      $("#hr").innerHTML=`<button class="btn co" data-a="go">CONTINUE ↓</button>`;
+      return toast(H[i][1])}
+    case "go":add("cont","voluntarily continued.");return $("#s0").scrollIntoView({behavior:RM?"auto":"smooth"});
+    case "reset":window.scrollTo(0,0);return init();
+    case "c1":{
+      att(0);const kb=e.detail===0;S.r0.mv(true,true);
+      add(kb?"c1k":"c1c",kb?"tried the keyboard. Denied.":["clicked. Rejected.","clicked again. Rejected.","keeps clicking. Rejected."]);
+      return hit(0,kb?"DENIED.":"REJECTED.",kb?"Keyboard? Cute.":["Almost a click.","Clicked. Not accepted.","Denied. Again."][tier()])}
+    case "c2":{
+      const i=+b.dataset.i;att(1);S.f++;let w,t;
+      if(S.f>=4){add("c2r","repeated the same action.");w="AGAIN?";t=pick(["Pattern noted.","Same button energy.","Repetition logged."])}
+      else if(i===0){add("c2a",["trusted confidence.","trusted confidence, again.","mistook size for truth."]);w="CONFIDENT. WRONG.";t="Loud. Not right."}
+      else if(i===1){add("c2b","picked DEFINITELY NOT.");w="IT SAID NOT.";t="Reading: optional."}
+      else{add("c2c","knew. Still wrong.");w="KNEW. STILL WRONG.";t="Knowing ≠ right."}
+      hit(1,w,t);S.o=[S.o[1],S.o[2],S.o[0]];ord();return}
+    case "c3":{
+      if(!S.t0||S.busy)return;att(2);
+      if(S.p<99){add("c3e","tried to rush a bar.");return toast("Too early.")}
+      S.busy=true;const f=$("#fill");
+      f.style.transition=RM?"none":"width .5s";f.style.width="100%";
+      $("#pct").textContent="100%";$("#pb").setAttribute("aria-valuenow",100);
+      add("c3w","waited for nothing.");hit(2,"DONE!","Congrats. You waited for nothing.");
+      later(()=>{
+        f.style.transition=RM?"none":"width .4s";f.style.width="0%";
+        $("#pct").textContent="0%";$("#pb").setAttribute("aria-valuenow",0);
+        add("c3r",["lost the reward.","lost it again.","never learns."]);
+        hit(2,"REVOKED.","Reward lost. Non-refundable.");
+        later(climb,1200);
+      },1700);return}
+    case "c4":{
+      att(3);S.on=!S.on;sync4();
+      if(S.on){
+        add("c4on",["asked for peace.","asked for peace. Denied.","begged for peace. In writing."]);
+        toast(S.k++?pick(P4):"PEACE DISABLED SUCCESSFULLY.");
+        later(()=>{if(!S.on)return;S.on=false;sync4();add("c4r","was overruled by committee.");hit(3,"RESCINDED.","Peace lasted 1 second.")},1000);
+      }else{
+        add("c4off","switched off what was already off.");hit(3,"NO AUTHORITY.","Motion denied.");
+      }
+      return}
+    case "reveal":
+      if(S.m)return;
+      if(e.detail!==0&&S.rv.d<3){S.rv.mv(true,true);return toast("Not yet.")}
+      S.m="open";att(4);
+      $("#env").classList.add("open");$("#rv").disabled=true;$("#rv").textContent="OPENING…";
+      toast("Compiling…");later(()=>toast("Consulting committee…"),1000);
+      later(()=>{
+        add("fin","FINAL EXHIBIT: TRUSTED A WEBSITE CALLED SKILLISSUE.CLUB.",true);
+        S.m="rick";
+        $("#s4").innerHTML=B[4]("rick");
+        playRick();
+        toast("Results postponed.");
+      },2300);return;
+    case "close":{
+      const v=$("#rickVideo");
+      if(v){try{v.pause();v.currentTime=0;}catch(e){}}
+      S.m="closed";
+      $("#s4").innerHTML=B[4]("closed");
+      return;
+    }
+    case "replay":
+      S.m="rick";
+      $("#s4").innerHTML=B[4]("rick");
+      playRick();
+      return;
+    case "unmute":{
+      const v=$("#rickVideo");
+      const ub=$("#unmuteBtn");
+      if(v){
+        v.muted=false;
+        v.volume=1.0;
+        if(v.paused)v.play();
+      }
+      if(ub)ub.style.display="none";
+      return;
+    }
+  }
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act(b.dataset.a,b,e)});
+init();
+</script>
+</body>
+</html>

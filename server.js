@@ -111,8 +111,8 @@ function streamVideo(req, res, videoPath) {
 }
 
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  let pathname = decodeURIComponent(parsedUrl.pathname);
+  const reqUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  let pathname = decodeURIComponent(reqUrl.pathname);
 
   // Normalize path
   if (pathname === '/' || pathname === '/index.html') {
