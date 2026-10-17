@@ -126,7 +126,7 @@ a{color:var(--cb)}
 <section class="sec" id="s2"></section>
 <section class="sec" id="s3"></section>
 
-<section class="sec rq" id="rq">
+<section class="sec rq" id="rq" style="position:relative">
   <div class="scr on" id="rqg">
     <div id="rqbar"><span id="rqtm">0:00</span><span id="rqlvn">L1</span><div id="rqmeter"><div id="rqfill"></div></div><button id="rqmu">🔊</button><button id="rqgu">I give up</button></div>
     <div id="rqlv"></div><div id="rqnar"></div>
@@ -486,7 +486,7 @@ const rqs0=rq$('#rqg'),rqsp=rq$('#rqsp'),rqpx=rq$('#rqparx');
 const rqio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:rqs0,threshold:.2});
 [...rqs0.children].forEach(c=>{if(c.id!=='rqsp'&&c.id!=='rqparx'){c.classList.add('rv');rqio.observe(c)}});
 rqs0.onscroll=()=>{const p=rqs0.scrollTop/Math.max(1,rqs0.scrollHeight-rqs0.clientHeight);if(rqsp)rqsp.style.width=(p<.8?p*100:p*50)+'%';if(rqpx)rqpx.style.transform=`translateX(${(p-.5)*60}vw) scale(${1+p*2}) rotate(${p*360}deg)`};
-const rqlb=rq$('#rqlb');if(rqlb)rqboard('#rqlb');
+const rqlb=rq$('#rqlbx');if(rqlb)rqboard('#rqlbx');
 const rqlb2=rq$('#rqlb2');if(rqlb2)rqboard('#rqlb2');
 rqbuild(0);
 })();
