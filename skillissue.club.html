@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>skillissue.club®</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
+<title>skillissue.club® — RAGEQUIT.EXE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Press+Start+2P&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
 :root{--bg:#FFF7ED;--tx:#171717;--mu:#746C63;--co:#F14F3E;--cb:#405CE8;--oncb:#fff;--li:#C5EF69;--sf:#FFFFFF;--bd:#E5D9C9;--d:"Bricolage Grotesque","Arial Black",Impact,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -70,6 +70,38 @@ a{color:var(--cb)}
 .shake{animation:shk .4s}
 @media(max-width:600px){.trio{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+:root--rq{--rk:#0d0d0d;--rpink:#ff006e;--rcyan:#00f5d4;--ryel:#ffe100}
+.rq{box-sizing:border-box;font-family:'Comic Neue','Comic Sans MS',cursive;font-weight:700;color:var(--rk);background:#fef3c7;transition:background .5s;overflow:visible}
+.rq h1,.rq h2,.rq .px{font-family:'Press Start 2P',Impact,monospace;line-height:1.4}
+.rq .scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;text-align:center}
+.rq .scr.on{display:flex}
+.rq #e{background:rgba(254,243,199,.97);z-index:30}
+.rq #s0{justify-content:flex-start;overflow-y:auto;overflow-x:hidden;gap:30vh;padding:0 16px 40vh}
+.rq #sp{position:sticky;top:0;flex:none;height:10px;background:var(--rpink);width:0;z-index:3;border-bottom:3px solid #000;align-self:flex-start}
+.rq .rv{opacity:0;transform:translateY(70px) rotate(-4deg);transition:opacity .6s,transform .6s}
+.rq .rv.in{opacity:1;transform:none}
+.rq #parx{will-change:transform}
+.rq .lock{filter:blur(3px) grayscale(1);pointer-events:none}
+.rq button{font:inherit;font-size:18px;background:var(--ryel);border:4px solid var(--rk);box-shadow:6px 6px 0 var(--rk);padding:10px 18px;cursor:pointer}
+.rq button:active{transform:translate(4px,4px);box-shadow:2px 2px 0 var(--rk)}
+.rq .card{background:#fff;border:4px solid var(--rk);box-shadow:6px 6px 0 var(--rk);padding:14px;max-width:min(560px,94vw)}
+.rq #bar{position:sticky;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;gap:8px;align-items:center;padding:8px;background:var(--rcyan);border-bottom:4px solid var(--rk);font-size:14px;z-index:50;flex-wrap:wrap}
+.rq #bar button{font-size:13px;padding:4px 8px;box-shadow:3px 3px 0 var(--rk)}
+.rq #meter{flex:1;min-width:80px;height:18px;border:3px solid var(--rk);background:#fff}
+.rq #fill{height:100%;width:0;background:var(--rpink)}
+.rq #lv{position:relative;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:40px;padding:10px 10px 40vh;overflow-y:auto;overflow-x:hidden;transition:transform .3s}
+.rq #lv .area{position:relative;width:min(560px,94vw);height:min(340px,50vh);border:4px solid var(--rk);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+.rq #nar{position:sticky;top:60px;left:0;right:0;background:#fff;border:4px solid var(--rk);box-shadow:5px 5px 0 var(--rpink);padding:8px 12px;font-size:16px;z-index:5}
+.rq #tick{position:sticky;bottom:0;left:0;right:0;height:26px;background:var(--rk);color:var(--ryel);overflow:hidden;white-space:nowrap;font-size:13px;line-height:26px;z-index:5}
+.rq #tick span{display:inline-block;padding-left:100%;animation:rqtk 40s linear infinite}
+@keyframes rqtk{to{transform:translateX(-100%)}}
+.rq #crt{position:fixed;inset:0;pointer-events:none;opacity:0;z-index:9;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px)}
+.rq .shake{animation:rqsh .25s infinite}
+@keyframes rqsh{25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,3px)}}
+.rq .bn{position:absolute;border:3px solid var(--rk);background:var(--ryel);font-size:14px;padding:4px 8px;box-shadow:3px 3px 0 var(--rk)}
+.rq .ab{position:absolute}
+@media(prefers-reduced-motion:reduce){.rq .shake,#rqtick span{animation:none}.rq .rv{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -93,6 +125,15 @@ a{color:var(--cb)}
 <section class="sec" id="s1"></section>
 <section class="sec" id="s2"></section>
 <section class="sec" id="s3"></section>
+
+<section class="sec rq" id="rq">
+  <div class="scr on" id="rqg">
+    <div id="rqbar"><span id="rqtm">0:00</span><span id="rqlvn">L1</span><div id="rqmeter"><div id="rqfill"></div></div><button id="rqmu">🔊</button><button id="rqgu">I give up</button></div>
+    <div id="rqlv"></div><div id="rqnar"></div>
+    <div id="rqtick"><span>Player_Dave quit at level 2 😭 &nbsp;•&nbsp; Only 0.3% finish level 9 &nbsp;•&nbsp; 98.7% of players beat this in 3 seconds &nbsp;•&nbsp; Karen_77 threw a mouse &nbsp;•&nbsp; Sponsored: Calm™ Tea</span></div>
+  </div>
+</section>
+
 <section class="sec" id="s4"></section>
 <div class="foot"><button class="btn" data-a="reset">RESET EVERYTHING</button><span>Satire. Nothing is tracked or stored.</span></div>
 </div>
@@ -168,7 +209,7 @@ B[1]=()=>`<h2>Pick one.</h2><div class="trio" id="trio">${[["OBVIOUSLY THIS ONE"
 B[2]=()=>`<h2>Loading reward…</h2><div class="track" id="pb" role="progressbar" aria-label="Reward progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div><div class="row"><button class="pct" id="pct" data-a="c3" aria-label="Progress percentage. Activate to finish.">0%</button><span class="mu">psst: tap the number</span></div>${W(2)}`;
 B[3]=()=>`<h2>Enable peace.</h2><div class="set"><b id="lb">ENABLE PEACEFUL MODE</b><span class="badge" id="bd">PEACE: PENDING</span><button type="button" class="sw" id="sw" role="switch" aria-checked="false" aria-labelledby="lb" data-a="c4"><i></i></button></div>${W(3)}`;
 B[4]=m=>{
-  if(m==="rick"||m==="closed")return `<h2>Results postponed.</h2><div class="word pop">RICKROLLED.</div>${m==="rick"?`<div class="vid" id="vidBox"><video id="rickVideo" playsinline autoplay controls preload="auto" loop><source src="/video" type="video/mp4"><source src="rickroll.mp4" type="video/mp4"><source src="vidssave.com%20Rickroll%20(Meme%20Template)%20360p.mp4" type="video/mp4"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&amp;rel=0&amp;playsinline=1" title="Official Rick Astley video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></video><button id="unmuteBtn" class="unmute-btn" style="display:none;" data-a="unmute">🔊 TAP TO UNMUTE</button></div><div class="v-info"><span class="badge">● VIDEO ENDPOINTS CONNECTED</span><span class="mu">Stream endpoint: <code>/video</code> (H.264/AAC)</span></div>`:`<span class="mu">Video closed. Evidence remains.</span>`}<div class="acts">${m==="rick"?`<button class="btn" data-a="close">CLOSE VIDEO</button>`:""}<button class="btn" data-a="replay">WATCH AGAIN</button><button class="btn co" data-a="reset">PLAY AGAIN →</button></div>`;
+  if(m==="rick"||m==="closed")return `<h2>Results postponed.</h2><div class="word pop">RICKROLLED.</div>${m==="rick"?`<div class="vid" id="vidBox"><video id="rickVideo" playsinline autoplay controls preload="auto" loop><source src="rickroll.mp4" type="video/mp4"><source src="vidssave.com%20Rickroll%20(Meme%20Template)%20360p.mp4" type="video/mp4"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&amp;rel=0&amp;playsinline=1" title="Official Rick Astley video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></video><button id="unmuteBtn" class="unmute-btn" style="display:none;" data-a="unmute">🔊 TAP TO UNMUTE</button></div><div class="v-info"><span class="badge">● VIDEO ENDPOINTS CONNECTED</span><span class="mu">Stream endpoint: <code>/video</code> (H.264/AAC)</span></div>`:`<span class="mu">Video closed. Evidence remains.</span>`}<div class="acts">${m==="rick"?`<button class="btn" data-a="close">CLOSE VIDEO</button>`:""}<button class="btn" data-a="replay">WATCH AGAIN</button><button class="btn co" data-a="reset">PLAY AGAIN →</button></div>`;
   return `<h2>Your personalized verdict is ready.</h2><div class="env" id="env" aria-hidden="true"><div class="flap"></div><div class="seal">SI</div><p>CONFIDENTIAL</p></div><div class="arena a2" id="ar4"><button class="btn co run" id="rv" data-a="reveal">REVEAL MY RESULTS →</button></div>`;
 };
 function playRick(){
@@ -339,6 +380,116 @@ function act(a,b,e){
 }
 document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act(b.dataset.a,b,e)});
 init();
+
+(()=>{
+const rq$=s=>document.querySelector(s),rqRnd=(a,b)=>a+Math.random()*(b-a);
+const RS={r:0,l:0,f:0,t0:0,live:false,mute:false,fails:0};
+let rac;function rqbeep(f=440,d=.12,ty='sine',to=f){if(RS.mute)return;try{rac=rac||new AudioContext();const o=rac.createOscillator(),g=rac.createGain();o.type=ty;o.frequency.setValueAtTime(f,rac.currentTime);o.frequency.linearRampToValueAtTime(to,rac.currentTime+d);g.gain.setValueAtTime(.12,rac.currentTime);g.gain.linearRampToValueAtTime(0,rac.currentTime+d);o.connect(g).connect(rac.destination);o.start();o.stop(rac.currentTime+d)}catch(e){}}
+const rqsnd={click:()=>rqbeep(440,.05),err:()=>rqbeep(160,.3,'square',60),trom:()=>rqbeep(220,.8,'sawtooth',110),fan:()=>[262,330,392,523].forEach((f,i)=>setTimeout(()=>rqbeep(f,.15),i*120))};
+const L=[["Oh, brave soul. You can do this!","Only 5 easy levels! :)","Take your time."],
+["Interesting technique.","Was that on purpose?","Hmm. Bold."],
+["lol.","Even my grandma got past this.","Have you tried not failing?"],
+["SKILL ISSUE.","The button didn't move that fast. Your hands did.","Breathe. Or don't."],
+["I CAN HEAR YOUR FOREHEAD ON THE DESK.","╰(°□°╰)","Ctrl+W is right there. Do it."]];
+function rqsay(t){rq$('#rqnar').textContent=t||L[Math.min(4,RS.r/20|0)][rqRnd(0,3)|0]}
+function rqrage(n){RS.r=Math.min(100,RS.r+n);const r=RS.r;rq$('#rqfill').style.width=r+'%';
+  document.body.style.background=`hsl(${48-r*.48},90%,${88-r*.45}%)`;
+  rq$('#rqlv').style.transform=`rotate(${(r/100)*(Math.random()<.5?-2:2)}deg)`;
+  rq$('#rqcrt').style.opacity=r>40?Math.min(.8,(r-40)/60):0;
+  rq$('#rqlv').classList.toggle('shake',r>60)}
+function rqmercy(){if(!RS.live||rq$('#rqmercy'))return;const m=document.createElement('button');m.id='rqmercy';m.textContent='😇 Mercy: next level';m.style.cssText+=';font-size:14px;position:relative;z-index:60';m.onclick=()=>RS.win();(RS.cards[RS.l]||rq$('#rqlv')).append(m);rqsay('Fine. I pity you. Press Mercy.')}
+function rqfail(n=6){RS.fails++;RS.f++;rqrage(n);rqsnd.err();rqsay();document.body.style.outline='8px solid red';setTimeout(()=>document.body.style.outline='',120);if(RS.f==2)rqsay("Hint: "+RQLV[RS.l].hint);if(RS.f>=3)rqmercy()}
+const RQLV=[
+{name:"Click to Win",hint:"The smallest one is honest.",init(a,win){let d=0,off;const b=document.createElement('button');b.className='bn';b.style.cssText+=';font-size:20px';b.textContent='CLICK ME';a.append(b);
+  const mv=()=>{b.style.left=rqRnd(5,60)+'%';b.style.top=rqRnd(5,80)+'%'};b.style.position='absolute';mv();
+  b.onpointerenter=()=>{if(d<3){d++;mv()}};
+  b.onclick=()=>{if(d<3){rqfail(3);return}b.remove();const n=5,r=rqRnd(0,n)|0;for(let i=0;i<n;i++){const x=document.createElement('button');x.className='bn';x.textContent='CLICK';const s=i==r?10:rqRnd(12,22);x.style.fontSize=s+'px';x.style.padding=(s/3)+'px';x.style.left=rqRnd(5,75)+'%';x.style.top=rqRnd(5,80)+'%';x.onclick=()=>i==r?win():rqfail();a.append(x)}};
+  return()=>{}}},
+{name:"Loading… 99%",hint:"Cancel is the only real button.",init(a,win){let p=0,rs=0;a.innerHTML='<div class="px" style="font-size:12px">Installing happiness</div><div style="width:80%;height:30px;border:4px solid #000"><div id="rqpb" style="height:100%;background:var(--rcyan);width:0"></div></div><div id="rqpt">0%</div><a id="rqcn" style="font-size:10px;cursor:pointer;text-decoration:underline">cancel</a>';
+  const iv=setInterval(()=>{p+=rqRnd(1,3);if(p>=99){p=12;rs++;rqsay("Almost there!")}rq$('#rqpb').style.width=p+'%';rq$('#rqpt').textContent=(p|0)+'%'},45);
+  rq$('#rqcn').onclick=()=>rs>=3?win():rqfail(3);return()=>clearInterval(iv)}},
+{name:"Perfect 50",hint:"Anything within 0.6 of 50 counts.",init(a,win){a.innerHTML='<div class="px" id="rqv" style="font-size:20px">0.000</div><input id="rqsl" type="range" min="0" max="100" step="0.001" value="10" style="width:80%"><div>Land within 0.6 of 50 and hold 1s</div>';
+  const s=rq$('#rqsl');let hold=0,ptr=false;const sh=()=>rq$('#rqv').textContent=(+s.value).toFixed(3);
+  s.onpointerdown=()=>ptr=true;s.onpointerup=()=>{ptr=false;if(Math.abs(s.value-50)>.6)rqfail(4)};
+  s.oninput=sh;s.onpointermove=()=>{if(ptr&&Math.abs(s.value-50)<4){s.value=+s.value+rqRnd(-.4,.4);sh()}};
+  const iv=setInterval(()=>{hold=Math.abs(s.value-50)<.6?hold+.1:0;if(hold>=1)win()},100);return()=>clearInterval(iv)}},
+{name:"Password Hell",hint:"An XKCD comic knows the answer.",init(a,win){const R=["Min 12 characters","No vowels allowed","Must contain a vowel","Must contain an emoji","Must not contain an emoji","Must be shorter than 4 characters"];
+  a.innerHTML='<input id="rqpw" placeholder="password" style="font-size:18px;padding:6px;border:4px solid #000;width:80%"><div id="rqst" style="width:80%;height:14px;border:3px solid #000"><div id="rqsf" style="height:100%;background:var(--rpink)"></div></div><div id="rqrl" style="font-size:14px"></div><button id="rqsb">Submit</button>';
+  let n=1;const rl=()=>rq$('#rqrl').innerHTML=R.slice(0,n).map(x=>'• '+x).join('<br>');rl();
+  const iv=setInterval(()=>{if(n<R.length){n++;rl();rqrage(2)}},3000);
+  rq$('#rqpw').oninput=()=>rq$('#rqsf').style.width=rqRnd(5,100)+'%';
+  let tr=0;rq$('#rqsb').onclick=()=>{tr++;if(rq$('#rqpw').value==='correcthorsebatterystaple'||tr>=3){rqsay('Fine. Whatever.');win()}else rqfail()};return()=>clearInterval(iv)}},
+{name:"Cookie Maze",hint:"The X is tiny. Follow it.",init(a,win){let n=4;const bs=[];const mvx=()=>bs.forEach(b=>{b.x.style.left=rqRnd(2,92)+'%';b.x.style.top=rqRnd(2,70)+'%'});
+  for(let i=0;i<n;i++){const b=document.createElement('div');b.className='bn';b.style.cssText+=`;left:${6+i*3}%;top:${8+i*4}%;width:80%;height:60%;background:hsl(${i*60},80%,80%);text-align:center`;b.innerHTML='🍪 We use cookies!<br><br><span class="dc" style="border:3px solid #000;padding:4px 10px;background:var(--rcyan)">Accept All</span>';
+  const x=document.createElement('span');x.textContent='x';x.className='ab';x.style.cssText+=';font-size:9px;cursor:pointer;padding:2px 3px;background:#eee;border:1px solid #000';b.append(x);b.x=x;bs.push(b);a.append(b);
+  b.querySelector('.dc').onclick=e=>{e.stopPropagation();rqfail()};
+  x.onclick=e=>{e.stopPropagation();const t=bs.pop();t.remove();n--;rqsnd.click();mvx();bs.length?0:win()}}mvx();return()=>{}}},
+{name:"Ad Apocalypse",hint:"Patience beats the mouse.",init(a,win){let c=5;a.innerHTML='<div class="px" style="font-size:14px">AD: BUY SOCKS™</div><button id="rqsk" style="font-size:14px;position:relative;z-index:50">Skip in 5</button>';
+  const sk=rq$('#rqsk');sk.onpointerenter=()=>{if(c>0){c=5;rqrage(2);sk.textContent='Skip in 5'}};
+  sk.onclick=()=>c<=0?win():rqfail(3);
+  const iv=setInterval(()=>{if(c>0&&!sk.matches(':hover')){c--;sk.textContent=c?'Skip in '+c:'Skip ▶'}},1000);
+  const pop=setInterval(()=>{const p=document.createElement('div');p.className='bn';p.style.left=rqRnd(0,70)+'%';p.style.top=rqRnd(0,75)+'%';p.innerHTML='🎰 YOU WON! <b class="fx" style="cursor:pointer;background:#fff;padding:0 4px;border:2px solid #000">X</b>';p.querySelector('.fx').onclick=e=>{e.stopPropagation();rqfail(3);p.remove()};a.append(p);if(a.children.length>9)a.children[2].remove()},2200);
+  return()=>{clearInterval(iv);clearInterval(pop)}}},
+{name:"Captcha",hint:"Buses only. Catch the checkbox.",init(a,win){let d=0,got=0;a.innerHTML='<label class="px" id="rqcl" style="font-size:12px;transition:transform .2s"><input type="checkbox" id="rqcb"> I am not a robot</label><div id="rqgr" style="display:none;grid-template-columns:repeat(3,64px);gap:4px"></div>';const cb=rq$('#rqcb'),gr=rq$('#rqgr'),cl=rq$('#rqcl');
+  const deal=()=>{gr.innerHTML='';const bus=[0,1,2,3,4,5,6,7,8].sort(()=>Math.random()-.5).slice(0,3);for(let i=0;i<9;i++){const t=document.createElement('button');t.style.cssText='font-size:26px;padding:4px;box-shadow:none';t.textContent=bus.includes(i)?'🚌':['🚗','🚲','🚦','🌳'][i%4];t.onclick=()=>{if(bus.includes(i)){got++;rqsnd.click();got>=3?win():deal()}else{rqfail(3);deal()}};gr.append(t)}};
+  cl.onpointerenter=()=>{if(d<3){d++;cl.style.transform=`translate(${rqRnd(-80,80)}px,${rqRnd(-30,30)}px)`}};cb.onchange=()=>{cl.style.display='none';gr.style.display='grid';deal()};return()=>{}}},
+{name:"Whack-a-Mole+",hint:"Skip the DON'T ones. Hit 6.",init(a,win){let h=0;a.innerHTML='<div id="rqwh" class="px" style="font-size:12px">Hit 6 moles: 0</div>';const iv=setInterval(()=>{const m=document.createElement('button'),bad=Math.random()<.3;m.className='bn';m.textContent=bad?"DON'T":'🐹';m.style.cssText+=`;left:${rqRnd(2,80)}%;top:${rqRnd(18,78)}%;font-size:18px`;m.onclick=()=>{m.remove();if(bad)rqfail(5);else{h++;rqsnd.click();rq$('#rqwh').textContent='Hit 6 moles: '+h;if(h>=6)win()}};a.append(m);setTimeout(()=>m.remove(),1600)},650);return()=>clearInterval(iv)}},
+{name:"Opposite Day",hint:"Do the opposite.",init(a,win){a.innerHTML='<div class="px" style="font-size:12px">Today is Opposite Day.<br>Click the button that says NOT to click.</div>';['Click me!','Pick me!','DO NOT CLICK','Free money'].sort(()=>Math.random()-.5).forEach(t=>{const b=document.createElement('button');b.textContent=t;b.style.fontSize='15px';b.onclick=()=>t=='DO NOT CLICK'?win():rqfail();a.append(b)});return()=>{}}},
+{name:"Memory Betrayal",hint:"Match the pairs. Cards shuffle on a miss.",init(a,win){let busy=0;const E=['🍕','🐸','🚀'];const cs=[...E,...E].map(e=>({e,o:0,m:0})).sort(()=>Math.random()-.5);const g=document.createElement('div');g.style.cssText='display:grid;grid-template-columns:repeat(3,70px);gap:6px';a.append(g);
+  const r=()=>{g.innerHTML='';cs.forEach(c=>{const b=document.createElement('button');b.style.cssText='font-size:26px;height:64px;box-shadow:none';b.textContent=c.m||c.o?c.e:'❓';b.onclick=()=>{if(c.m||c.o||busy)return;c.o=1;rqsnd.click();const op=cs.filter(x=>x.o&&!x.m);if(op.length==2){if(op[0].e==op[1].e){op.forEach(x=>x.m=1);if(cs.every(x=>x.m))return win()}else{busy=1;rqfail(3);r();setTimeout(()=>{op.forEach(x=>x.o=0);cs.sort(()=>Math.random()-.5);busy=0;r()},700);return}}r()};g.append(b)})};r();return()=>{}}},
+{name:"Fake Victory",hint:"Read the dialog. Then click OK.",init(a,win){a.innerHTML='<div class="px" style="font-size:22px">YOU WIN!</div>';rqsnd.fan();let cs=[];for(let i=0;i<30;i++){const e=document.createElement('span');e.textContent='🎉';e.className='ab';e.style.left=rqRnd(0,95)+'%';e.style.top='100%';e.style.transition=`top ${rqRnd(2,4)}s linear`;a.append(e);cs.push(e);setTimeout(()=>e.style.top='-10%',50)}
+  const t=setTimeout(()=>{rqrage(8);rqsnd.trom();a.insertAdjacentHTML('beforeend','<div class="card" style="position:absolute;z-index:3">…just kidding.<br><button id="rqok">OK</button></div>');rq$('#rqok').onclick=win},2500);return()=>clearTimeout(t)}},
+{name:"Fake Crash",hint:"Do nothing. Truly nothing. 10 seconds.",init(a,win){let t=10;const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#0000aa;color:#fff;z-index:20;padding:30px;font-family:monospace;font-size:16px';
+  o.innerHTML=':(<br><br>Your PC ran into a problem.<br>Restarting from Level 1…<br><br><span id="rqcd"></span>';document.body.append(o);
+  const reset=()=>{if(t<10){rqfail(5);t=10}};
+  ['keydown','pointerdown'].forEach(ev=>addEventListener(ev,reset));
+  const iv=setInterval(()=>{t--;rq$('#rqcd').textContent=t>=9?'':'Still rebooting… '+t;if(t<=0){win()}},1000);
+  return()=>{clearInterval(iv);o.remove();['pointermove','keydown','pointerdown'].forEach(ev=>removeEventListener(ev,reset))}}}
+];
+let rqclean=()=>{},rqend;
+let rqpg=0;
+function rqbuild(p){rqpg=p;clearTimeout(RS.mt);rqclean();rqclean=()=>{};const lv=rq$('#rqlv');lv.replaceChildren();lv.scrollTop=0;RS.cards={};
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:lv,threshold:.1});
+  const rqadd=el=>{el.classList.add('rv');lv.append(el);io2.observe(el)};
+  if(p==0){const c=document.createElement('div');c.className='card';c.innerHTML='<h1 style="font-size:20px">RAGEQUIT.EXE</h1>⚠️ Flashing colors, shaking and buzzers. The I give up button always works.<br>Page 1 of 2: scroll down. Levels 1-6 live here, 7-12 on page 2.<br>'+(RS.live?'Good luck 😈':'<button id="rqst" class="px" style="font-size:13px;margin:8px">Only 5 easy levels!</button>')+'<div id="rqlbx" style="font-size:14px;margin-top:8px"></div>';rqadd(c);const st=c.querySelector('#rqst');if(st)st.onclick=rqstart}
+  for(let i=p*6;i<p*6+6;i++){const c=document.createElement('div');c.style.cssText='display:flex;flex-direction:column;align-items:center;gap:8px';c.innerHTML=`<div class="px" style="font-size:11px">Level ${i+1}: ${RQLV[i].name}</div><div class="area lock"></div>`;rqadd(c);RS.cards[i]=c}
+  if(p==0)rqboard('#rqlbx');else{const c=document.createElement('div');c.className='px';c.style.fontSize='12px';c.textContent='Page 2 of 2: the last page. Honest.';lv.prepend(c)}
+  rq$('#rqlvn').textContent='Page '+(p+1)+'/2'}
+function rqactivate(i){clearTimeout(RS.mt);rqclean();rqclean=()=>{};RS.l=i;RS.f=0;const card=RS.cards[i],a=card.querySelector('.area');a.classList.remove('lock');card.scrollIntoView({behavior:'smooth',block:'center'});rq$('#rqlvn').textContent='P'+(rqpg+1)+'/2 L'+(i+1);
+  let done=false;const win=()=>{if(done)return;done=true;rqsnd.fan();rqclean();rqclean=()=>{};const m=rq$('#rqmercy');if(m)m.remove();a.innerHTML='<div class="px" style="font-size:14px">✅ cleared</div>';RS.l++;
+  if(RS.l>=12){rqsay('You made it. Respect.');return setTimeout(()=>rqend(true),600)}
+  if(RS.l==6){rqsay('Page 1 done. Page 2 is worse.');const b=document.createElement('button');b.className='px';b.style.fontSize='13px';b.textContent='Next page →';b.onclick=()=>{rqbuild(1);rqactivate(6)};rq$('#rqlv').append(b);b.scrollIntoView({behavior:'smooth',block:'center'});return}
+  rqsay('Fine. Next.');setTimeout(()=>rqactivate(RS.l),900)};
+  RS.win=win;RS.mt=setTimeout(rqmercy,18000);rqclean=RQLV[i].init(a,win)||(()=>{});rqsay()}
+function rqload0(){clearTimeout(RS.mt);rqclean();const a=document.createElement('div');a.className='area';rq$('#rqlv').replaceChildren(a);
+  if(RS.l>=RQLV.length){return rqend(true)}
+  rq$('#rqlvn').textContent='L'+(RS.l+1);RS.f=0;
+  const lvl=RQLV[RS.l];let done=false;const win=()=>{if(done)return;done=true;rqsnd.fan();rqsay(RS.l==RQLV.length-1?"…You waited. Respect.":"Fine. Next.");RS.l++;setTimeout(rqload,RS.l>=RQLV.length?200:900)};
+  const h=document.createElement('div');h.className='px';h.style.fontSize='11px';h.textContent=lvl.name;rq$('#rqlv').prepend(h);
+  RS.win=win;RS.mt=setTimeout(rqmercy,18000);rqclean=lvl.init(a,win)||(()=>{});rqsay()}
+function rqend2(zen){RS.live=false;rqclean();rqclean=()=>{};rq$('#rqg').classList.remove('on');
+  const secs=((Date.now()-RS.t0)/1000)|0,r=RS.r|0;
+  const title=zen?"Zen Monk":r<25?"Mildly Annoyed":r<50?"Keyboard Warrior":r<80?"Table Flipper":"Monitor Defenestrator";
+  const score=Math.round((RS.l+1)*100+secs-r);
+  try{const k='rq_lb',l=JSON.parse(localStorage.getItem(k)||'[]');l.push({t:title,s:score});l.sort((a,b)=>b.s-a.s);localStorage.setItem(k,JSON.stringify(l.slice(0,5)))}catch(e){}
+  rqboard('#rqlb2');const old=rq$('#rqres');if(old)old.remove();const c=document.createElement('div');c.id='rqres';c.className='card';c.style.fontSize='16px';c.innerHTML='<h2 style="font-size:16px">'+title+'</h2>'+rq$('#rqes').innerHTML+'<br><button id="rqrr" class="px" style="font-size:12px;margin:8px;background:var(--rcyan)">🎁 Claim your Calm Certificate</button><br><button id="rqra2" class="px" style="font-size:12px;margin:8px">Try Again (you won&#39;t)</button><div style="font-size:14px">'+rq$('#rqlb2').innerHTML+'</div>';rq$('#rqlv').append(c);rq$('#rqra2').onclick=rqstart;rq$('#rqrr').onclick=()=>{window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ','_blank','noopener');rqsay('Rickrolled. Certificate revoked.')};c.scrollIntoView({behavior:'smooth',block:'center'})}
+rqend=rqend2;
+function rqboard(sel){let l=[];try{l=JSON.parse(localStorage.getItem('rq_lb')||'[]')}catch(e){}
+  rq$(sel).innerHTML='<b>Shame Leaderboard</b><br>'+(l.length?l.map((x,i)=>`${i+1}. ${x.t} — ${x.s}`).join('<br>'):'Nobody has suffered yet.')}
+function rqstart(){Object.assign(RS,{r:0,l:0,f:0,fails:0,t0:Date.now(),live:true});rqrage(0);document.body.style.background='#fef3c7';
+  document.querySelectorAll('.rq .scr').forEach(s=>s.classList.remove('on'));rq$('#rqg').classList.add('on');rqpg=0;rqbuild(0);rqactivate(0)}
+rq$('#rqgu').onclick=()=>rqend2(false);
+rq$('#rqmu').onclick=()=>{RS.mute=!RS.mute;rq$('#rqmu').textContent=RS.mute?'🔇':'🔊'};
+document.addEventListener('pointerdown',e=>{if(RS.live&&e.target.closest('#rqlv')&&e.target.closest('button,.bn')===null)rqrage(0.5)});
+setInterval(()=>{if(!RS.live)return;const s=((Date.now()-RS.t0)/1000)|0;rq$('#rqtm').textContent=(s/60|0)+':'+String(s%60).padStart(2,'0');rqrage(.15);if(!(s%12))rqsay()},1000);
+const rqs0=rq$('#rqg'),rqsp=rq$('#rqsp'),rqpx=rq$('#rqparx');
+const rqio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{root:rqs0,threshold:.2});
+[...rqs0.children].forEach(c=>{if(c.id!=='rqsp'&&c.id!=='rqparx'){c.classList.add('rv');rqio.observe(c)}});
+rqs0.onscroll=()=>{const p=rqs0.scrollTop/Math.max(1,rqs0.scrollHeight-rqs0.clientHeight);if(rqsp)rqsp.style.width=(p<.8?p*100:p*50)+'%';if(rqpx)rqpx.style.transform=`translateX(${(p-.5)*60}vw) scale(${1+p*2}) rotate(${p*360}deg)`};
+const rqlb=rq$('#rqlb');if(rqlb)rqboard('#rqlb');
+const rqlb2=rq$('#rqlb2');if(rqlb2)rqboard('#rqlb2');
+rqbuild(0);
+})();
 </script>
 </body>
 </html>
