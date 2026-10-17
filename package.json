@@ -1,0 +1,19 @@
+{
+  "name": "skillissue-club",
+  "version": "1.0.0",
+  "description": "skillissue.club - The UX Tribunal with interactive video endpoints",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test-video.js"
+  },
+  "keywords": [
+    "skillissue",
+    "ux-tribunal",
+    "rickroll",
+    "video-stream"
+  ],
+  "author": "",
+  "license": "ISC"
+}
